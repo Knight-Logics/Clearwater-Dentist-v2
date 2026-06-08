@@ -3,6 +3,7 @@ node_modules/
 
 # Build output (regenerate with: npm run build)
 dist/
+pages-deploy/
 
 # QA artifacts
 logs/

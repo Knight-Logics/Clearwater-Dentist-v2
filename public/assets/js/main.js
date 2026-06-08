@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (rect.bottom < -40 || rect.top > viewH + 40) return;
 
       const centerOffset = rect.top + rect.height * 0.5 - viewH * 0.5;
-      const shift = centerOffset * -0.3;
+      const shift = centerOffset * -0.52;
       media.style.transform = 'translate3d(0,' + shift + 'px,0) scale(1.04)';
     }
 
@@ -101,13 +101,41 @@ document.addEventListener('DOMContentLoaded', function () {
 
   initWhyBandParallax();
 
-  function initBeforeAfterBand() {
-    const media = document.querySelector('.page-home [data-before-after-parallax]');
-    if (!media) return;
-    media.style.transform = 'translate3d(0,0,0) scale(1.02)';
+  function initBeforeAfterBandParallax() {
+    const section = document.querySelector('.page-home .cw-before-after-band');
+    const media = section && section.querySelector('[data-before-after-parallax]');
+    if (!section || !media) return;
+
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let frame = null;
+
+    function tick() {
+      frame = null;
+      if (motionQuery.matches) {
+        media.style.transform = 'translate3d(0,0,0) scale(1.04)';
+        return;
+      }
+
+      const rect = section.getBoundingClientRect();
+      const viewH = window.innerHeight;
+      if (rect.bottom < -40 || rect.top > viewH + 40) return;
+
+      const centerOffset = rect.top + rect.height * 0.5 - viewH * 0.5;
+      const shift = centerOffset * -0.52;
+      media.style.transform = 'translate3d(0,' + shift + 'px,0) scale(1.04)';
+    }
+
+    function queueTick() {
+      if (!frame) frame = requestAnimationFrame(tick);
+    }
+
+    tick();
+    window.addEventListener('scroll', queueTick, { passive: true });
+    window.addEventListener('resize', queueTick, { passive: true });
+    motionQuery.addEventListener('change', queueTick);
   }
 
-  initBeforeAfterBand();
+  initBeforeAfterBandParallax();
 
   function initWhyBandDoctorScale() {
     const section = document.querySelector('.page-home .cw-why-band');

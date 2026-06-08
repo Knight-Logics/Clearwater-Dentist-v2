@@ -183,7 +183,7 @@ body.page-home {
 
   .page-home .cw-why-band__media,
   .page-home .cw-before-after-band__media {
-    transform: translate3d(0, 0, 0) scale(1.02);
+    transform: translate3d(0, 0, 0) scale(1.04);
   }
 
   .cw-video-carousel__film {
@@ -533,11 +533,11 @@ body.page-home {
 
 .page-home .cw-before-after-band__media {
   position: absolute;
-  inset: -12% 0;
+  inset: -18% 0;
   background-size: cover;
-  background-position: center 38%;
+  background-position: center center;
   background-repeat: no-repeat;
-  transform: translate3d(0, 0, 0) scale(1.02);
+  transform: translate3d(0, 0, 0) scale(1.04);
   z-index: 0;
 }
 
@@ -586,6 +586,15 @@ body.page-home {
 
 .page-home .cw-before-after-band__inner .compare-grid {
   margin-top: 1rem;
+}
+
+.page-home .cw-before-after-band__inner .section-head .eyebrow {
+  paint-order: stroke fill;
+  -webkit-text-stroke: 1.25px rgba(0, 0, 0, 0.92);
+  text-shadow:
+    0 0 2px rgba(0, 0, 0, 0.95),
+    0 2px 10px rgba(0, 0, 0, 0.88),
+    1px 2px 0 rgba(0, 0, 0, 0.9);
 }
 
 @media (max-width: 900px) {
@@ -986,13 +995,28 @@ body.page-home {
   }
 }
 
+.page-home .home-hero-copy .eyebrow {
+  paint-order: stroke fill;
+  -webkit-text-stroke: 1.25px rgba(0, 0, 0, 0.92);
+  text-shadow:
+    0 0 2px rgba(0, 0, 0, 0.95),
+    0 2px 10px rgba(0, 0, 0, 0.88),
+    1px 2px 0 rgba(0, 0, 0, 0.9);
+}
+
 .home-hero-copy .cw-hero-welcome {
   margin: 0 0 0.5rem;
-  font-size: clamp(2rem, 4vw, 3.45rem);
+  font-size: clamp(1.7rem, 2.35vw, 2.25rem);
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.08;
   max-width: none;
   opacity: 0;
+}
+
+@media (min-width: 769px) {
+  .home-hero-copy .cw-hero-welcome {
+    white-space: nowrap;
+  }
 }
 
 .home-hero-copy .cw-hero-smile {
@@ -1556,24 +1580,27 @@ body.page-home {
   text-align: center;
 }
 
-.cw-service-card__cta-btn {
+.cw-service-card.service-card span.cw-service-card__cta-btn {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   min-height: 36px;
   padding: 0.45rem 0.75rem;
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  background: rgba(255, 255, 255, 0.1);
-  font-size: 0.66rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
+  border: 2px solid #ff9a3c;
+  background: rgba(0, 0, 0, 0.55);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #fff;
+  color: #ff9a3c;
   text-decoration: none;
   box-sizing: border-box;
   flex: 0 0 auto;
   margin-top: 0.15rem;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.78);
+  text-shadow: none;
+  -webkit-font-smoothing: antialiased;
 }
 
 .cw-service-card > .cw-service-card__panel--hover .cw-service-card__cta-btn {
@@ -2099,7 +2126,7 @@ body.cw-modal-open {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   min-width: 0;
   text-align: center;
 }
@@ -2619,14 +2646,45 @@ body.cw-modal-open {
 
   .hero-pills a {
     color: #fff;
-    background: rgba(255, 255, 255, 0.14);
-    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 154, 60, 0.88);
+    border-color: rgba(255, 180, 100, 0.95);
   }
 
-  .hero-pills a:hover {
-    background: #fff;
-    color: var(--cw-logo-navy);
+  .hero-pills a:hover,
+  .hero-pills a:focus-visible {
+    background: #ff9a3c;
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.9);
   }
+}
+
+.page-home .hero-pills a {
+  color: #fff;
+  background: rgba(255, 154, 60, 0.88);
+  border-color: rgba(255, 180, 100, 0.95);
+}
+
+.page-home .hero-pills a:hover,
+.page-home .hero-pills a:focus-visible {
+  background: #ff9a3c;
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.9);
+}
+
+.page-home .home-hero-copy .hero-actions .btn.primary,
+.page-home .home-lead-panel .mini-form .btn.primary {
+  background: var(--cw-logo-navy);
+  border-color: rgba(255, 255, 255, 0.28);
+  color: #fff;
+}
+
+.page-home .home-hero-copy .hero-actions .btn.primary:hover,
+.page-home .home-hero-copy .hero-actions .btn.primary:focus-visible,
+.page-home .home-lead-panel .mini-form .btn.primary:hover,
+.page-home .home-lead-panel .mini-form .btn.primary:focus-visible {
+  background: var(--cw-logo-blue-deep);
+  border-color: rgba(255, 255, 255, 0.42);
+  color: #fff;
 }
 
 .cta-band {
@@ -2636,6 +2694,19 @@ body.cw-modal-open {
     var(--cw-logo-navy) 58%,
     #0a3345 100%
   );
+}
+
+.cta-band .btn.primary {
+  background: #ff9a3c;
+  border-color: #ff9a3c;
+  color: #fff;
+}
+
+.cta-band .btn.primary:hover,
+.cta-band .btn.primary:focus-visible {
+  background: #f07a18;
+  border-color: #f07a18;
+  color: #fff;
 }
 
 .cta-band p {
