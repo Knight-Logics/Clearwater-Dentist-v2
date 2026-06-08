@@ -1,0 +1,246 @@
+{
+  "name": "Clearwater Dentist",
+  "domain": "https://www.clearwaterdentist.com",
+  "phoneDisplay": "(727) 285-8132",
+  "phoneTel": "+17272858132",
+  "bookingUrl": "https://bookit.dentrixascend.com/soe/new/dental?pid=ASC2000000000940&mode=externalLink",
+  "googleReviewUrl": "https://www.google.com/maps/place/?q=place_id:ChIJddsi0kbuwogRVbiZCHZSQ3s",
+  "email": "info@clearwaterdentist.com",
+  "doctor": "Dr. Nadia Pokrovskaya, D. M. D.",
+  "tagline": "Concierge family & cosmetic dentistry with an artistic touch - serving Clearwater, FL and the greater Tampa Bay area.",
+  "address": {
+    "street": "1700 N McMullen Booth Rd, Ste A1",
+    "city": "Clearwater",
+    "state": "FL",
+    "zip": "33759",
+    "country": "US"
+  },
+  "hours": [
+    {
+      "days": "Monday - Friday",
+      "time": "9:00 AM - 5:00 PM"
+    },
+    {
+      "days": "Saturday - Sunday",
+      "time": "Closed"
+    }
+  ],
+  "reviews": [
+    {
+      "name": "Verified Google Patient",
+      "text": "I have a fear of dentists due to past experiences. The doctor was very nice and knowledgeable, explaining everything and making me feel comfortable. Lyndsay the hygienist was absolutely amazing - gentle, patient, and thorough. Thank you to the entire team!",
+      "stars": 5
+    },
+    {
+      "name": "Dennis C.",
+      "text": "Several damaged and missing teeth repaired with natural-looking crowns and bridges. After restoring the foundation, they brightened my smile with professional whitening - a fresh, confident result.",
+      "stars": 5
+    },
+    {
+      "name": "Jackie A.",
+      "text": "My smile was rebuilt with crowns, bridges, and fillings. Extractions and deep cleanings supported long-term health. Every restoration looks natural and feels comfortable.",
+      "stars": 5
+    },
+    {
+      "name": "Susan C.",
+      "text": "Multiple teeth restored with natural-looking crowns. Each crown was custom-shaped and color-matched - a consistent, confident look across my entire smile.",
+      "stars": 5
+    }
+  ],
+  "quickLinks": [
+    {
+      "href": "/",
+      "label": "Home"
+    },
+    {
+      "href": "/meet-the-doctor",
+      "label": "Meet Dr. Nadia"
+    },
+    {
+      "href": "/meet-the-team",
+      "label": "Meet the Team"
+    },
+    {
+      "href": "/before-and-after",
+      "label": "Before & After"
+    },
+    {
+      "href": "/new-patient-faqs",
+      "label": "New Patient FAQs"
+    },
+    {
+      "href": "/financing",
+      "label": "Financing"
+    },
+    {
+      "href": "/blog",
+      "label": "Blog"
+    },
+    {
+      "href": "/contact-us",
+      "label": "Contact Us"
+    }
+  ],
+  "serviceLinks": [
+    {
+      "href": "/dental-implants-clearwater-fl",
+      "label": "Dental Implants"
+    },
+    {
+      "href": "/cosmetic-dentistry",
+      "label": "Cosmetic Dentistry"
+    },
+    {
+      "href": "/smile-makeover",
+      "label": "Smile Makeover"
+    },
+    {
+      "href": "/porcelain-veneers-clearwater-fl",
+      "label": "Porcelain Veneers"
+    },
+    {
+      "href": "/Invisalign-service-clearwater-fl",
+      "label": "Invisalign"
+    },
+    {
+      "href": "/teeth-whitening-clearwater-fl",
+      "label": "Teeth Whitening"
+    },
+    {
+      "href": "/emergency-dentistry-clearwater-fl",
+      "label": "Emergency Dentistry"
+    },
+    {
+      "href": "/gum-disease-treatment",
+      "label": "Gum Disease Treatment"
+    },
+    {
+      "href": "/root-canal-clearwater-fl",
+      "label": "Root Canal"
+    },
+    {
+      "href": "/crowns-and-bridges",
+      "label": "Crowns & Bridges"
+    },
+    {
+      "href": "/sedation-dentistry-clearwater-fl",
+      "label": "Sedation Dentistry"
+    },
+    {
+      "href": "/dental-therapy-dogs-clearwater-fl",
+      "label": "Dental Therapy Dogs"
+    }
+  ],
+  "policyLinks": [
+    {
+      "href": "/privacy-policy",
+      "label": "Privacy Policy"
+    },
+    {
+      "href": "/terms-and-conditions",
+      "label": "Terms & Conditions"
+    },
+    {
+      "href": "/accessibility-statement",
+      "label": "Accessibility Statement"
+    },
+    {
+      "href": "/notice-of-privacy-practices",
+      "label": "Notice of Privacy Practices"
+    },
+    {
+      "href": "/financial-policy",
+      "label": "Financial Policy"
+    }
+  ],
+  "serviceAreas": [
+    {
+      "slug": "dentist-clearwater-fl",
+      "city": "Clearwater",
+      "state": "FL",
+      "label": "Clearwater, FL",
+      "neighbors": "Countryside, Morningside, and the Bayside neighborhoods",
+      "intro": "Our home base. Comprehensive family, cosmetic, and restorative dentistry minutes from downtown Clearwater and Clearwater Beach."
+    },
+    {
+      "slug": "dentist-safety-harbor-fl",
+      "city": "Safety Harbor",
+      "state": "FL",
+      "label": "Safety Harbor, FL",
+      "neighbors": "the waterfront district and Philippe Park area",
+      "intro": "A short drive across McMullen Booth Road. We are proud members of the Safety Harbor Chamber of Commerce and welcome Safety Harbor families."
+    },
+    {
+      "slug": "dentist-dunedin-fl",
+      "city": "Dunedin",
+      "state": "FL",
+      "label": "Dunedin, FL",
+      "neighbors": "downtown Dunedin and the Honeymoon Island corridor",
+      "intro": "Concierge dentistry for Dunedin residents who want gentle, modern care with an artistic touch, just a few minutes south."
+    },
+    {
+      "slug": "dentist-palm-harbor-fl",
+      "city": "Palm Harbor",
+      "state": "FL",
+      "label": "Palm Harbor, FL",
+      "neighbors": "Ozona, Crystal Beach, and the East Lake area",
+      "intro": "Palm Harbor families trust us for implants, cosmetic dentistry, and anxiety-free visits supported by our therapy dog program."
+    },
+    {
+      "slug": "dentist-largo-fl",
+      "city": "Largo",
+      "state": "FL",
+      "label": "Largo, FL",
+      "neighbors": "Belleair and the Ulmerton Road corridor",
+      "intro": "Full-service general and cosmetic dentistry for Largo patients seeking a calm, comfortable, and highly personalized experience."
+    }
+  ],
+  "social": [
+    {
+      "href": "https://facebook.com/Clearwaterdentist/",
+      "label": "Facebook",
+      "className": "dmSocialFacebook dm-social-icons-facebook"
+    },
+    {
+      "href": "https://instagram.com/clearwaterdentist",
+      "label": "Instagram",
+      "className": "dmSocialInstagram dm-social-icons-instagram"
+    },
+    {
+      "href": "https://youtube.com/Clearwater_Dentist",
+      "label": "YouTube",
+      "className": "dmSocialYoutube dm-social-icons-youtube"
+    },
+    {
+      "href": "https://pinterest.com/clearwater_dentist",
+      "label": "Pinterest",
+      "className": "dmSocialPinterest icon-pinterest"
+    },
+    {
+      "href": "https://www.tiktok.com/@clearwaterdentist",
+      "label": "TikTok",
+      "className": "dmSocialTiktok dm-social-icons-tiktok"
+    }
+  ],
+  "assets": {
+    "logo": "/assets/icons/clearwater-dentist-logo-466372.svg",
+    "logoWhite": "/assets/icons/clearwater-dentist-white.svg",
+    "office": "/assets/images/clearwater-dentist-clearwater-fl-front-of-dental-office-1920w.jpg",
+    "doctor": "/assets/images/clearwater-dentist-clearwater-fl-dr-nadia-pokrovskaya-2-739bdcb2-1920w.jpg",
+    "doctorCutout": "/assets/images/dr-nadia-pokrovskaya-cutout.png",
+    "heroPoster": "/assets/images/6qrr3vuprfkb7oix65k8-elmjyubzqwcgczf8kujh-2024-clearwater-dentist-intro-video-desktop-v-v2-0.jpg",
+    "heroVideo": "/assets/video/6qrr3vuprfkb7oix65k8-elmjyubzqwcgczf8kujh-2024-clearwater-dentist-intro-video-desktop-v-v.mp4",
+    "whyBandParallax": "/assets/images/clearwater-dentist-clearwater-fl-front-staff-parallax.jpg",
+    "beforeAfterParallax": "/assets/images/before-after-parallax.jpg"
+  },
+  "chat": {
+    "enabled": true,
+    "provider": "tidio",
+    "tidioPublicKey": "rmlhzyory69fi9cbvxvlfy9hwlt4v6kf",
+    "placeholder": true,
+    "productionNotificationEmail": "Drnadia@clearwaterdentist.com",
+    "placeholderNote": "Knight Logics Tidio workspace until Clearwater Dentist is ready. Replace tidioPublicKey with their key, set placeholder to false, and route notifications to productionNotificationEmail in Tidio.",
+    "welcomeMessage": "Hi! How can we help you today?"
+  },
+  "pageCount": 72
+}

@@ -1,0 +1,14 @@
+{
+  "name": "dentist-clearwater-v2-clean-rebuild",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "serve": "node scripts/serve.mjs --port 4178",
+    "verify": "node scripts/verify-static.mjs",
+    "qa:screenshots": "node scripts/qa-screenshots.mjs"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
