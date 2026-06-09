@@ -66,12 +66,7 @@
         "label": "Clearwater Dentist video"
       }
     ],
-    "embeds": [
-      {
-        "src": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3523.3396634613287!2d-82.70995339999999!3d27.9835027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88c2ee46d222db75%3A0x7b4352760899b855!2sClearwater%20Dentist!5e0!3m2!1sen!2sus!4v1709671422749!5m2!1sen!2sus",
-        "label": "Clearwater Dentist on Google Maps"
-      }
-    ],
+    "embeds": [],
     "sections": [
       {
         "heading": "Overview",
@@ -568,32 +563,8 @@
         "alt": "Calm sedation dentistry at Clearwater Dentist"
       },
       {
-        "src": "/assets/images/screenshot-2026-01-26-at-3-32-16-pm-1920w.png",
-        "alt": "Barbie, therapy dog comfort ambassador"
-      },
-      {
         "src": "/assets/images/clearwater-dentist-clearwater-fl-dog-barbie-1920w.jpg",
         "alt": "Barbie, therapy dog comfort ambassador"
-      },
-      {
-        "src": "/assets/images/5-786c530d-1920w.png",
-        "alt": "A five-star rating with a testimonial from James Cuomo praising Martha for being phenomenal, gentle, and thorough."
-      },
-      {
-        "src": "/assets/images/3-4b169ebf-1920w.png",
-        "alt": "A five-star rating followed by the review:"
-      },
-      {
-        "src": "/assets/images/4-9e1ea4b7-1920w.png",
-        "alt": "A five-star rating with a testimonial from Jim Henry praising Martha and the staff at Clearwater Dentist for dental care."
-      },
-      {
-        "src": "/assets/images/2-copy-1920w.png",
-        "alt": "A five-star rating followed by a testimonial from Makenzie Koehn praising the dental hygienist and front desk staff."
-      },
-      {
-        "src": "/assets/images/1-copy-1920w.png",
-        "alt": "A five-star rating followed by the quote,"
       }
     ],
     "videos": [],
@@ -645,10 +616,7 @@
           "We prioritize your comfort above all else. Because our patients feel so at ease with our team, they often trust us for more than just their routine dental care.",
           "Dr. Nadia's expert touch and artistic eye extend to all our services, from complex restorative work and emergency care to our curated aesthetic treatments. Whether you are interested in enhancing your smile with XERF and Ultra or exploring our premium Epicutus derm line, you can do so in the same comfortable, familiar environment you've come to love."
         ],
-        "items": [
-          "Write your caption here Button",
-          "Slide title Write your caption here Button"
-        ]
+        "items": []
       },
       {
         "heading": "Experience a Calmer Way to Care",
@@ -663,53 +631,29 @@
     "route": "/before-and-after",
     "slug": "before-and-after",
     "type": "gallery",
-    "title": "Before & After Dental Gallery | Clearwater Dentist",
-    "description": "Browse before and after images of dental treatments including implants, crowns, and smile makeover to see the results our patients. Start your smile transformation!",
+    "title": "Before & After Dental Photos in Clearwater, FL | Clearwater Dentist",
+    "description": "View real before and after dental photos from Clearwater Dentist — dental implants, smile makeovers, veneers, crowns, and restorative results by Dr. Nadia Pokrovskaya.",
     "h1": "Before & After Dental Gallery",
     "heroImage": {
       "src": "/assets/images/4-5f84c482-50be5873-50c6f43b-5b31c7bf-b0ddaaaf-51f6a7c5-7a328735-70980e3c-1920w.png",
-      "alt": "A smiling person wearing glasses, centered against a light, neutral background."
+      "alt": "Before and after smile transformation at Clearwater Dentist in Clearwater, FL"
     },
     "images": [
       {
         "src": "/assets/images/4-5f84c482-50be5873-50c6f43b-5b31c7bf-b0ddaaaf-51f6a7c5-7a328735-70980e3c-1920w.png",
-        "alt": "A smiling person wearing glasses, centered against a light, neutral background."
+        "alt": "Before and after smile transformation at Clearwater Dentist"
       },
       {
         "src": "/assets/images/5-ae8bb993-9f57610f-b7ca963b-c6b3aead-ea1c3f27-39b8498f-4e212feb-1920w.png",
-        "alt": "A smiling person with gray hair and glasses wearing a light blue collared shirt, against a plain white background."
+        "alt": "Restorative smile renewal after treatment at Clearwater Dentist"
       },
       {
-        "src": "/assets/images/screenshot-2025-12-04-at-2-48-40-pm-de03c815-1bdd2457-9435e2a6-5cb22128-3e8f8488-3d10d599-5e.png",
-        "alt": "A person with shoulder-length gray hair wearing silver hoop earrings and a patterned top, looking toward the camera."
+        "src": "/assets/images/clearwater-dentist-clearwater-fl-smile-lady-2880w.jpg",
+        "alt": "Cosmetic smile makeover patient at Clearwater Dentist"
       },
       {
-        "src": "/assets/images/screenshot-2025-12-04-at-2-49-20-pm-b327eaf9-5dcb1b1e-1920w.png",
-        "alt": "A smiling person wearing glasses and a blue patterned top against a soft pink background."
-      },
-      {
-        "src": "/assets/images/img-20250924-115520-1-1920w.jpg",
-        "alt": "A smiling person with a shaved head and a gray-flecked beard against a plain, light-colored background."
-      },
-      {
-        "src": "/assets/images/img-20250924-115518-281-29-aba1cc49-592781a0-108b1bfd-1920w.png",
-        "alt": "A person with a shaved head and a light gray beard smiling at the camera against a neutral, beige background."
-      },
-      {
-        "src": "/assets/images/screenshot-2025-12-04-at-3-38-29-pm-1920w.png",
-        "alt": "A person with short light hair wearing clear-framed glasses and a colorful beaded necklace, smiling at the camera."
-      },
-      {
-        "src": "/assets/images/screenshot-2025-12-04-at-3-37-49-pm-1920w.png",
-        "alt": "A person with short light-brown hair and clear-framed glasses smiling against a plain white background."
-      },
-      {
-        "src": "/assets/images/screenshot-2025-12-18-at-9-54-23-am-1920w.png",
-        "alt": "A person with chin-length reddish-brown hair and glasses perched on their head, smiling warmly against a white background."
-      },
-      {
-        "src": "/assets/images/screenshot-2025-12-18-at-9-54-39-am-1920w.png",
-        "alt": "A smiling person with shoulder-length reddish-brown hair, wearing a red shirt against a plain white background."
+        "src": "/assets/images/clearwater-dentist-clearwater-fl-woman-dental-implants-6627bd42-07d3fb59-1920w.jpg",
+        "alt": "Dental implant smile result at Clearwater Dentist in Clearwater FL"
       }
     ],
     "videos": [],
@@ -718,13 +662,72 @@
       {
         "heading": "Overview",
         "body": [
-          "Our repair & renewal cases highlight the everyday smile fixes that make a big difference - from cracked or chipped teeth to worn edges, cavities, and broken restorations.",
-          "These natural, health‑focused transformations restore strength, comfort, and confidence using modern restorative dentistry, including tooth‑colored fillings, crowns, bonding, and gentle laser treatments.",
-          "Whether you're repairing damaged teeth, replacing missing teeth, or exploring cosmetic enhancements, our smile transformations show what's possible with modern, patient‑centered dentistry. From natural‑looking crowns and bridges to whitening, bonding, and full‑smile makeovers, every result is customized with comfort, function, and esthetics in mind.",
-          "If you're looking for a dentist in Clearwater who blends advanced techniques with a warm, personalized experience, you're in the right place.",
-          "If you're ready to feel more confident in your smile - even if you're just curious about your options - schedule a consultation with Dr. Nadia and our team. We'd love to help you take the next step."
+          "See real before and after dental results from patients treated at Clearwater Dentist in Clearwater, FL. Dr. Nadia Pokrovskaya and our team combine advanced restorative and cosmetic dentistry with a calm, patient-first experience.",
+          "Drag the sliders above to compare actual smile transformations — from dental implants and full smile makeovers to crowns, veneers, and everyday restorative repairs."
         ],
         "items": []
+      },
+      {
+        "heading": "Smile Transformations for Clearwater and Tampa Bay Patients",
+        "body": [
+          "Our before and after gallery reflects the breadth of care available at our McMullen Booth Road office — real outcomes planned for comfort, function, and natural esthetics.",
+          "Whether you are repairing worn teeth, replacing missing teeth with [dental implants](/dental-implants-clearwater-fl), or exploring a complete [smile makeover](/smile-makeover), every treatment plan starts with a thoughtful consultation and digital planning when appropriate."
+        ],
+        "items": [
+          "Full-arch and single-tooth dental implant restorations",
+          "Porcelain veneers, bonding, and professional teeth whitening",
+          "Crowns, bridges, and tooth-colored fillings",
+          "Gentle care for anxious patients with sedation options"
+        ]
+      },
+      {
+        "heading": "Dental Implant and Full-Arch Before & After",
+        "body": [
+          "Missing teeth affect how you eat, speak, and smile with confidence. Our implant cases show how secure, natural-looking restorations can restore both appearance and bite strength.",
+          "From single implants to [implant-supported dentures](/implant-supported-dentures-clearwater-fl), we coordinate surgical and restorative phases for a seamless experience at one Clearwater location."
+        ],
+        "figure": {
+          "src": "/assets/images/clearwater-dentist-clearwater-fl-woman-dental-implants-6627bd42-07d3fb59-1920w.jpg",
+          "alt": "Dental implant smile transformation at Clearwater Dentist"
+        },
+        "items": []
+      },
+      {
+        "heading": "Cosmetic Dentistry: Veneers, Whitening and Bonding",
+        "body": [
+          "Cosmetic dentistry can refine shade, shape, and symmetry without looking overly done. Patients choose [porcelain veneers](/porcelain-veneers-clearwater-fl), [teeth whitening](/teeth-whitening-clearwater-fl), and bonding when they want a brighter, more balanced smile.",
+          "Dr. Nadia's artistic background informs how she designs smiles — emphasizing proportions that suit your features rather than a one-size-fits-all template."
+        ],
+        "figure": {
+          "src": "/assets/images/clearwater-dentist-clearwater-fl-smile-lady-2880w.jpg",
+          "alt": "Cosmetic smile makeover at Clearwater Dentist in Clearwater FL"
+        },
+        "items": []
+      },
+      {
+        "heading": "Restorative and Emergency Smile Repair",
+        "body": [
+          "Not every transformation requires a full makeover. Many before and after photos begin with cracked teeth, old fillings, or sudden [emergency dental](/emergency-dentistry-clearwater-fl) needs.",
+          "We restore strength and esthetics with modern [crowns and bridges](/crowns-and-bridges), laser-assisted care, and tooth-colored materials that blend with your natural enamel."
+        ],
+        "figure": {
+          "src": "/assets/images/clearwater-dentist-clearwater-fl-crowns-and-bridges-1920w.jpg",
+          "alt": "Crown and bridge restorative dentistry in Clearwater FL"
+        },
+        "items": []
+      },
+      {
+        "heading": "What to Expect at Your Consultation",
+        "body": [
+          "During your visit, we review your goals, examine your teeth and gums, and discuss realistic timelines, [financing options](/financing), and any anxiety concerns.",
+          "You will see examples similar to your situation, understand the steps involved, and leave with a clear path — never pressure to start treatment on the spot."
+        ],
+        "items": [
+          "Digital imaging and photos when clinically appropriate",
+          "Transparent treatment estimates before care begins",
+          "Sedation and comfort amenities for nervous patients",
+          "Flexible financing through CareCredit, Cherry, Sunbit, and more"
+        ]
       }
     ]
   },
@@ -3660,12 +3663,7 @@
       }
     ],
     "videos": [],
-    "embeds": [
-      {
-        "src": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3523.3396634613287!2d-82.70995339999999!3d27.9835027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88c2ee46d222db75%3A0x7b4352760899b855!2sClearwater%20Dentist!5e0!3m2!1sen!2sus!4v1709671422749!5m2!1sen!2sus",
-        "label": "Clearwater Dentist on Google Maps"
-      }
-    ],
+    "embeds": [],
     "sections": [
       {
         "heading": "What Are Dental Implants",
@@ -3962,10 +3960,6 @@
         "heading": "Meet Our Therapy Dogs",
         "body": [
           "Our therapy dogs at Clearwater Dentist are valued members of the dental family. Our furry friends have all been trained to offer comfort, companionship, and support to our patients. Let us introduce you to some of the warm personalities who brighten up our office.",
-          "Barbie",
-          "Baby",
-          "Chucha",
-          "Pusha",
           "Our therapy dogs are carefully chosen and trained in order to provide our patients with the best possible level of comfort and care. Our therapy dogs will be there to provide you with warm and friendly companionship during your next visit to Clearwater Dentist."
         ],
         "items": []
@@ -4068,12 +4062,7 @@
         "label": "Clearwater Dentist video"
       }
     ],
-    "embeds": [
-      {
-        "src": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3523.3396634613287!2d-82.70995339999999!3d27.9835027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88c2ee46d222db75%3A0x7b4352760899b855!2sClearwater%20Dentist!5e0!3m2!1sen!2sus!4v1709671422749!5m2!1sen!2sus",
-        "label": "Clearwater Dentist on Google Maps"
-      }
-    ],
+    "embeds": [],
     "sections": [
       {
         "heading": "Expert Emergency Dentistry in Clearwater, FL",
@@ -4286,7 +4275,11 @@
           "We have partnered with leading financing providers to offer you flexible payment plans. Explore your options below to find the perfect fit for you.",
           "For insurance participation, payment timing, membership plans, and our 48-hour cancellation policy, read our [Financial Policy](/financial-policy)."
         ],
-        "items": []
+        "items": [],
+        "figure": {
+          "src": "/assets/images/misc-web-asset-cherry-financing-1440w.png",
+          "alt": "Cherry payment plans for dental care - 0% APR options, fast approval, no hard credit checks"
+        }
       },
       {
         "heading": "For Patients with Good to Excellent Credit",
@@ -4476,12 +4469,7 @@
         "label": "Clearwater Dentist video"
       }
     ],
-    "embeds": [
-      {
-        "src": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3523.3396634613287!2d-82.70995339999999!3d27.9835027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88c2ee46d222db75%3A0x7b4352760899b855!2sClearwater%20Dentist!5e0!3m2!1sen!2sus!4v1709671422749!5m2!1sen!2sus",
-        "label": "Clearwater Dentist on Google Maps"
-      }
-    ],
+    "embeds": [],
     "sections": [
       {
         "heading": "Overview",
@@ -4676,12 +4664,7 @@
         "label": "Clearwater Dentist video"
       }
     ],
-    "embeds": [
-      {
-        "src": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3523.3396634613287!2d-82.70995339999999!3d27.9835027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88c2ee46d222db75%3A0x7b4352760899b855!2sClearwater%20Dentist!5e0!3m2!1sen!2sus!4v1709671422749!5m2!1sen!2sus",
-        "label": "Clearwater Dentist on Google Maps"
-      }
-    ],
+    "embeds": [],
     "sections": [
       {
         "heading": "Overview",
@@ -4745,12 +4728,7 @@
       }
     ],
     "videos": [],
-    "embeds": [
-      {
-        "src": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3523.3396634613287!2d-82.70995339999999!3d27.9835027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88c2ee46d222db75%3A0x7b4352760899b855!2sClearwater%20Dentist!5e0!3m2!1sen!2sus!4v1709671422749!5m2!1sen!2sus",
-        "label": "Clearwater Dentist on Google Maps"
-      }
-    ],
+    "embeds": [],
     "sections": [
       {
         "heading": "Guides Your Child Towards A Positive Future",
@@ -5261,12 +5239,7 @@
         "label": "Clearwater Dentist video"
       }
     ],
-    "embeds": [
-      {
-        "src": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3523.3396634613287!2d-82.70995339999999!3d27.9835027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88c2ee46d222db75%3A0x7b4352760899b855!2sClearwater%20Dentist!5e0!3m2!1sen!2sus!4v1709671422749!5m2!1sen!2sus",
-        "label": "Clearwater Dentist on Google Maps"
-      }
-    ],
+    "embeds": [],
     "sections": [
       {
         "heading": "Feel Confident With Invisalign",
@@ -5398,12 +5371,7 @@
       }
     ],
     "videos": [],
-    "embeds": [
-      {
-        "src": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3523.3396634613287!2d-82.70995339999999!3d27.9835027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88c2ee46d222db75%3A0x7b4352760899b855!2sClearwater%20Dentist!5e0!3m2!1sen!2sus!4v1709671422749!5m2!1sen!2sus",
-        "label": "Clearwater Dentist on Google Maps"
-      }
-    ],
+    "embeds": [],
     "sections": [
       {
         "heading": "A Faster, Gentler, Stress‑Free Dental Experience",
@@ -6021,12 +5989,7 @@
       }
     ],
     "videos": [],
-    "embeds": [
-      {
-        "src": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3523.3396634613287!2d-82.70995339999999!3d27.9835027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88c2ee46d222db75%3A0x7b4352760899b855!2sClearwater%20Dentist!5e0!3m2!1sen!2sus!4v1709671422749!5m2!1sen!2sus",
-        "label": "Clearwater Dentist on Google Maps"
-      }
-    ],
+    "embeds": [],
     "sections": [
       {
         "heading": "We Perform Thorough Oral Pathology Exams",
@@ -6103,12 +6066,7 @@
       }
     ],
     "videos": [],
-    "embeds": [
-      {
-        "src": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3523.3396634613287!2d-82.70995339999999!3d27.9835027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88c2ee46d222db75%3A0x7b4352760899b855!2sClearwater%20Dentist!5e0!3m2!1sen!2sus!4v1709671422749!5m2!1sen!2sus",
-        "label": "Clearwater Dentist on Google Maps"
-      }
-    ],
+    "embeds": [],
     "sections": [
       {
         "heading": "Pediatric Dentistry For Kids Of All Ages",
@@ -6707,12 +6665,7 @@
       }
     ],
     "videos": [],
-    "embeds": [
-      {
-        "src": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3523.3396634613287!2d-82.70995339999999!3d27.9835027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88c2ee46d222db75%3A0x7b4352760899b855!2sClearwater%20Dentist!5e0!3m2!1sen!2sus!4v1709671422749!5m2!1sen!2sus",
-        "label": "Clearwater Dentist on Google Maps"
-      }
-    ],
+    "embeds": [],
     "sections": [
       {
         "heading": "Schedule an Appointment for a Root Canal in Clearwater",
@@ -6805,12 +6758,7 @@
         "label": "Clearwater Dentist video"
       }
     ],
-    "embeds": [
-      {
-        "src": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3523.3396634613287!2d-82.70995339999999!3d27.9835027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88c2ee46d222db75%3A0x7b4352760899b855!2sClearwater%20Dentist!5e0!3m2!1sen!2sus!4v1709671422749!5m2!1sen!2sus",
-        "label": "Clearwater Dentist on Google Maps"
-      }
-    ],
+    "embeds": [],
     "sections": [
       {
         "heading": "Overview",
@@ -8376,12 +8324,7 @@
       }
     ],
     "videos": [],
-    "embeds": [
-      {
-        "src": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3523.3396634613287!2d-82.70995339999999!3d27.9835027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88c2ee46d222db75%3A0x7b4352760899b855!2sClearwater%20Dentist!5e0!3m2!1sen!2sus!4v1709671422749!5m2!1sen!2sus",
-        "label": "Clearwater Dentist on Google Maps"
-      }
-    ],
+    "embeds": [],
     "sections": [
       {
         "heading": "TMJ Treatment For Improper Jaw Alignment",

@@ -195,6 +195,16 @@ const beforeAfterPairs = [
     name: 'Full Smile Repair',
     before: '/assets/images/img-20250924-115520-1-1920w.jpg',
     after: '/assets/images/img-20250924-115518-281-29-aba1cc49-592781a0-108b1bfd-1920w.png'
+  },
+  {
+    name: 'Cosmetic Smile Makeover',
+    before: '/assets/images/screenshot-2025-12-04-at-3-37-49-pm-1920w.png',
+    after: '/assets/images/screenshot-2025-12-04-at-3-38-29-pm-1920w.png'
+  },
+  {
+    name: 'Complete Smile Transformation',
+    before: '/assets/images/screenshot-2025-12-18-at-9-54-23-am-1920w.png',
+    after: '/assets/images/screenshot-2025-12-18-at-9-54-39-am-1920w.png'
   }
 ];
 
@@ -331,11 +341,15 @@ function socialIcon(label) {
   const codes = { Facebook: '&#xea90;', Instagram: '&#xea92;', YouTube: '&#xea9d;', Pinterest: '&#xf0d2;', TikTok: '&#xe813;' };
   return codes[label] || '•';
 }
-function footer() {
+function footerOfficeCompact() {
   const addr = site.address || {};
+  const hours = (site.hours || []).map(h => '<span><strong>' + e(h.days) + '</strong> ' + e(h.time) + '</span>').join('');
+  return '<div class="footer-office"><p class="footer-office__label">Office</p><p class="footer-office__address">' + e(addr.street) + ', ' + e(addr.city) + ', ' + e(addr.state) + ' ' + e(addr.zip) + '</p><div class="footer-office__hours">' + hours + '</div><p class="footer-office__contact"><a href="tel:' + attr(site.phoneTel) + '">' + e(site.phoneDisplay) + '</a><span class="footer-office__sep" aria-hidden="true"> · </span><a href="mailto:' + attr(site.email) + '">' + e(site.email) + '</a></p></div>';
+}
+function footer() {
   const logo = site.assets.logoWhite || site.assets.logo || '';
   const social = (site.social || []).map(s => '<a class="social-link" href="' + attr(s.href) + '" target="_blank" rel="noopener" aria-label="' + attr(s.label) + '"><span class="social-glyph" aria-hidden="true">' + socialIcon(s.label) + '</span></a>').join('');
-  return '<footer class="site-footer"><div class="footer-grid"><section class="footer-brand">' + (logo ? '<img src="' + attr(logo) + '" alt="Clearwater Dentist logo" width="108" height="108" decoding="async">' : '') + '<h2>' + e(site.name) + '</h2><p>' + e(site.tagline) + '</p><div class="social-row">' + social + '</div></section><section><h2>Office</h2><p>' + e(addr.street) + '<br>' + e(addr.city) + ', ' + e(addr.state) + ' ' + e(addr.zip) + '</p>' + (site.hours || []).map(h => '<p><strong>' + e(h.days) + '</strong><br>' + e(h.time) + '</p>').join('') + '<p><a href="tel:' + attr(site.phoneTel) + '">' + e(site.phoneDisplay) + '</a><br><a href="mailto:' + attr(site.email) + '">' + e(site.email) + '</a></p></section><section class="footer-services"><h2>Services</h2><ul class="footer-services__list">' + linkList(site.serviceLinks || []) + '</ul></section><section><h2>Quick Links</h2><ul>' + linkList(site.quickLinks || []) + '</ul></section></div><div class="footer-bottom"><ul class="footer-policies">' + linkList(site.policyLinks || []) + '</ul><p class="copyright">&copy; 2026 Clearwater Dentist. All Rights Reserved.</p></div></footer>';
+  return '<footer class="site-footer"><div class="footer-grid"><section class="footer-brand">' + (logo ? '<img src="' + attr(logo) + '" alt="Clearwater Dentist logo" width="108" height="108" decoding="async">' : '') + '<h2>' + e(site.name) + '</h2><p>' + e(site.tagline) + '</p><div class="social-row">' + social + '</div>' + footerOfficeCompact() + '</section><section class="footer-services"><h2>Services</h2><ul class="footer-services__list">' + linkList(site.serviceLinks || []) + '</ul></section><section class="footer-quick-links"><h2>Quick Links</h2><ul class="footer-quick-links__list">' + linkList(site.quickLinks || []) + '</ul></section></div><div class="footer-bottom"><ul class="footer-policies">' + linkList(site.policyLinks || []) + '</ul><p class="copyright">&copy; 2026 Clearwater Dentist. All Rights Reserved.</p></div></footer>';
 }
 function imageTag(image, cls, eager) {
   if (!image || !image.src) return '';
@@ -385,12 +399,290 @@ function heroPanels(page) {
 function hero(page, kicker) {
   return '<section class="page-hero page-hero--gallery">' + heroPanels(page) + '<div class="page-hero-overlay" aria-hidden="true"></div><div class="page-hero-inner"><div class="page-hero-copy"><p class="eyebrow">' + e(kicker || page.type.replace(/([A-Z])/g, ' $1')) + '</p><h1>' + e(page.h1) + '</h1>' + (page.description ? '<p class="lede">' + e(page.description) + '</p>' : '') + '<div class="hero-actions"><a class="btn primary" href="' + APPOINTMENT_PATH + '">Request Appointment</a><a class="btn secondary" href="tel:' + attr(site.phoneTel) + '">Call ' + e(site.phoneDisplay) + '</a></div></div></div></section>';
 }
+const THERAPY_DOG_NAMES = ['Barbie', 'Baby', 'Chucha', 'Pusha'];
+const MAP_EMBED_ROUTES = new Set(['/', '/contact-us']);
+
+function isMapEmbed(item) {
+  return String(item?.src || '').includes('google.com/maps');
+}
+function pageEmbeds(page) {
+  const embeds = page.embeds || [];
+  if (MAP_EMBED_ROUTES.has(page.route) || page.type === 'contact') return embeds;
+  return embeds.filter(item => !isMapEmbed(item));
+}
+function usesInlineMedia(page) {
+  return page.type === 'doctor' || page.type === 'team' || page.type === 'service';
+}
+function contentImages(page) {
+  const images = page.images || [];
+  let rest = images.slice(1).filter(img => !isReviewImage(img));
+  if (page.type === 'team') {
+    const first = images[0];
+    if (first && !rest.some(img => img.src === first.src)) rest.unshift(first);
+  }
+  if (page.route === '/dental-therapy-dogs-clearwater-fl') {
+    const barbie = images.find(img => imageMatchesName(img, 'Barbie'));
+    if (barbie && !rest.some(img => img.src === barbie.src)) rest.unshift(barbie);
+  }
+  if (page.route === '/anti-anxiety-dentist-office') {
+    const office = images[0];
+    if (office && !rest.some(img => img.src === office.src)) rest.unshift(office);
+    rest = rest.filter(img => !isReviewImage(img));
+  }
+  return rest;
+}
+function isReviewImage(image) {
+  const alt = String(image.alt || '').toLowerCase();
+  return alt.includes('rating') || alt.includes('testimonial') || alt.includes('review') || alt.includes('five-star');
+}
+function roleFromAlt(alt) {
+  const text = String(alt || '').trim();
+  const dash = text.indexOf(' - ');
+  if (dash !== -1) return text.slice(dash + 3).trim().toLowerCase();
+  const parts = text.split(/\s+/);
+  return parts.length > 1 ? parts.slice(1).join(' ').toLowerCase() : text.toLowerCase();
+}
+function personNameFromAlt(alt) {
+  const text = String(alt || '').trim();
+  const dash = text.indexOf(' - ');
+  return dash !== -1 ? text.slice(0, dash).trim() : text.split(/\s+/)[0];
+}
+function imageNameKey(image) {
+  const alt = String(image.alt || '');
+  const dogMatch = alt.match(/therapy dog\s*-\s*(\w+)/i);
+  if (dogMatch) return dogMatch[1].toLowerCase();
+  if (/^barbie/i.test(alt.trim())) return 'barbie';
+  const file = String(image.src || '').toLowerCase();
+  const dogFile = file.match(/dog-([a-z]+)/);
+  if (dogFile) return dogFile[1];
+  return alt.split(' - ')[0].split(',')[0].trim().toLowerCase();
+}
+function imageMatchesName(image, name) {
+  const key = imageNameKey(image);
+  const target = String(name || '').trim().toLowerCase();
+  return key === target || key.startsWith(target);
+}
+function sectionText(section) {
+  return [section.heading || '', ...(section.body || []), ...(section.items || [])].join(' ').toLowerCase();
+}
+function keywordOverlapScore(image, section) {
+  const alt = String(image.alt || '').toLowerCase();
+  const heading = (section.heading || '').toLowerCase();
+  const text = sectionText(section);
+  const stop = new Set(['the', 'and', 'with', 'clearwater', 'dentist', 'dental', 'florida', 'patient', 'care', 'office']);
+  const words = alt.split(/[^a-z0-9]+/).filter(word => word.length > 3 && !stop.has(word));
+  let score = 0;
+  for (const word of words) {
+    if (heading.includes(word)) score += 18;
+    if (text.includes(word)) score += 10;
+  }
+  return score;
+}
+function buildServiceSectionImageMap(page, sections, images) {
+  const map = new Map();
+  const pool = [...images];
+  const eligible = sections
+    .map((section, index) => ({ section, index }))
+    .filter(({ section }) => {
+      const heading = (section.heading || '').toLowerCase();
+      return heading && heading !== 'overview';
+    });
+
+  for (const { section, index } of eligible) {
+    const best = pool
+      .map(img => ({ img, score: matchScoreForSection(img, section, page) }))
+      .filter(entry => entry.score > 0)
+      .sort((a, b) => b.score - a.score)[0];
+    if (best) {
+      map.set(index, [best.img]);
+      pool.splice(pool.findIndex(img => img.src === best.img.src), 1);
+    }
+  }
+
+  for (const { index } of eligible) {
+    if (!map.has(index) && pool.length) map.set(index, [pool.shift()]);
+  }
+
+  if (pool.length && eligible.length) {
+    const lastIndex = eligible[eligible.length - 1].index;
+    map.set(lastIndex, [...(map.get(lastIndex) || []), ...pool]);
+  }
+
+  return map;
+}
+function matchTeamScore(image, section) {
+  const role = roleFromAlt(image.alt);
+  const heading = (section.heading || '').toLowerCase();
+  const alt = String(image.alt || '').toLowerCase();
+  if (role === heading) return 100 + (alt.includes(' - ') ? 1 : 0);
+  if (role.includes(heading) && heading.length > 4) return 80;
+  if (heading.includes(role) && role.length > 4) return 70;
+  if (alt.includes(heading)) return 60;
+  return 0;
+}
+function matchScoreForSection(image, section, page) {
+  const alt = String(image.alt || '').toLowerCase();
+  const heading = (section.heading || '').toLowerCase();
+  const text = sectionText(section);
+  if (page.type === 'team') return matchTeamScore(image, section);
+  if (isReviewImage(image)) return 0;
+  if (heading.includes('barbie') && alt.includes('barbie')) return 100;
+  if ((heading.includes('space') || heading.includes('breathe')) && (alt.includes('office') || alt.includes('bright') || alt.includes('open'))) return 90;
+  if (heading.includes('comfort') && alt.includes('sedation')) return 85;
+  if (text.includes('front desk') && alt.includes('staff')) return 80;
+  if (alt.includes('therapy dog') && (text.includes('therapy') || text.includes('dog') || heading.includes('dog'))) return 70;
+  if (alt.includes('dog') && heading.includes('journey')) return 65;
+  if (alt.includes('nadia') && (text.includes('nadia') || page.type === 'doctor')) return 80;
+  if (page.type === 'service') {
+    const overlap = keywordOverlapScore(image, section);
+    if (overlap > 0) return overlap;
+  }
+  return 0;
+}
+function pickSectionImages(section, page, ctx, sectionIndex) {
+  const heading = (section.heading || '').toLowerCase();
+  if (heading === 'overview') return [];
+  if (ctx.sectionImageMap && sectionIndex !== undefined) {
+    const assigned = ctx.sectionImageMap.get(sectionIndex) || [];
+    const picked = assigned.filter(img => !ctx.usedSrcs.has(img.src));
+    picked.forEach(img => ctx.usedSrcs.add(img.src));
+    return picked;
+  }
+  if (page.route === '/dental-therapy-dogs-clearwater-fl' && heading.includes('meet our therapy dogs')) return [];
+  if (page.type === 'doctor' && heading.includes('dr. nadia')) {
+    const imgs = ctx.images.filter(img => !ctx.usedSrcs.has(img.src));
+    imgs.forEach(img => ctx.usedSrcs.add(img.src));
+    return imgs;
+  }
+  const matches = ctx.images
+    .filter(img => !ctx.usedSrcs.has(img.src))
+    .map(img => ({ img, score: matchScoreForSection(img, section, page) }))
+    .filter(x => x.score > 0)
+    .sort((a, b) => b.score - a.score);
+  const limit = page.route === '/anti-anxiety-dentist-office' || page.type === 'team' || heading.includes('barbie') ? 1 : 4;
+  const picked = matches.slice(0, limit).map(x => x.img);
+  picked.forEach(img => ctx.usedSrcs.add(img.src));
+  return picked;
+}
+function mediaInsertAfterParagraph(page, section) {
+  if (page.type === 'doctor' && (section.heading || '').toLowerCase().includes('dr. nadia')) return 3;
+  return 0;
+}
+function renderSectionMedia(images) {
+  if (!images.length) return '';
+  return inlineGalleryHtml(images);
+}
+function therapyDogProfiles(ctx) {
+  return THERAPY_DOG_NAMES.map(name => {
+    const image = ctx.images.find(img => !ctx.usedSrcs.has(img.src) && imageMatchesName(img, name));
+    if (!image) return null;
+    ctx.usedSrcs.add(image.src);
+    return { name, image };
+  }).filter(Boolean);
+}
+function inlineProfileGridHtml(profiles) {
+  if (!profiles.length) return '';
+  return '<div class="cw-profile-grid">' + profiles.map(profile => '<figure class="cw-profile-card">' + imageTag(profile.image, '', false) + '<figcaption>' + e(profile.name) + '</figcaption></figure>').join('') + '</div>';
+}
+function inlineSingleFigureHtml(image) {
+  return '<figure class="cw-inline-figure">' + imageTag(image, 'cw-inline-figure-img', false) + '</figure>';
+}
+function inlineGalleryHtml(images) {
+  if (!images.length) return '';
+  if (images.length === 1) return inlineSingleFigureHtml(images[0]);
+  return '<div class="cw-inline-gallery">' + images.map(img => '<figure>' + imageTag(img, 'cw-inline-gallery-img', false) + '</figure>').join('') + '</div>';
+}
+function teamProfileHtml(image) {
+  const role = roleFromAlt(image.alt);
+  const roleLabel = role.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+  return '<figure class="cw-team-profile">' + imageTag(image, 'cw-team-profile-img', false) + '<figcaption><strong>' + e(personNameFromAlt(image.alt)) + '</strong><span>' + e(roleLabel) + '</span></figcaption></figure>';
+}
+function inlineVideosHtml(videos) {
+  return videos.map(video => '<div class="cw-inline-media">' + videoMarkup(video, 'content-video') + '</div>').join('');
+}
+function inlineSectionHtml(section, page, ctx, isLast, sectionIndex) {
+  const heading = section.heading || '';
+  const headingKey = heading.toLowerCase();
+  const isMeetDogs = page.route === '/dental-therapy-dogs-clearwater-fl' && headingKey.includes('meet our therapy dogs');
+  let leadMedia = '';
+  let bodyHtml = '';
+  let sectionImages = [];
+
+  if (page.type === 'team' && headingKey !== 'overview') {
+    const teamImage = pickSectionImages(section, page, ctx, sectionIndex)[0];
+    if (teamImage) leadMedia += teamProfileHtml(teamImage);
+  } else if (!isMeetDogs) {
+    sectionImages = pickSectionImages(section, page, ctx, sectionIndex);
+  }
+
+  const insertAfter = mediaInsertAfterParagraph(page, section);
+  let mediaInserted = false;
+  const body = section.body || [];
+  for (let i = 0; i < body.length; i++) {
+    const name = String(body[i] || '').trim();
+    if (THERAPY_DOG_NAMES.some(dog => dog.toLowerCase() === name.toLowerCase())) continue;
+    bodyHtml += '<p>' + richText(body[i]) + '</p>';
+    if (isMeetDogs && i === 0) {
+      const profiles = therapyDogProfiles(ctx);
+      if (profiles.length) bodyHtml += inlineProfileGridHtml(profiles);
+      const extraDogs = ctx.images.filter(img => !ctx.usedSrcs.has(img.src) && /therapy dog|with therapy dog|with dog/i.test(img.alt || ''));
+      if (extraDogs.length) {
+        bodyHtml += inlineGalleryHtml(extraDogs);
+        extraDogs.forEach(img => ctx.usedSrcs.add(img.src));
+      }
+      if (ctx.videos.length) bodyHtml += inlineVideosHtml(ctx.videos.splice(0, 1));
+    } else if (!mediaInserted && sectionImages.length && i === insertAfter) {
+      bodyHtml += renderSectionMedia(sectionImages);
+      mediaInserted = true;
+    }
+  }
+
+  if (!mediaInserted && sectionImages.length) {
+    bodyHtml = renderSectionMedia(sectionImages) + bodyHtml;
+  }
+
+  if (isLast) {
+    const remaining = ctx.images.filter(img => !ctx.usedSrcs.has(img.src));
+    if (remaining.length) {
+      bodyHtml += renderSectionMedia(remaining);
+      remaining.forEach(img => ctx.usedSrcs.add(img.src));
+    }
+    if (ctx.videos.length) bodyHtml += inlineVideosHtml(ctx.videos.splice(0));
+    if (ctx.embeds.length) {
+      bodyHtml += ctx.embeds.splice(0).map(x => '<iframe class="content-embed" src="' + attr(x.src) + '" title="' + attr(x.label || 'Video') + '" loading="lazy" allowfullscreen></iframe>').join('');
+    }
+  }
+
+  const sectionClass = page.type === 'service'
+    ? 'content-section cw-gallery-section cw-reveal'
+    : 'content-section';
+  const revealAttrs = page.type === 'service'
+    ? cwRevealAttr(GALLERY_REVEAL_DIRS[sectionIndex % GALLERY_REVEAL_DIRS.length], sectionIndex * 90)
+    : '';
+  return '<section class="' + sectionClass + '"' + revealAttrs + '><h2>' + e(heading) + '</h2>' + leadMedia + bodyHtml + (section.items && section.items.length ? '<ul class="check-list">' + section.items.map(i => '<li>' + richText(i) + '</li>').join('') + '</ul>' : '') + sectionFigureHtml(section.figure) + '</section>';
+}
+function renderInlineSections(page) {
+  const sections = page.type === 'service' ? servicePageSections(page) : (page.sections || []);
+  const images = contentImages(page);
+  const ctx = {
+    usedSrcs: new Set(),
+    images,
+    videos: [...(page.videos || [])],
+    embeds: [...pageEmbeds(page)],
+    sectionImageMap: page.type === 'service' ? buildServiceSectionImageMap(page, sections, images) : null
+  };
+  return sections.map((section, index) => inlineSectionHtml(section, page, ctx, index === sections.length - 1, index)).join('');
+}
+function sectionFigureHtml(figure) {
+  if (!figure?.src) return '';
+  return '<figure class="cw-inline-figure cw-section-figure">' + imageTag(figure, 'cw-inline-figure-img', false) + '</figure>';
+}
 function sectionHtml(section) {
-  return '<section class="content-section"><h2>' + e(section.heading) + '</h2>' + (section.body || []).map(p => '<p>' + richText(p) + '</p>').join('') + (section.items && section.items.length ? '<ul class="check-list">' + section.items.map(i => '<li>' + richText(i) + '</li>').join('') + '</ul>' : '') + '</section>';
+  return '<section class="content-section"><h2>' + e(section.heading) + '</h2>' + (section.body || []).map(p => '<p>' + richText(p) + '</p>').join('') + (section.items && section.items.length ? '<ul class="check-list">' + section.items.map(i => '<li>' + richText(i) + '</li>').join('') + '</ul>' : '') + sectionFigureHtml(section.figure) + '</section>';
 }
 function mediaHtml(page) {
   const vids = (page.videos || []).map(v => videoMarkup(v, 'content-video')).join('');
-  const embeds = (page.embeds || []).map(x => '<iframe class="content-embed" src="' + attr(x.src) + '" title="' + attr(x.label || 'Video') + '" loading="lazy" allowfullscreen></iframe>').join('');
+  const embeds = pageEmbeds(page).map(x => '<iframe class="content-embed" src="' + attr(x.src) + '" title="' + attr(x.label || 'Video') + '" loading="lazy" allowfullscreen></iframe>').join('');
   return vids || embeds ? '<section class="media-section"><h2>Featured Media</h2><div class="media-grid">' + vids + embeds + '</div></section>' : '';
 }
 function videoMarkup(video, cls) {
@@ -406,6 +698,33 @@ function relatedServices(currentRoute) {
   return '<aside class="related-card"><h2>Helpful Services</h2><ul>' + linkList(links) + '</ul><a class="btn secondary full" href="/general-dentistry#service-directory">All Services</a><a class="btn primary full" href="' + APPOINTMENT_PATH + '">Schedule Consultation</a></aside>';
 }
 const COMPARE_REVEAL_DIRS = ['left', 'bottom', 'right-soft'];
+const GALLERY_REVEAL_DIRS = ['left', 'right-soft', 'bottom', 'left-soft', 'right'];
+const galleryTreatmentHighlights = [
+  {
+    title: 'Dental Implants',
+    desc: 'Replace missing teeth with secure, natural-looking implant restorations in Clearwater, FL.',
+    href: '/dental-implants-clearwater-fl',
+    image: '/assets/images/clearwater-dentist-clearwater-fl-woman-dental-implants-6627bd42-07d3fb59-1920w.jpg'
+  },
+  {
+    title: 'Smile Makeover',
+    desc: 'Comprehensive smile design combining cosmetic and restorative treatments.',
+    href: '/smile-makeover',
+    image: '/assets/images/clearwater-dentist-clearwater-fl-smile-makeover-ab960fc4-256c5e17-1920w.jpg'
+  },
+  {
+    title: 'Porcelain Veneers',
+    desc: 'Refine shape, shade, and symmetry with custom veneers crafted for your features.',
+    href: '/porcelain-veneers-clearwater-fl',
+    image: '/assets/images/clearwater-dentist-clearwater-fl-veneer-1920w.png'
+  },
+  {
+    title: 'Cosmetic Dentistry',
+    desc: 'Whitening, bonding, and aesthetic treatments for a confident Clearwater smile.',
+    href: '/cosmetic-dentistry',
+    image: '/assets/images/clearwater-dentist-clearwater-fl-smile-lady-2880w.jpg'
+  }
+];
 const SERVICE_REVEAL_DIRS = ['left', 'right', 'bottom', 'left-soft', 'right-soft', 'bottom', 'left', 'right'];
 function cwRevealAttr(direction, stagger) {
   let attrs = ' data-cw-reveal="' + direction + '"';
@@ -493,6 +812,16 @@ function googleReviewCard(review, index) {
   const color = REVIEW_AVATAR_COLORS[index % REVIEW_AVATAR_COLORS.length];
   return '<article class="review-card"><div class="review-card-top"><div class="review-avatar ' + color + '">' + e(reviewInitials(review.name)) + '</div><div class="review-card-person"><h3>' + e(review.name) + '</h3><p class="review-card-meta">' + e(review.meta) + '</p></div></div><span class="review-card-stars" aria-label="5 out of 5 stars">★★★★★</span><p class="review-card-quote">"' + e(review.quote) + '"</p><p class="review-card-date">' + e(review.date) + '</p></article>';
 }
+function contactMapSection() {
+  const embed = googleReviews.mapEmbed;
+  if (!embed) return '';
+  const addr = site.address || {};
+  const rating = Number(googleReviews.rating || 4.9).toFixed(1);
+  const count = Number(googleReviews.reviewCount || 0).toLocaleString('en-US');
+  const officePhoto = site.assets.office || '/assets/images/clearwater-dentist-clearwater-fl-front-of-dental-office-1920w.jpg';
+  const addressLine = e(addr.street) + ' · ' + e(addr.city) + ', ' + e(addr.state) + ' ' + e(addr.zip);
+  return '<section class="contact-map-band cw-google-trust" aria-label="Office location"><div class="cw-google-trust"><div class="cw-trust-map-row cw-trust-map-row--contact" data-cw-map-row><div class="map-card"><div class="map-frame-wrap"><iframe src="' + attr(embed) + '" width="600" height="450" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Clearwater Dentist on Google Maps"></iframe><a class="map-place-badge" href="' + attr(googleReviews.googleUrl || site.googleReviewUrl) + '" target="_blank" rel="noopener noreferrer" aria-label="Clearwater Dentist ' + attr(rating) + ' stars, ' + attr(count) + ' Google reviews"><strong class="map-place-badge__name">Clearwater Dentist</strong><span class="map-place-badge__score"><span class="map-place-badge__stars" aria-hidden="true">★★★★★</span><span>' + rating + ' · ' + count + ' reviews</span></span></a></div><p class="map-card__address">' + addressLine + '</p></div><figure class="cw-trust-office-photo" data-cw-map-photo aria-hidden="false"><img src="' + attr(officePhoto) + '" alt="Clearwater Dentist office exterior at 1700 N McMullen Booth Rd" width="640" height="480" loading="lazy" decoding="async"></figure></div></div></section>';
+}
 function googleTrustSection() {
   const rating = Number(googleReviews.rating || 4.9).toFixed(1);
   const count = Number(googleReviews.reviewCount || 0).toLocaleString('en-US');
@@ -521,9 +850,14 @@ function pageKicker(page) {
   return page.type;
 }
 function renderGeneric(page) {
-  const sections = page.type === 'service' ? servicePageSections(page) : (page.sections || []);
   const sidebar = page.type === 'policy' ? '' : relatedServices(page.route);
-  return hero(page, pageKicker(page)) + '<div class="content-layout' + (page.type === 'policy' ? ' content-layout--policy' : '') + '"><article class="article-body">' + sections.map(sectionHtml).join('') + policyLinksBlock(page.route) + mediaHtml(page) + galleryHtml((page.images || []).slice(1), 8) + '</article>' + sidebar + '</div>' + (page.route === '/general-dentistry' ? serviceDirectorySection() : '');
+  const articleBody = usesInlineMedia(page)
+    ? renderInlineSections(page)
+    : (page.sections || []).map(sectionHtml).join('');
+  const tailMedia = usesInlineMedia(page) ? '' : mediaHtml(page);
+  const tailGallery = usesInlineMedia(page) ? '' : galleryHtml((page.images || []).slice(1), 8);
+  const serviceFooter = page.type === 'service' ? serviceHighlightsBand(page) + serviceCtaBand(page) : '';
+  return hero(page, pageKicker(page)) + '<div class="content-layout' + (page.type === 'policy' ? ' content-layout--policy' : '') + '"><article class="article-body">' + articleBody + policyLinksBlock(page.route) + tailMedia + tailGallery + '</article>' + sidebar + '</div>' + (page.route === '/general-dentistry' ? serviceDirectorySection() : '') + serviceFooter;
 }
 function renderBlogIndex(page) {
   const posts = pages.filter(p => p.type === 'blogPost').map(post => '<article class="post-card"><a href="' + attr(post.route) + '">' + imageTag(post.heroImage || { src: site.assets.office, alt: post.h1 }, '', false) + '<span>Dental Blog</span><h2>' + e(post.h1) + '</h2><p>' + e(post.description || ((post.sections[0] && post.sections[0].body[0]) || 'Read more from Clearwater Dentist.')) + '</p></a></article>').join('');
@@ -531,11 +865,65 @@ function renderBlogIndex(page) {
 }
 function renderContact(page) {
   const addr = site.address || {};
-  return hero(page, 'Contact') + '<section class="contact-grid"><div class="contact-panel"><h2>Contact the office</h2><p><strong>Phone</strong><br><a href="tel:' + attr(site.phoneTel) + '">' + e(site.phoneDisplay) + '</a></p><p><strong>Email</strong><br><a href="mailto:' + attr(site.email) + '">' + e(site.email) + '</a></p><p><strong>Address</strong><br>' + e(addr.street) + '<br>' + e(addr.city) + ', ' + e(addr.state) + ' ' + e(addr.zip) + '</p><p class="fine-print">Payment and insurance questions? Read our <a href="/financial-policy">Financial Policy</a>.</p><a class="btn primary full" href="/contact-us">Request Appointment</a></div><form class="contact-form" action="#" method="post"><h2>Request an Appointment</h2><label>Name<input name="name" autocomplete="name" required></label><label>Phone<input name="phone" type="tel" autocomplete="tel" required></label><label>Email<input name="email" type="email" autocomplete="email"></label><label>How can we help?<textarea name="message" rows="5"></textarea></label><p class="fine-print">We do not accept State Insurances, HMOs, or Medicaid. Information you submit is handled according to our <a href="/privacy-policy">Privacy Policy</a> and <a href="/notice-of-privacy-practices">Notice of Privacy Practices</a>.</p><button class="btn primary" type="submit">Send Request</button></form></section>';
+  return hero(page, 'Contact') + '<section class="contact-grid"><div class="contact-panel"><h2>Contact the office</h2><p><strong>Phone</strong><br><a href="tel:' + attr(site.phoneTel) + '">' + e(site.phoneDisplay) + '</a></p><p><strong>Email</strong><br><a href="mailto:' + attr(site.email) + '">' + e(site.email) + '</a></p><p><strong>Address</strong><br>' + e(addr.street) + '<br>' + e(addr.city) + ', ' + e(addr.state) + ' ' + e(addr.zip) + '</p><p class="fine-print">Payment and insurance questions? Read our <a href="/financial-policy">Financial Policy</a>.</p><a class="btn primary full" href="/contact-us">Request Appointment</a></div><form class="contact-form" action="#" method="post"><h2>Request an Appointment</h2><label>Name<input name="name" autocomplete="name" required></label><label>Phone<input name="phone" type="tel" autocomplete="tel" required></label><label>Email<input name="email" type="email" autocomplete="email"></label><label>How can we help?<textarea name="message" rows="5"></textarea></label><p class="fine-print">We do not accept State Insurances, HMOs, or Medicaid. Information you submit is handled according to our <a href="/privacy-policy">Privacy Policy</a> and <a href="/notice-of-privacy-practices">Notice of Privacy Practices</a>.</p><button class="btn primary" type="submit">Send Request</button></form></section>' + contactMapSection();
+}
+function gallerySectionHtml(section, index) {
+  const dir = GALLERY_REVEAL_DIRS[index % GALLERY_REVEAL_DIRS.length];
+  return '<section class="content-section cw-gallery-section cw-reveal"' + cwRevealAttr(dir, index * 90) + '><h2>' + e(section.heading) + '</h2>' + (section.body || []).map(p => '<p>' + richText(p) + '</p>').join('') + (section.items && section.items.length ? '<ul class="check-list">' + section.items.map(i => '<li>' + richText(i) + '</li>').join('') + '</ul>' : '') + sectionFigureHtml(section.figure) + '</section>';
+}
+function galleryHighlightsBand() {
+  const cards = galleryTreatmentHighlights.map((item, index) => '<a class="cw-gallery-highlight cw-reveal" href="' + attr(item.href) + '"' + cwRevealAttr(GALLERY_REVEAL_DIRS[index % GALLERY_REVEAL_DIRS.length], index * 100) + '>' + imageTag({ src: item.image, alt: item.title + ' at Clearwater Dentist' }, 'cw-gallery-highlight__img', false) + '<span class="cw-gallery-highlight__copy"><strong>' + e(item.title) + '</strong><p>' + e(item.desc) + '</p><span class="cw-gallery-highlight__link">Learn more</span></span></a>').join('');
+  return '<section class="cw-gallery-discover" aria-label="Treatments featured in our before and after gallery"><div class="cw-gallery-discover__inner"><div class="section-head cw-reveal"' + cwRevealAttr('bottom', 0) + '><p class="eyebrow">Smile Transformations</p><h2>Explore the treatments behind these results.</h2><p>Every before and after photo reflects a personalized plan at our Clearwater, FL dental office. Browse the services most often associated with these transformations, then request a consultation to discuss your goals with Dr. Nadia.</p></div><div class="cw-gallery-highlight-grid">' + cards + '</div></div></section>';
+}
+function galleryCtaBand() {
+  return '<section class="cw-gallery-cta cw-reveal"' + cwRevealAttr('bottom', 120) + '><div class="cw-gallery-cta__inner"><p class="eyebrow">Clearwater Dentist</p><h2>Ready to start your smile transformation?</h2><p>Schedule a consultation at our Clearwater office to review your options for dental implants, cosmetic dentistry, restorative care, and flexible financing.</p><div class="hero-actions"><a class="btn primary" href="' + APPOINTMENT_PATH + '">Request Appointment</a><a class="btn secondary" href="tel:' + attr(site.phoneTel) + '">Call ' + e(site.phoneDisplay) + '</a></div></div></section>';
+}
+function servicePageTitle(page) {
+  return String(page.h1 || page.title || 'Dental Care').replace(/^[\u{1F300}-\u{1FAFF}\u2600-\u27BF]+\s*/u, '').trim();
+}
+function serviceNavGroupFor(route) {
+  for (const group of site.serviceNavGroups || []) {
+    if ((group.children || []).some(child => child.href === route)) return group;
+  }
+  return null;
+}
+function relatedServiceHighlights(page, limit = 4) {
+  const current = page.route;
+  const group = serviceNavGroupFor(current);
+  let pool = [];
+  if (group) pool = (group.children || []).filter(child => child.href !== current);
+  if (pool.length < limit) {
+    const seen = new Set([current, ...pool.map(item => item.href)]);
+    for (const link of site.serviceLinks || []) {
+      if (seen.has(link.href)) continue;
+      pool.push(link);
+      seen.add(link.href);
+      if (pool.length >= limit) break;
+    }
+  }
+  return pool.slice(0, limit).map(link => ({
+    title: link.label,
+    href: link.href,
+    desc: (serviceTileCopy[link.href]?.hoverDetail || 'Personalized dental care at Clearwater Dentist in Clearwater, FL.').slice(0, 160),
+    image: serviceImages[link.href] || site.assets.office
+  }));
+}
+function serviceHighlightsBand(page) {
+  const items = relatedServiceHighlights(page);
+  if (!items.length) return '';
+  const group = serviceNavGroupFor(page.route);
+  const eyebrow = group ? group.label : 'Related Services';
+  const title = servicePageTitle(page);
+  const cards = items.map((item, index) => '<a class="cw-gallery-highlight cw-reveal" href="' + attr(item.href) + '"' + cwRevealAttr(GALLERY_REVEAL_DIRS[index % GALLERY_REVEAL_DIRS.length], index * 100) + '>' + imageTag({ src: item.image, alt: item.title + ' at Clearwater Dentist' }, 'cw-gallery-highlight__img', false) + '<span class="cw-gallery-highlight__copy"><strong>' + e(item.title) + '</strong><p>' + e(item.desc) + '</p><span class="cw-gallery-highlight__link">Learn more</span></span></a>').join('');
+  return '<section class="cw-gallery-discover" aria-label="Related dental services"><div class="cw-gallery-discover__inner"><div class="section-head cw-reveal"' + cwRevealAttr('bottom', 0) + '><p class="eyebrow">' + e(eyebrow) + '</p><h2>Explore related care at Clearwater Dentist.</h2><p>' + richText('Patients often combine treatments related to ' + title + ' with other services in our Clearwater, FL office. Browse related care below, or see the [full service directory](/general-dentistry#service-directory) for every option we offer.') + '</p></div><div class="cw-gallery-highlight-grid">' + cards + '</div></div></section>';
+}
+function serviceCtaBand(page) {
+  const title = servicePageTitle(page);
+  return '<section class="cw-gallery-cta cw-reveal"' + cwRevealAttr('bottom', 120) + '><div class="cw-gallery-cta__inner"><p class="eyebrow">Clearwater Dentist</p><h2>Ready to learn more about ' + e(title) + '?</h2><p>' + richText('Request a consultation at our Clearwater office. Dr. Nadia and our team will review your goals, explain your options, and discuss [financing](/financing) when helpful.') + '</p><div class="hero-actions"><a class="btn primary" href="' + APPOINTMENT_PATH + '">Request Appointment</a><a class="btn secondary" href="tel:' + attr(site.phoneTel) + '">Call ' + e(site.phoneDisplay) + '</a></div></div></section>';
 }
 function renderGallery(page) {
   const sections = galleryPageSections(page);
-  return hero(page, 'Before & After') + '<div class="content-layout"><article class="article-body">' + sections.map(sectionHtml).join('') + '</article>' + relatedServices(page.route) + '</div>' + beforeAfterSection(3) + galleryHtml(page.images || [], 30);
+  return hero(page, 'Before & After') + beforeAfterSection(5) + '<div class="content-layout cw-gallery-content"><article class="article-body">' + sections.map(gallerySectionHtml).join('') + '</article>' + relatedServices(page.route) + '</div>' + galleryHighlightsBand() + galleryCtaBand();
 }
 function schema(page) {
   const addr = site.address || {};
