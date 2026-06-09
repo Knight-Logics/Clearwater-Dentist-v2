@@ -1,0 +1,33 @@
+[
+  {
+    "from": "/xerfa76ea7ac",
+    "to": "/XERF-skin-tightening",
+    "note": "GSC duplicate XERF slug (4,408 impressions)"
+  },
+  {
+    "from": "/ultrac9d83452",
+    "to": "/Ultra-skin-resurfacing",
+    "note": "GSC duplicate LaseMD Ultra slug"
+  },
+  {
+    "from": "/before---afters",
+    "to": "/before-and-after",
+    "note": "Legacy gallery URL variant"
+  },
+  {
+    "from": "/copy-of-home",
+    "to": "/",
+    "note": "Duplicate homepage from site builder"
+  },
+  {
+    "from": "/carecredit",
+    "to": "/financing/carecredit",
+    "note": "Consolidate CareCredit to financing path"
+  },
+  {
+    "from": "/martha-referral",
+    "to": "/contact-us",
+    "noindex": true,
+    "note": "Legacy referral landing page"
+  }
+]

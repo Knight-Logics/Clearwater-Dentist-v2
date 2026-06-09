@@ -8,19 +8,34 @@ const DIST = path.join(ROOT, 'dist');
 const PUBLIC = path.join(ROOT, 'public');
 const site = JSON.parse(await fs.readFile(path.join(ROOT, 'src/content/site.json'), 'utf8'));
 const pages = JSON.parse(await fs.readFile(path.join(ROOT, 'src/content/pages.json'), 'utf8'));
+const redirects = JSON.parse(await fs.readFile(path.join(ROOT, 'src/content/redirects.json'), 'utf8'));
 const googleReviews = JSON.parse(await fs.readFile(path.join(ROOT, 'src/content/google-reviews.json'), 'utf8'));
+const PREVIEW_NOINDEX = process.env.PREVIEW_NOINDEX === 'true';
 const APPOINTMENT_PATH = '/contact-us';
 const REVIEW_AVATAR_COLORS = ['review-avatar--blue', 'review-avatar--red', 'review-avatar--green', 'review-avatar--orange', 'review-avatar--purple', 'review-avatar--teal'];
 
 const serviceImages = {
+  '/general-dentistry': '/assets/images/clearwater-dentist-clearwater-fl-front-of-dental-office-1920w.jpg',
   '/dental-implants-clearwater-fl': '/assets/images/clearwater-dentist-clearwater-fl-woman-dental-implants-6627bd42-07d3fb59-1920w.jpg',
+  '/implant-supported-dentures-clearwater-fl': '/assets/images/clearwater-dentist-clearwater-fl-old-person-smiling-17cba580-1920w.jpg',
+  '/bone-grafting': '/assets/images/clearwater-dentist-clearwater-fl-dr-nadia-pokrovskaya-2-42fee302-cc2dcf47-1920w.jpg',
+  '/tooth-extraction-clearwater-fl': '/assets/images/clearwater-dentist-clearwater-fl-tooth-extraction-d8c9769c-260a362d-2880w.jpg',
   '/cosmetic-dentistry': '/assets/images/clearwater-dentist-clearwater-fl-smile-lady-2880w.jpg',
   '/smile-makeover': '/assets/images/clearwater-dentist-clearwater-fl-smile-makeover-ab960fc4-256c5e17-1920w.jpg',
   '/porcelain-veneers-clearwater-fl': '/assets/images/clearwater-dentist-clearwater-fl-veneer-1920w.png',
   '/Invisalign-service-clearwater-fl': '/assets/images/clearwater-dentist-clearwater-fl-invisalign-girl-fd93d95a-2880w.jpg',
   '/teeth-whitening-clearwater-fl': '/assets/images/clearwater-dentist-clearwater-fl-teeth-whitening-1920w.png',
   '/emergency-dentistry-clearwater-fl': '/assets/images/clearwater-dentist-clearwater-fl-emergency-2-1920w.png',
-  '/gum-disease-treatment': '/assets/images/clearwater-dentist-clearwater-fl-gingivectomy-be1e5855-1920w.jpg'
+  '/gum-disease-treatment': '/assets/images/clearwater-dentist-clearwater-fl-gingivectomy-be1e5855-1920w.jpg',
+  '/root-canal-clearwater-fl': '/assets/images/clearwater-dentist-clearwater-fl-root-canal-1920w.jpg',
+  '/crowns-and-bridges': '/assets/images/clearwater-dentist-clearwater-fl-crowns-and-bridges-1920w.jpg',
+  '/sedation-dentistry-clearwater-fl': '/assets/images/sedation-dentist-v2-0000000-1920w.jpg',
+  '/laser-dentistry': '/assets/images/clearwater-dentist-clearwater-fl-laser-dentistry-1920w.jpg',
+  '/facial-esthetics': '/assets/images/screenshot-2025-12-05-at-2-33-21-pm-1920w.png',
+  '/Ultra-skin-resurfacing': '/assets/images/ljxyvgwytwgsk6zlvv3i-prd-1749-ultra-branded-social-assets-motion-03-1-v2-0000000.jpg',
+  '/oral-cancer-screening': '/assets/images/clearwater-dentist-clearwater-fl-front-of-dental-office-1920w.jpg',
+  '/solea-sleep': '/assets/images/clearwater-dentist-clearwater-fl-laser-dentistry-1920w.jpg',
+  '/tmj-treatment-clearwater-fl': '/assets/images/clearwater-dentist-clearwater-fl-dr-nadia-pokrovskaya-2-739bdcb2-1920w.jpg'
 };
 
 const serviceTileCopy = {
@@ -63,6 +78,51 @@ const serviceTileCopy = {
     headline: 'Worried about bleeding or swollen gums?',
     hoverTitle: 'Gum Disease Treatment',
     hoverDetail: 'At Clearwater Dentist, periodontal care targets infection and inflammation with deep cleanings, laser-assisted treatment options, and ongoing maintenance to help protect your teeth and smile.'
+  },
+  '/tooth-extraction-clearwater-fl': {
+    headline: 'Need a tooth removed with gentle care?',
+    hoverTitle: 'Tooth Extraction',
+    hoverDetail: 'Comfort-focused extractions for damaged, infected, or problematic teeth — with sedation options and clear guidance on healing and replacement choices.'
+  },
+  '/implant-supported-dentures-clearwater-fl': {
+    headline: 'Tired of loose or shifting dentures?',
+    hoverTitle: 'Implant-Supported Dentures',
+    hoverDetail: 'Secure full-arch and partial solutions anchored by dental implants for improved stability, chewing confidence, and a more natural feel day to day.'
+  },
+  '/bone-grafting': {
+    headline: 'Need more bone before implants or extractions?',
+    hoverTitle: 'Bone Grafting',
+    hoverDetail: 'Bone grafting rebuilds jaw support so implant placement and long-term restorative plans have a stronger, healthier foundation.'
+  },
+  '/general-dentistry': {
+    headline: 'Due for a checkup or preventive visit?',
+    hoverTitle: 'General Dentistry',
+    hoverDetail: 'Comprehensive exams, cleanings, fillings, and preventive care for families in Clearwater — built around comfort and long-term oral health.'
+  },
+  '/sedation-dentistry-clearwater-fl': {
+    headline: 'Anxious about your next dental visit?',
+    hoverTitle: 'Sedation Dentistry',
+    hoverDetail: 'Oral conscious sedation and a calm, patient-paced approach help anxious patients complete treatment with less stress and more confidence.'
+  },
+  '/laser-dentistry': {
+    headline: 'Interested in needle-free, laser-assisted care?',
+    hoverTitle: 'Laser Dentistry',
+    hoverDetail: 'Advanced laser technology supports gentler gum treatment, soft-tissue procedures, and select restorative workflows with less discomfort.'
+  },
+  '/solea-sleep': {
+    headline: 'Snoring or sleep-disordered breathing concerns?',
+    hoverTitle: 'Solea Sleep',
+    hoverDetail: 'Laser-assisted snoring treatment designed to help eligible patients breathe more easily at night without surgery or appliances in many cases.'
+  },
+  '/oral-cancer-screening': {
+    headline: 'Due for an oral cancer screening?',
+    hoverTitle: 'Oral Cancer Screening',
+    hoverDetail: 'Thorough oral pathology exams and patient education to catch mouth, jaw, and soft-tissue concerns early.'
+  },
+  '/tmj-treatment-clearwater-fl': {
+    headline: 'Jaw pain, clicking, or teeth grinding?',
+    hoverTitle: 'TMJ Treatment',
+    hoverDetail: 'Custom oral appliances and thoughtful planning for jaw pain, headaches, and TMJ-related symptoms.'
   }
 };
 
@@ -157,12 +217,64 @@ async function copyDir(src, dest) {
 function linkList(items) {
   return (items || []).map(item => '<li><a href="' + attr(item.href) + '">' + e(item.label) + '</a></li>').join('');
 }
+const internalLinkRoutes = new Set([
+  ...pages.map(page => page.route),
+  ...(site.serviceLinks || []).map(item => item.href),
+  ...(site.policyLinks || []).map(item => item.href),
+  ...(site.quickLinks || []).map(item => item.href),
+  '/blog',
+  '/financing/carecredit'
+]);
+function richText(value) {
+  const text = String(value || '');
+  let html = '';
+  const pattern = /\[([^\]]+)\]\((\/[^)\s]+)\)/g;
+  let lastIndex = 0;
+  let match;
+  while ((match = pattern.exec(text)) !== null) {
+    html += e(text.slice(lastIndex, match.index));
+    const href = match[2];
+    html += internalLinkRoutes.has(href)
+      ? '<a href="' + attr(href) + '">' + e(match[1]) + '</a>'
+      : e(match[0]);
+    lastIndex = match.index + match[0].length;
+  }
+  html += e(text.slice(lastIndex));
+  return html;
+}
+function policyLinksBlock(route) {
+  if (route === '/financing') {
+    return '<section class="content-section cw-inline-policy-links"><h2>Practice Policies</h2><p>Review our <a href="/financial-policy">Financial Policy</a> for insurance, payments, membership plans, and cancellation terms. You can also read our <a href="/privacy-policy">Privacy Policy</a> and <a href="/notice-of-privacy-practices">Notice of Privacy Practices</a>.</p></section>';
+  }
+  if (route === '/new-patient-faqs') {
+    return '<section class="content-section cw-inline-policy-links"><h2>Policies & Privacy</h2><p>New patients should review our <a href="/financial-policy">Financial Policy</a> before their first visit. Information submitted through forms is handled according to our <a href="/privacy-policy">Privacy Policy</a>.</p></section>';
+  }
+  return '';
+}
 function pageByRoute(route) {
   return pages.find(page => page.route === route) || {};
 }
 function isActive(item, currentRoute) {
   if (item.href === currentRoute) return true;
   return !!(item.children || []).some(child => isActive(child, currentRoute));
+}
+function serviceNavGroups() {
+  const groups = (site.serviceNavGroups || []).map(group => ({
+    label: group.label,
+    href: group.href,
+    children: (group.children || []).map(item => ({ label: item.label, href: item.href }))
+  }));
+  return groups.concat([{
+    label: 'All Services',
+    href: '/general-dentistry#service-directory',
+    children: []
+  }]);
+}
+function navListClass(options) {
+  if (!options.nested) return 'site-nav';
+  if (options.megaMenu && options.depth >= 2) return 'site-subnav site-subnav--flyout';
+  if (options.megaMenu && options.depth === 1) return 'site-subnav cw-services-nav';
+  return 'site-subnav';
 }
 function navTree() {
   return [
@@ -173,36 +285,35 @@ function navTree() {
       { label: 'Anti-Anxiety Practice', href: '/anti-anxiety-dentist-office' },
       { label: 'Dental Therapy Dogs', href: '/dental-therapy-dogs-clearwater-fl' }
     ] },
-    { label: 'Services', href: '/general-dentistry', children: [
-      { label: 'Dental Implants', href: '/dental-implants-clearwater-fl' },
-      { label: 'Cosmetic Dentistry', href: '/cosmetic-dentistry' },
-      { label: 'Smile Makeover', href: '/smile-makeover' },
-      { label: 'Porcelain Veneers', href: '/porcelain-veneers-clearwater-fl' },
-      { label: 'Invisalign', href: '/Invisalign-service-clearwater-fl' },
-      { label: 'Teeth Whitening', href: '/teeth-whitening-clearwater-fl' },
-      { label: 'Emergency Dentistry', href: '/emergency-dentistry-clearwater-fl' },
-      { label: 'Gum Disease Treatment', href: '/gum-disease-treatment' },
-      { label: 'Root Canal', href: '/root-canal-clearwater-fl' },
-      { label: 'Crowns & Bridges', href: '/crowns-and-bridges' },
-      { label: 'Sedation Dentistry', href: '/sedation-dentistry-clearwater-fl' },
-      { label: 'Facial Esthetics', href: '/facial-esthetics' }
-    ] },
+    { label: 'Services', href: '/general-dentistry', megaMenu: true, children: serviceNavGroups() },
     { label: 'Before & After', href: '/before-and-after' },
     { label: 'Financing', href: '/financing', children: [
       { label: 'Financing Options', href: '/financing' },
       { label: 'CareCredit', href: '/financing/carecredit' },
       { label: 'Sunbit', href: '/sunbit' },
-      { label: 'Alphaeon', href: '/alphaeon' }
+      { label: 'Alphaeon', href: '/alphaeon' },
+      { label: 'Financial Policy', href: '/financial-policy' }
     ] },
     { label: 'Blog', href: '/blog' },
     { label: 'Contact', href: '/contact-us' }
   ];
 }
-function renderNav(items, currentRoute, nested) {
-  return '<ul class="' + (nested ? 'site-subnav' : 'site-nav') + '">' + items.map(item => {
-    const children = item.children && item.children.length ? '<button class="subnav-toggle" aria-expanded="false" aria-label="Open ' + attr(item.label) + ' menu">+</button>' + renderNav(item.children, currentRoute, true) : '';
+function renderNav(items, currentRoute, options) {
+  const opts = options || {};
+  const depth = opts.depth || 0;
+  return '<ul class="' + navListClass(opts) + '">' + items.map(item => {
+    const childItems = item.children && item.children.length ? item.children : [];
+    const childOpts = {
+      nested: true,
+      depth: depth + 1,
+      megaMenu: !!(opts.megaMenu || item.megaMenu)
+    };
+    const children = childItems.length
+      ? '<button class="subnav-toggle" type="button" aria-expanded="false" aria-label="Expand ' + attr(item.label) + ' submenu"><span class="cw-subnav-toggle__icon" aria-hidden="true"></span></button>' + renderNav(childItems, currentRoute, childOpts)
+      : '';
     const active = isActive(item, currentRoute) ? ' is-active' : '';
-    return '<li class="nav-item' + (children ? ' has-children' : '') + active + '"><a href="' + attr(item.href) + '">' + e(item.label) + '</a>' + children + '</li>';
+    const directoryClass = item.label === 'All Services' ? ' cw-services-nav__directory' : '';
+    return '<li class="nav-item' + (children ? ' has-children' : '') + directoryClass + active + '"><a href="' + attr(item.href) + '">' + e(item.label) + '</a>' + children + '</li>';
   }).join('') + '</ul>';
 }
 const phoneIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8c1.5 2.9 3.7 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.5.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.3 21 3 13.7 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.3 0 .7-.2 1L6.6 10.8z"/></svg>';
@@ -214,7 +325,7 @@ function headerCtaStack() {
 }
 function header(page) {
   const logo = site.assets.logo || site.assets.logoWhite || '';
-  return '<header class="site-header" data-site-header><div class="header-inner"><div class="brand-wrap"><a class="brand" href="/" aria-label="Clearwater Dentist home">' + (logo ? '<img src="' + attr(logo) + '" alt="Clearwater Dentist logo" width="58" height="58">' : '') + '<span class="brand-text"><strong>' + e(site.name) + '</strong><small>' + e(site.doctor) + '</small></span></a><div class="cw-site-header__social cw-brand-social" aria-label="Social media">' + headerSocial() + '</div></div><nav id="primary-menu" class="primary-menu" aria-label="Primary navigation">' + renderNav(navTree(), page.route, false) + '</nav><div class="header-mobile-end">' + headerCtaStack() + '<button class="menu-button" type="button" data-menu-toggle aria-controls="primary-menu" aria-expanded="false"><span></span><span></span><span></span><b>Menu</b></button></div></div></header>';
+  return '<header class="site-header" data-site-header><div class="header-inner"><div class="brand-wrap"><a class="brand" href="/" aria-label="Clearwater Dentist home">' + (logo ? '<img src="' + attr(logo) + '" alt="Clearwater Dentist logo" width="58" height="58">' : '') + '<span class="brand-text"><strong>' + e(site.name) + '</strong><small>' + e(site.doctor) + '</small></span></a><div class="cw-site-header__social cw-brand-social" aria-label="Social media">' + headerSocial() + '</div></div><nav id="primary-menu" class="primary-menu" aria-label="Primary navigation">' + renderNav(navTree(), page.route, { depth: 0 }) + '</nav><div class="header-mobile-end">' + headerCtaStack() + '<button class="menu-button" type="button" data-menu-toggle aria-controls="primary-menu" aria-expanded="false"><span></span><span></span><span></span><b>Menu</b></button></div></div></header>';
 }
 function socialIcon(label) {
   const codes = { Facebook: '&#xea90;', Instagram: '&#xea92;', YouTube: '&#xea9d;', Pinterest: '&#xf0d2;', TikTok: '&#xe813;' };
@@ -224,7 +335,7 @@ function footer() {
   const addr = site.address || {};
   const logo = site.assets.logoWhite || site.assets.logo || '';
   const social = (site.social || []).map(s => '<a class="social-link" href="' + attr(s.href) + '" target="_blank" rel="noopener" aria-label="' + attr(s.label) + '"><span class="social-glyph" aria-hidden="true">' + socialIcon(s.label) + '</span></a>').join('');
-  return '<footer class="site-footer"><div class="footer-grid"><section class="footer-brand">' + (logo ? '<img src="' + attr(logo) + '" alt="Clearwater Dentist logo" width="108" height="108" decoding="async">' : '') + '<h2>' + e(site.name) + '</h2><p>' + e(site.tagline) + '</p><div class="social-row">' + social + '</div></section><section><h2>Office</h2><p>' + e(addr.street) + '<br>' + e(addr.city) + ', ' + e(addr.state) + ' ' + e(addr.zip) + '</p>' + (site.hours || []).map(h => '<p><strong>' + e(h.days) + '</strong><br>' + e(h.time) + '</p>').join('') + '<p><a href="tel:' + attr(site.phoneTel) + '">' + e(site.phoneDisplay) + '</a><br><a href="mailto:' + attr(site.email) + '">' + e(site.email) + '</a></p></section><section><h2>Services</h2><ul>' + linkList((site.serviceLinks || []).slice(0, 8)) + '</ul></section><section><h2>Quick Links</h2><ul>' + linkList(site.quickLinks || []) + '</ul></section></div><div class="footer-bottom"><ul class="footer-policies">' + linkList(site.policyLinks || []) + '</ul><p class="copyright">&copy; 2026 Clearwater Dentist. All Rights Reserved.</p></div></footer>';
+  return '<footer class="site-footer"><div class="footer-grid"><section class="footer-brand">' + (logo ? '<img src="' + attr(logo) + '" alt="Clearwater Dentist logo" width="108" height="108" decoding="async">' : '') + '<h2>' + e(site.name) + '</h2><p>' + e(site.tagline) + '</p><div class="social-row">' + social + '</div></section><section><h2>Office</h2><p>' + e(addr.street) + '<br>' + e(addr.city) + ', ' + e(addr.state) + ' ' + e(addr.zip) + '</p>' + (site.hours || []).map(h => '<p><strong>' + e(h.days) + '</strong><br>' + e(h.time) + '</p>').join('') + '<p><a href="tel:' + attr(site.phoneTel) + '">' + e(site.phoneDisplay) + '</a><br><a href="mailto:' + attr(site.email) + '">' + e(site.email) + '</a></p></section><section class="footer-services"><h2>Services</h2><ul class="footer-services__list">' + linkList(site.serviceLinks || []) + '</ul></section><section><h2>Quick Links</h2><ul>' + linkList(site.quickLinks || []) + '</ul></section></div><div class="footer-bottom"><ul class="footer-policies">' + linkList(site.policyLinks || []) + '</ul><p class="copyright">&copy; 2026 Clearwater Dentist. All Rights Reserved.</p></div></footer>';
 }
 function imageTag(image, cls, eager) {
   if (!image || !image.src) return '';
@@ -275,7 +386,7 @@ function hero(page, kicker) {
   return '<section class="page-hero page-hero--gallery">' + heroPanels(page) + '<div class="page-hero-overlay" aria-hidden="true"></div><div class="page-hero-inner"><div class="page-hero-copy"><p class="eyebrow">' + e(kicker || page.type.replace(/([A-Z])/g, ' $1')) + '</p><h1>' + e(page.h1) + '</h1>' + (page.description ? '<p class="lede">' + e(page.description) + '</p>' : '') + '<div class="hero-actions"><a class="btn primary" href="' + APPOINTMENT_PATH + '">Request Appointment</a><a class="btn secondary" href="tel:' + attr(site.phoneTel) + '">Call ' + e(site.phoneDisplay) + '</a></div></div></div></section>';
 }
 function sectionHtml(section) {
-  return '<section class="content-section"><h2>' + e(section.heading) + '</h2>' + (section.body || []).map(p => '<p>' + e(p) + '</p>').join('') + (section.items && section.items.length ? '<ul class="check-list">' + section.items.map(i => '<li>' + e(i) + '</li>').join('') + '</ul>' : '') + '</section>';
+  return '<section class="content-section"><h2>' + e(section.heading) + '</h2>' + (section.body || []).map(p => '<p>' + richText(p) + '</p>').join('') + (section.items && section.items.length ? '<ul class="check-list">' + section.items.map(i => '<li>' + richText(i) + '</li>').join('') + '</ul>' : '') + '</section>';
 }
 function mediaHtml(page) {
   const vids = (page.videos || []).map(v => videoMarkup(v, 'content-video')).join('');
@@ -291,11 +402,19 @@ function galleryHtml(images, limit) {
   return '<section class="image-gallery"><h2>Photo Gallery</h2><div class="gallery-grid">' + imgs.map(img => '<figure>' + imageTag(img, '', false) + '<figcaption>' + e(img.alt || 'Clearwater Dentist') + '</figcaption></figure>').join('') + '</div></section>';
 }
 function relatedServices(currentRoute) {
-  const links = pages.filter(page => page.type === 'service' && page.route !== currentRoute).slice(0, 10).map(page => ({ href: page.route, label: page.h1 || page.title }));
+  const links = (site.serviceLinks || []).filter(item => item.href !== currentRoute).slice(0, 10);
   return '<aside class="related-card"><h2>Helpful Services</h2><ul>' + linkList(links) + '</ul><a class="btn secondary full" href="/general-dentistry#service-directory">All Services</a><a class="btn primary full" href="' + APPOINTMENT_PATH + '">Schedule Consultation</a></aside>';
 }
+const COMPARE_REVEAL_DIRS = ['left', 'bottom', 'right-soft'];
+const SERVICE_REVEAL_DIRS = ['left', 'right', 'bottom', 'left-soft', 'right-soft', 'bottom', 'left', 'right'];
+function cwRevealAttr(direction, stagger) {
+  let attrs = ' data-cw-reveal="' + direction + '"';
+  if (stagger) attrs += ' data-cw-reveal-stagger="' + stagger + '"';
+  return attrs;
+}
 function compareCard(pair, index) {
-  return '<article class="compare-card"><div class="compare-slider" style="--position:50%"><img class="compare-img compare-before" src="' + attr(pair.before) + '" alt="' + attr(pair.name + ' before') + '" loading="' + (index === 0 ? 'eager' : 'lazy') + '"><div class="compare-after-wrap"><img class="compare-img compare-after" src="' + attr(pair.after) + '" alt="' + attr(pair.name + ' after') + '" loading="' + (index === 0 ? 'eager' : 'lazy') + '"></div><input class="compare-range" type="range" min="0" max="100" value="50" aria-label="Reveal before and after image"><span class="compare-handle" aria-hidden="true"></span><span class="compare-label compare-label-before">Before</span><span class="compare-label compare-label-after">After</span></div><h3>' + e(pair.name) + '</h3></article>';
+  const dir = COMPARE_REVEAL_DIRS[index] || 'left';
+  return '<article class="compare-card cw-reveal"' + cwRevealAttr(dir, index * 100) + '><div class="compare-slider" style="--position:50%"><img class="compare-img compare-before" src="' + attr(pair.before) + '" alt="' + attr(pair.name + ' before') + '" loading="' + (index === 0 ? 'eager' : 'lazy') + '"><div class="compare-after-wrap"><img class="compare-img compare-after" src="' + attr(pair.after) + '" alt="' + attr(pair.name + ' after') + '" loading="' + (index === 0 ? 'eager' : 'lazy') + '"></div><input class="compare-range" type="range" min="0" max="100" value="50" aria-label="Reveal before and after image"><span class="compare-handle" aria-hidden="true"></span><span class="compare-label compare-label-before">Before</span><span class="compare-label compare-label-after">After</span></div><h3>' + e(pair.name) + '</h3></article>';
 }
 function beforeAfterSection(limit) {
   const parallaxBg = site.assets.beforeAfterParallax || '/assets/images/patient-looking-at-mirror-at-teeth-1920w.jpeg';
@@ -310,18 +429,21 @@ function serviceCardPeek(detail) {
   const peek = text.length > 118 ? text.slice(0, 115).trim() + '...' : text;
   return '<span class="cw-service-card__peek">' + e(peek) + '</span>';
 }
-function serviceCard(service) {
+function serviceCard(service, index) {
   const image = serviceImages[service.href] || site.assets.office;
   const copy = serviceTileCopy[service.href] || {
     headline: 'Looking for ' + service.label.toLowerCase() + ' in Clearwater?',
     hoverTitle: service.label,
     hoverDetail: 'Learn how Clearwater Dentist can help with personalized, patient-focused care tailored to your goals and comfort level.'
   };
-  return '<a class="service-card cw-service-card" href="' + attr(service.href) + '"><img class="cw-service-card__bg" src="' + attr(image) + '" alt="" loading="lazy" decoding="async"><span class="cw-service-card__overlay" aria-hidden="true"></span><span class="cw-service-card__panel cw-service-card__panel--front">' + serviceCardIcon + '<strong class="cw-service-card__headline">' + e(copy.headline) + '</strong>' + serviceCardPeek(copy.hoverDetail) + '</span><span class="cw-service-card__panel cw-service-card__panel--hover"><strong class="cw-service-card__title">' + e(copy.hoverTitle || service.label) + '</strong><span class="cw-service-card__detail">' + e(copy.hoverDetail) + '</span><span class="cw-service-card__cta-btn">Learn more</span></span></a>';
+  const dir = SERVICE_REVEAL_DIRS[index % SERVICE_REVEAL_DIRS.length] || 'left';
+  const stagger = (index % 4) * 85;
+  return '<a class="service-card cw-service-card cw-reveal"' + cwRevealAttr(dir, stagger) + ' href="' + attr(service.href) + '"><img class="cw-service-card__bg" src="' + attr(image) + '" alt="" loading="lazy" decoding="async"><span class="cw-service-card__overlay" aria-hidden="true"></span><span class="cw-service-card__panel cw-service-card__panel--front">' + serviceCardIcon + '<strong class="cw-service-card__headline">' + e(copy.headline) + '</strong>' + serviceCardPeek(copy.hoverDetail) + '</span><span class="cw-service-card__panel cw-service-card__panel--hover"><strong class="cw-service-card__title">' + e(copy.hoverTitle || service.label) + '</strong><span class="cw-service-card__detail">' + e(copy.hoverDetail) + '</span><span class="cw-service-card__cta-btn">Learn more</span></span></a>';
 }
 function servicesSection() {
-  const cards = (site.serviceLinks || []).slice(0, 8).map(serviceCard).join('');
-  return '<section class="home-band cw-service-band"><div class="cw-service-band__inner"><div class="section-head"><p class="eyebrow">Our Dental Services</p><h2>Find the right care path for your smile.</h2><p>Whether you need a routine visit, cosmetic upgrade, or same-day emergency care, our team builds treatment around your comfort and long-term oral health. Each service below links to a dedicated page with what to expect, financing options, and how Dr. Nadia approaches your care.</p></div><div class="service-grid cw-service-mosaic">' + cards + '</div></div></section>';
+  const services = (site.serviceLinks || []).slice(0, 8);
+  const cards = services.map((service, index) => serviceCard(service, index)).join('');
+  return '<section class="home-band cw-service-band"><div class="cw-service-band__inner"><div class="section-head"><p class="eyebrow">Our Dental Services</p><h2>Find the right care path for your smile.</h2><p>Whether you need a routine visit, cosmetic upgrade, or same-day emergency care, our team builds treatment around your comfort and long-term oral health. Explore our most requested services below, or browse the full directory for every treatment we offer.</p></div><div class="service-grid cw-service-mosaic">' + cards + '</div><p class="cw-service-band__more"><a href="/general-dentistry#service-directory">View the complete service directory</a></p></div></section>';
 }
 const carouselMuteBtn = '<button type="button" class="cw-slide-mute" aria-pressed="true" aria-label="Unmute video"><span class="cw-slide-mute__icon cw-slide-mute__off" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg></span><span class="cw-slide-mute__icon cw-slide-mute__on" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg></span></button>';
 const carouselFullscreenIcon = '<svg viewBox="0 0 36 36" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="m 10,16 2,0 0,-4 4,0 0,-2 L 10,10 l 0,6 0,0 z"></path><path d="m 20,10 0,2 4,0 0,4 2,0 L 26,10 l -6,0 0,0 z"></path><path d="m 24,24 -4,0 0,2 L 26,26 l 0,-6 -2,0 0,4 0,0 z"></path><path d="M 12,20 10,20 10,26 l 6,0 0,-2 -4,0 0,-4 0,0 z"></path></svg>';
@@ -341,11 +463,11 @@ function videoCarouselSection() {
 }
 function doctorMeetCopy(className) {
   const panelClass = className === 'doctor-band__copy' ? 'doctor-band__copy' : 'cw-why-band__panel cw-why-band__doctor-copy';
-  return '<div class="' + attr(panelClass) + '"><p class="eyebrow">Meet The Doctor</p><h3>' + e(site.doctor) + '</h3><p>' + e(site.tagline) + '</p><p>Dr. Nadia focuses on functional, minimally invasive, aesthetic dentistry delivered with patience and an artistic eye.</p><a class="btn secondary" href="/meet-the-doctor">Meet Dr. Nadia</a></div>';
+  return '<div class="' + attr(panelClass) + ' cw-reveal"' + cwRevealAttr('bottom', 120) + '><p class="eyebrow">Meet The Doctor</p><h3>' + e(site.doctor) + '</h3><p>' + e(site.tagline) + '</p><p>Dr. Nadia focuses on functional, minimally invasive, aesthetic dentistry delivered with patience and an artistic eye.</p><a class="btn secondary" href="/meet-the-doctor">Meet Dr. Nadia</a></div>';
 }
 function whyChecklist(items) {
   const rows = items.map(item => '<li><span class="cw-why-band__check" aria-hidden="true"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2.5 8.2 6.2 11.8 13.5 4.5"></polyline></svg></span><span class="cw-why-band__check-copy"><strong>' + e(item[0]) + '</strong><span>' + e(item[1]) + '</span></span></li>').join('');
-  return '<div class="cw-why-band__panel cw-why-band__checks"><ul class="cw-why-band__checklist">' + rows + '</ul></div>';
+  return '<div class="cw-why-band__panel cw-why-band__checks cw-reveal"' + cwRevealAttr('right', 200) + '><ul class="cw-why-band__checklist">' + rows + '</ul></div>';
 }
 function doctorSection() {
   return '<section class="doctor-band"><div class="doctor-image"><img src="' + attr(site.assets.doctor || site.assets.office) + '" alt="' + attr(site.doctor) + '" loading="lazy"></div>' + doctorMeetCopy('doctor-band__copy') + '</section>';
@@ -359,7 +481,7 @@ function whySection() {
   ];
   const whyBg = site.assets.whyBandParallax || '/assets/images/clearwater-dentist-clearwater-fl-front-staff-1920w.jpg';
   const doctorCutout = site.assets.doctorCutout || site.assets.doctor || site.assets.office;
-  return '<section class="why-band cw-why-band"><div class="cw-why-band__media" data-why-parallax style="background-image:url(' + attr(whyBg) + ')"></div><div class="cw-why-band__scrim" aria-hidden="true"></div><div class="cw-why-band__inner"><div class="cw-why-band__figure"><img class="cw-why-band__doctor" src="' + attr(doctorCutout) + '" alt="' + attr(site.doctor) + '" loading="lazy" decoding="async"></div><div class="cw-why-band__content"><div class="cw-why-band__panel cw-why-band__head"><h2>Why Come to Clearwater Dentist?</h2><p class="cw-why-band__lede">Modern care with a calmer chairside experience — from your first hello through your final result.</p><p class="cw-why-band__intro">Patients choose our office for thoughtful planning, advanced technology, and a culture built around reducing dental anxiety. We explain options clearly, coordinate care in-house when possible, and help you move forward with confidence.</p></div><div class="cw-why-band__panel-row">' + doctorMeetCopy() + whyChecklist(items) + '</div></div></div></section>';
+  return '<section class="why-band cw-why-band"><div class="cw-why-band__media" data-why-parallax style="background-image:url(' + attr(whyBg) + ')"></div><div class="cw-why-band__scrim" aria-hidden="true"></div><div class="cw-why-band__inner"><div class="cw-why-band__figure"><img class="cw-why-band__doctor cw-reveal"' + cwRevealAttr('left', 0) + ' src="' + attr(doctorCutout) + '" alt="' + attr(site.doctor) + '" loading="lazy" decoding="async"></div><div class="cw-why-band__content"><div class="cw-why-band__panel cw-why-band__head"><h2>Why Come to Clearwater Dentist?</h2><p class="cw-why-band__lede cw-slide-reveal">Modern care with a calmer chairside experience — from your first hello through your final result.</p><p class="cw-why-band__intro">Patients choose our office for thoughtful planning, advanced technology, and a culture built around reducing dental anxiety. We explain options clearly, coordinate care in-house when possible, and help you move forward with confidence.</p></div><div class="cw-why-band__panel-row">' + doctorMeetCopy() + whyChecklist(items) + '</div></div></div></section>';
 }
 function reviewInitials(name) {
   const parts = String(name || '').replace(/"/g, '').trim().split(/\s+/).filter(Boolean);
@@ -378,14 +500,14 @@ function googleTrustSection() {
   const addr = site.address || {};
   const officePhoto = site.assets.office || '/assets/images/clearwater-dentist-clearwater-fl-front-of-dental-office-1920w.jpg';
   const addressLine = e(addr.street) + ' · ' + e(addr.city) + ', ' + e(addr.state) + ' ' + e(addr.zip);
-  return '<section class="cw-google-trust-band" aria-label="Patient reviews and location"><div class="cw-google-trust"><div class="review-layout review-layout--stacked"><div class="review-carousel-shell" data-review-carousel><div class="review-showcase-header"><div class="review-showcase-brand"><div><strong>See what patients said before you book</strong><div class="review-showcase-score"><img class="google-mark" src="/assets/icons/google-g-logo.svg" alt="" width="38" height="38" decoding="async" aria-hidden="true"><span class="review-stars" aria-label="' + attr(rating) + ' out of 5 stars">★★★★★</span><span>' + rating + ' · ' + count + ' Google reviews</span></div></div></div><div class="review-carousel-controls"><button class="review-carousel-btn" type="button" data-review-prev aria-label="Previous review card">&#8249;</button><button class="review-carousel-btn" type="button" data-review-next aria-label="Next review card">&#8250;</button></div></div><p class="cw-trust-intro">Patients consistently mention our friendly team, thorough explanations, and Dr. Nadia&apos;s attention to detail. Browse recent Google reviews from real visits, then see our Clearwater office on the map below.</p><div class="review-carousel-track-outer"><div class="review-carousel-track" data-review-track>' + cards + '</div></div><div class="review-carousel-dots" data-review-dots></div><div class="review-carousel-footer"><a class="review-carousel-link" href="' + attr(googleReviews.googleUrl || site.googleReviewUrl) + '" target="_blank" rel="noopener noreferrer">See all reviews on Google</a></div></div><div class="cw-trust-map-row" data-cw-map-row><div class="map-card"><div class="map-frame-wrap"><iframe src="' + attr(googleReviews.mapEmbed) + '" width="600" height="450" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Clearwater Dentist on Google Maps"></iframe><a class="map-place-badge" href="' + attr(googleReviews.googleUrl || site.googleReviewUrl) + '" target="_blank" rel="noopener noreferrer" aria-label="Clearwater Dentist ' + attr(rating) + ' stars, ' + attr(count) + ' Google reviews"><strong class="map-place-badge__name">Clearwater Dentist</strong><span class="map-place-badge__score"><span class="map-place-badge__stars" aria-hidden="true">★★★★★</span><span>' + rating + ' · ' + count + ' reviews</span></span></a></div><p class="map-card__address">' + addressLine + '</p></div><figure class="cw-trust-office-photo" data-cw-map-photo aria-hidden="false"><img src="' + attr(officePhoto) + '" alt="Clearwater Dentist office exterior at 1700 N McMullen Booth Rd" width="640" height="480" loading="lazy" decoding="async"></figure></div></div></div></section>';
+  return '<section class="cw-google-trust-band" aria-label="Patient reviews and location"><div class="cw-google-trust"><div class="review-layout review-layout--stacked"><div class="review-carousel-shell cw-reveal"' + cwRevealAttr('bottom', 0) + ' data-review-carousel><div class="review-showcase-header"><div class="review-showcase-brand"><div><strong>See what patients said before you book</strong><div class="review-showcase-score"><img class="google-mark" src="/assets/icons/google-g-logo.svg" alt="" width="38" height="38" decoding="async" aria-hidden="true"><span class="review-stars" aria-label="' + attr(rating) + ' out of 5 stars">★★★★★</span><span>' + rating + ' · ' + count + ' Google reviews</span></div></div></div><div class="review-carousel-controls"><button class="review-carousel-btn" type="button" data-review-prev aria-label="Previous review card">&#8249;</button><button class="review-carousel-btn" type="button" data-review-next aria-label="Next review card">&#8250;</button></div></div><p class="cw-trust-intro">Patients consistently mention our friendly team, thorough explanations, and Dr. Nadia&apos;s attention to detail. Browse recent Google reviews from real visits, then see our Clearwater office on the map below.</p><div class="review-carousel-track-outer"><div class="review-carousel-track" data-review-track>' + cards + '</div></div><div class="review-carousel-dots" data-review-dots></div><div class="review-carousel-footer"><a class="review-carousel-link" href="' + attr(googleReviews.googleUrl || site.googleReviewUrl) + '" target="_blank" rel="noopener noreferrer">See all reviews on Google</a></div></div><div class="cw-trust-map-row" data-cw-map-row><div class="map-card cw-reveal"' + cwRevealAttr('left', 0) + '><div class="map-frame-wrap"><iframe src="' + attr(googleReviews.mapEmbed) + '" width="600" height="450" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Clearwater Dentist on Google Maps"></iframe><a class="map-place-badge" href="' + attr(googleReviews.googleUrl || site.googleReviewUrl) + '" target="_blank" rel="noopener noreferrer" aria-label="Clearwater Dentist ' + attr(rating) + ' stars, ' + attr(count) + ' Google reviews"><strong class="map-place-badge__name">Clearwater Dentist</strong><span class="map-place-badge__score"><span class="map-place-badge__stars" aria-hidden="true">★★★★★</span><span>' + rating + ' · ' + count + ' reviews</span></span></a></div><p class="map-card__address">' + addressLine + '</p></div><figure class="cw-trust-office-photo cw-reveal"' + cwRevealAttr('right-soft', 120) + ' data-cw-map-photo aria-hidden="false"><img src="' + attr(officePhoto) + '" alt="Clearwater Dentist office exterior at 1700 N McMullen Booth Rd" width="640" height="480" loading="lazy" decoding="async"></figure></div></div></div></section>';
 }
 function finalCta() {
-  return '<section class="cta-band"><h2>Ready to schedule your visit?</h2><p>New patients are welcome. Request an appointment online, call our Clearwater office directly, or review financing and insurance options before your consultation with Dr. Nadia.</p><div class="hero-actions"><a class="btn primary" href="/contact-us">Request Appointment</a><a class="btn secondary" href="/financing">View Financing</a></div></section>';
+  return '<section class="cta-band cw-reveal"' + cwRevealAttr('right', 0) + '><h2>Ready to schedule your visit?</h2><p>New patients are welcome. Request an appointment online, call our Clearwater office directly, or review financing and insurance options before your consultation with Dr. Nadia.</p><div class="hero-actions"><a class="btn primary" href="/contact-us">Request Appointment</a><a class="btn secondary" href="/financing">View Financing</a></div></section>';
 }
 function serviceDirectorySection() {
-  const directory = pages.filter(page => ['service', 'finance', 'doctor', 'team', 'gallery'].includes(page.type) && page.route !== '/general-dentistry').map(page => ({ href: page.route, label: page.h1 || page.title }));
-  return '<section id="service-directory" class="directory-band"><div class="section-head"><p class="eyebrow">Complete Page Directory</p><h2>Every treatment and patient page is reachable from here.</h2><p>This keeps the rebuild clean without turning the header into a giant menu.</p></div><div class="directory-grid">' + directory.map(item => '<a class="directory-link" href="' + attr(item.href) + '">' + e(item.label) + '</a>').join('') + '</div></section>';
+  const directory = (site.serviceLinks || []).filter(item => item.href !== '/general-dentistry');
+  return '<section id="service-directory" class="directory-band"><div class="section-head"><p class="eyebrow">All Services</p><h2>Every core treatment page in one place.</h2><p>From preventive visits and emergency care to implants, cosmetic dentistry, and advanced esthetic treatments — browse the full service lineup below.</p></div><div class="directory-grid">' + directory.map(item => '<a class="directory-link" href="' + attr(item.href) + '">' + e(item.label) + '</a>').join('') + '</div></section>';
 }
 function renderHome(page) {
   const video = site.assets.heroVideo;
@@ -393,9 +515,15 @@ function renderHome(page) {
   const heroInner = '<section class="home-hero" data-home-hero-parallax><div class="home-hero-media">' + (video ? '<video autoplay muted loop playsinline poster="' + attr(poster) + '"><source src="' + attr(video) + '" type="video/mp4"></video>' : '<img src="' + attr(poster) + '" alt="Clearwater Dentist office" loading="eager">') + '</div><div class="home-hero-copy"><p class="eyebrow">Family & Cosmetic Dentistry in Clearwater, FL</p><h1 class="cw-hero-welcome cw-welcome-glimmer">' + e(page.h1 || 'Welcome to the Office of Dr. Nadia') + '</h1><p class="cw-hero-smile cw-smile-glimmer">You Deserve a Beautiful Smile</p><p class="lede">Concierge dental care for patients who want calm visits, modern technology, and a smile they feel proud to show.</p><div class="hero-actions"><a class="btn primary" href="/contact-us">Request Appointment</a><a class="btn secondary" href="tel:' + attr(site.phoneTel) + '">Call ' + e(site.phoneDisplay) + '</a></div><div class="hero-pills"><a href="/emergency-dentistry-clearwater-fl">Same-day emergencies</a><a href="/anti-anxiety-dentist-office">Anti-anxiety care</a><a href="/financing">Flexible financing</a><a href="/before-and-after">Before & afters</a></div></div></section>';
   return '<div class="home-hero-stage">' + heroInner + homeLeadForm() + '</div>' + servicesSection() + whySection() + googleTrustSection() + beforeAfterSection(3) + videoCarouselSection() + finalCta();
 }
+function pageKicker(page) {
+  if (page.type === 'blogPost') return 'Dental Blog';
+  if (page.type === 'policy') return 'Practice Policy';
+  return page.type;
+}
 function renderGeneric(page) {
   const sections = page.type === 'service' ? servicePageSections(page) : (page.sections || []);
-  return hero(page, page.type === 'blogPost' ? 'Dental Blog' : page.type) + '<div class="content-layout"><article class="article-body">' + sections.map(sectionHtml).join('') + mediaHtml(page) + galleryHtml((page.images || []).slice(1), 8) + '</article>' + relatedServices(page.route) + '</div>' + (page.route === '/general-dentistry' ? serviceDirectorySection() : '');
+  const sidebar = page.type === 'policy' ? '' : relatedServices(page.route);
+  return hero(page, pageKicker(page)) + '<div class="content-layout' + (page.type === 'policy' ? ' content-layout--policy' : '') + '"><article class="article-body">' + sections.map(sectionHtml).join('') + policyLinksBlock(page.route) + mediaHtml(page) + galleryHtml((page.images || []).slice(1), 8) + '</article>' + sidebar + '</div>' + (page.route === '/general-dentistry' ? serviceDirectorySection() : '');
 }
 function renderBlogIndex(page) {
   const posts = pages.filter(p => p.type === 'blogPost').map(post => '<article class="post-card"><a href="' + attr(post.route) + '">' + imageTag(post.heroImage || { src: site.assets.office, alt: post.h1 }, '', false) + '<span>Dental Blog</span><h2>' + e(post.h1) + '</h2><p>' + e(post.description || ((post.sections[0] && post.sections[0].body[0]) || 'Read more from Clearwater Dentist.')) + '</p></a></article>').join('');
@@ -403,7 +531,7 @@ function renderBlogIndex(page) {
 }
 function renderContact(page) {
   const addr = site.address || {};
-  return hero(page, 'Contact') + '<section class="contact-grid"><div class="contact-panel"><h2>Contact the office</h2><p><strong>Phone</strong><br><a href="tel:' + attr(site.phoneTel) + '">' + e(site.phoneDisplay) + '</a></p><p><strong>Email</strong><br><a href="mailto:' + attr(site.email) + '">' + e(site.email) + '</a></p><p><strong>Address</strong><br>' + e(addr.street) + '<br>' + e(addr.city) + ', ' + e(addr.state) + ' ' + e(addr.zip) + '</p><a class="btn primary full" href="/contact-us">Request Appointment</a></div><form class="contact-form" action="#" method="post"><h2>Request an Appointment</h2><label>Name<input name="name" autocomplete="name" required></label><label>Phone<input name="phone" type="tel" autocomplete="tel" required></label><label>Email<input name="email" type="email" autocomplete="email"></label><label>How can we help?<textarea name="message" rows="5"></textarea></label><p class="fine-print">We do not accept State Insurances, HMOs, or Medicaid. This static form is ready to connect to the selected form endpoint.</p><button class="btn primary" type="submit">Send Request</button></form></section>';
+  return hero(page, 'Contact') + '<section class="contact-grid"><div class="contact-panel"><h2>Contact the office</h2><p><strong>Phone</strong><br><a href="tel:' + attr(site.phoneTel) + '">' + e(site.phoneDisplay) + '</a></p><p><strong>Email</strong><br><a href="mailto:' + attr(site.email) + '">' + e(site.email) + '</a></p><p><strong>Address</strong><br>' + e(addr.street) + '<br>' + e(addr.city) + ', ' + e(addr.state) + ' ' + e(addr.zip) + '</p><p class="fine-print">Payment and insurance questions? Read our <a href="/financial-policy">Financial Policy</a>.</p><a class="btn primary full" href="/contact-us">Request Appointment</a></div><form class="contact-form" action="#" method="post"><h2>Request an Appointment</h2><label>Name<input name="name" autocomplete="name" required></label><label>Phone<input name="phone" type="tel" autocomplete="tel" required></label><label>Email<input name="email" type="email" autocomplete="email"></label><label>How can we help?<textarea name="message" rows="5"></textarea></label><p class="fine-print">We do not accept State Insurances, HMOs, or Medicaid. Information you submit is handled according to our <a href="/privacy-policy">Privacy Policy</a> and <a href="/notice-of-privacy-practices">Notice of Privacy Practices</a>.</p><button class="btn primary" type="submit">Send Request</button></form></section>';
 }
 function renderGallery(page) {
   const sections = galleryPageSections(page);
@@ -430,8 +558,37 @@ function chatScriptTag() {
   if (!chat.enabled || chat.provider !== 'tidio' || !chat.tidioPublicKey) return '';
   return '<script src="/assets/js/site-chat.js" defer></script>';
 }
-function layout(page, main) {
-  return '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>' + e(page.title) + '</title><meta name="description" content="' + attr(page.description || site.tagline) + '"><link rel="canonical" href="' + attr(site.domain + page.route) + '"><link rel="stylesheet" href="/assets/css/styles.css"><link rel="stylesheet" href="/assets/css/overrides.css"><script src="/assets/js/main.js" defer></script>' + schema(page) + '</head><body class="page-' + attr(page.type) + '" ' + chatBodyAttrs() + '><a class="skip-link" href="#main">Skip to content</a>' + header(page) + '<main id="main">' + main + '</main>' + footer() + chatScriptTag() + '</body></html>';
+function robotsMeta(noindex) {
+  if (!noindex) return '';
+  return '<meta name="robots" content="noindex,nofollow">';
+}
+function layout(page, main, options) {
+  const opts = options || {};
+  const noindex = opts.noindex || PREVIEW_NOINDEX;
+  const canonical = site.domain + (opts.canonicalRoute || page.route);
+  return '<!doctype html><html lang="en"><head><meta charset="utf-8"><script>document.documentElement.classList.add(\'js\');</script><meta name="viewport" content="width=device-width, initial-scale=1">' + robotsMeta(noindex) + '<title>' + e(page.title) + '</title><meta name="description" content="' + attr(page.description || site.tagline) + '"><link rel="canonical" href="' + attr(canonical) + '"><link rel="stylesheet" href="/assets/css/styles.css"><link rel="stylesheet" href="/assets/css/overrides.css"><script src="/assets/js/main.js" defer></script>' + schema(page) + '</head><body class="page-' + attr(page.type) + '" ' + chatBodyAttrs() + '><a class="skip-link" href="#main">Skip to content</a>' + header(page) + '<main id="main">' + main + '</main>' + footer() + chatScriptTag() + '</body></html>';
+}
+function redirectDocument(rule) {
+  const target = rule.to;
+  const absolute = site.domain + target;
+  const title = 'Redirecting… | ' + site.name;
+  const main = '<section class="content-section"><h1>Page moved</h1><p>This page has moved. If you are not redirected automatically, <a href="' + attr(target) + '">continue to the updated page</a>.</p></section>';
+  const stubPage = { route: rule.from, type: 'redirect', title: title, description: 'Redirect to ' + target };
+  return '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">' + robotsMeta(true) + '<title>' + e(title) + '</title><link rel="canonical" href="' + attr(absolute) + '"><meta http-equiv="refresh" content="0;url=' + attr(target) + '"><link rel="stylesheet" href="/assets/css/styles.css"><link rel="stylesheet" href="/assets/css/overrides.css"></head><body class="page-redirect"><main id="main">' + main + '</main></body></html>';
+}
+function htaccessRules() {
+  const lines = ['# Clearwater Dentist v2 — generated redirect map for Apache', 'RewriteEngine On', ''];
+  for (const rule of redirects) {
+    const from = rule.from.replace(/\/$/, '') || '/';
+    lines.push('Redirect 301 ' + from + ' ' + rule.to);
+  }
+  lines.push('', '# Canonicalize homepage variants', 'RewriteCond %{QUERY_STRING} (^|&)utm_ [NC]', 'RewriteRule ^$ /? [R=301,L]');
+  return lines.join('\n') + '\n';
+}
+function netlifyRedirects() {
+  const lines = redirects.map(rule => rule.from + ' ' + rule.to + ' 301');
+  lines.push('/?utm_* / 301');
+  return lines.join('\n') + '\n';
 }
 function render(page) {
   if (page.type === 'home') return renderHome(page);
@@ -440,8 +597,27 @@ function render(page) {
   if (page.type === 'gallery') return renderGallery(page);
   return renderGeneric(page);
 }
+const SITEMAP_EXCLUDED_TYPES = new Set(['redirect']);
+const PRIMARY_SERVICE_ROUTES = new Set((site.serviceLinks || []).map(item => item.href));
+function sitemapPriority(page) {
+  if (page.route === '/') return '1.0';
+  if (PRIMARY_SERVICE_ROUTES.has(page.route)) return '0.9';
+  if (page.type === 'blogPost') return '0.6';
+  if (page.type === 'policy') return '0.3';
+  if (['contact', 'gallery', 'finance', 'doctor', 'team', 'blogIndex'].includes(page.type)) return '0.7';
+  return '0.5';
+}
+function sitemapChangefreq(page) {
+  if (page.route === '/') return 'weekly';
+  if (page.type === 'blogPost') return 'monthly';
+  if (PRIMARY_SERVICE_ROUTES.has(page.route)) return 'monthly';
+  return 'yearly';
+}
+function indexablePages() {
+  return pages.filter(page => !SITEMAP_EXCLUDED_TYPES.has(page.type) && !page.noindex);
+}
 function sitemap() {
-  const urls = pages.map(page => '<url><loc>' + site.domain + page.route + '</loc><changefreq>' + (page.type === 'blogPost' ? 'weekly' : 'monthly') + '</changefreq><priority>' + (page.route === '/' ? '1.0' : '0.7') + '</priority></url>').join('');
+  const urls = indexablePages().map(page => '<url><loc>' + site.domain + page.route + '</loc><changefreq>' + sitemapChangefreq(page) + '</changefreq><priority>' + sitemapPriority(page) + '</priority></url>').join('');
   return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + urls + '</urlset>\n';
 }
 async function main() {
@@ -454,8 +630,18 @@ async function main() {
     await fs.mkdir(dir, { recursive: true });
     await fs.writeFile(path.join(dir, 'index.html'), layout(page, render(page)), 'utf8');
   }
+  for (const rule of redirects) {
+    const dir = outDir(rule.from);
+    await fs.mkdir(dir, { recursive: true });
+    await fs.writeFile(path.join(dir, 'index.html'), redirectDocument(rule), 'utf8');
+  }
   await fs.writeFile(path.join(DIST, 'sitemap.xml'), sitemap(), 'utf8');
-  await fs.writeFile(path.join(DIST, 'robots.txt'), 'User-agent: *\nAllow: /\nSitemap: ' + site.domain + '/sitemap.xml\n', 'utf8');
+  const robots = PREVIEW_NOINDEX
+    ? 'User-agent: *\nDisallow: /\n'
+    : 'User-agent: *\nAllow: /\nSitemap: ' + site.domain + '/sitemap.xml\n';
+  await fs.writeFile(path.join(DIST, 'robots.txt'), robots, 'utf8');
+  await fs.writeFile(path.join(DIST, '.htaccess'), htaccessRules(), 'utf8');
+  await fs.writeFile(path.join(DIST, '_redirects'), netlifyRedirects(), 'utf8');
   await fs.writeFile(path.join(DIST, 'humans.txt'), 'Clean rebuild for Clearwater Dentist. Source generated in DentistClearwater v2.\n', 'utf8');
   console.log('Built ' + pages.length + ' pages into ' + DIST);
 }

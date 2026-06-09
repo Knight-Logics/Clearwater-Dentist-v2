@@ -47,11 +47,17 @@ function prefixRootPaths(text) {
 
 async function injectBase(file) {
   let html = await fs.readFile(file, 'utf8');
-  if (html.includes('data-github-pages-base')) return;
   const tag = `<base href="${BASE}" data-github-pages-base>`;
-  html = html.includes('<head>')
-    ? html.replace('<head>', `<head>\n  ${tag}`)
-    : tag + html;
+  if (!html.includes('data-github-pages-base')) {
+    html = html.includes('<head>')
+      ? html.replace('<head>', `<head>\n  ${tag}`)
+      : tag + html;
+  }
+  if (!html.includes('name="robots"')) {
+    html = html.includes('<head>')
+      ? html.replace('<head>', '<head>\n  <meta name="robots" content="noindex,nofollow" data-github-pages-preview>')
+      : '<meta name="robots" content="noindex,nofollow" data-github-pages-preview>' + html;
+  }
   await fs.writeFile(file, html, 'utf8');
 }
 

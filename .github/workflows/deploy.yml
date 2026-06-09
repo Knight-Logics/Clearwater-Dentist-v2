@@ -25,6 +25,8 @@ jobs:
 
       - name: Build static site
         run: node scripts/build.mjs
+        env:
+          PREVIEW_NOINDEX: "true"
 
       - name: Prepare site for GitHub Pages
         run: node scripts/prepare-pages.mjs

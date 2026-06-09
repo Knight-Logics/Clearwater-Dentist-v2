@@ -3,8 +3,8 @@
     "route": "/",
     "slug": "home",
     "type": "home",
-    "title": "Family & Cosmetic Dentistry in Clearwater, FL | Clearwater Dentist",
-    "description": "Clearwater Dentist provides family dental services in Clearwater, FL, including general dentistry, cosmetic dentistry, teeth whitening, and more. Book an appointment!",
+    "title": "Dentist in Clearwater, FL | Family, Cosmetic & Emergency Care",
+    "description": "Looking for a dentist in Clearwater, FL? Dr. Nadia Pokrovskaya offers family dentistry, cosmetic smile design, dental implants, same-day emergency visits, and gentle sedation options. Request an appointment today.",
     "h1": "Welcome to the Office of Dr. Nadia",
     "heroImage": {
       "src": "/assets/images/clearwater-dentist-clearwater-fl-front-of-dental-office-1920w.jpg",
@@ -450,6 +450,37 @@
           "Newer Post >"
         ],
         "items": []
+      }
+    ]
+  },
+  {
+    "route": "/accessibility-statement",
+    "slug": "accessibility-statement",
+    "type": "policy",
+    "title": "Accessibility Statement | Clearwater Dentist",
+    "description": "Clearwater Dentist accessibility statement and contact information for website accessibility feedback.",
+    "h1": "Accessibility Statement",
+    "sections": [
+      {
+        "heading": "Our Commitment",
+        "body": [
+          "We are committed to providing digital accessibility through https://www.clearwaterdentist.com for individuals with disabilities. We will implement improvements in compliance with the Americans with Disabilities Act, as amended (ADA), and other applicable regulations.",
+          "We are working to ensure the website is in substantial conformance with the Web Content Accessibility Guidelines (WCAG) 2.1, Level A and AA."
+        ]
+      },
+      {
+        "heading": "Third-Party Content",
+        "body": [
+          "Our website may link to, or interface with, third-party websites and tools that we do not control. We cannot ensure accessibility on third-party websites or make accommodations on their behalf.",
+          "Third-party vendors may provide content, plugins, or widgets on our website. We encourage vendors to comply with industry standards, but we cannot guarantee their compliance."
+        ]
+      },
+      {
+        "heading": "Feedback",
+        "body": [
+          "We want to hear from you if you encounter accessibility barriers on our website. Please contact Dr. Nadia at frontdesk@clearwaterdentist.com or call (727) 285-8132 so we can assist you.",
+          "Thank you for helping us improve access for every patient and visitor."
+        ]
       }
     ]
   },
@@ -2674,8 +2705,8 @@
     "route": "/bone-grafting",
     "slug": "bone-grafting",
     "type": "service",
-    "title": "Bone Grafting Treatment in Clearwater, FL | Clearwater Dentist",
-    "description": "Clearwater Dentist provides bone grafting in Clearwater, FL to restore lost jawbone and improve implant support. Get a consult, grafting, and implant care here.",
+    "title": "Bone Grafting Clearwater, FL | Jaw Support for Dental Implants",
+    "description": "Bone grafting in Clearwater, FL to rebuild jawbone for dental implants. Guided tissue regeneration and full-scope implant planning with Dr. Nadia.",
     "h1": "Bone Grafting at Clearwater, FL",
     "heroImage": {
       "src": "/assets/images/clearwater-dentist-clearwater-fl-dr-nadia-pokrovskaya-2-42fee302-cc2dcf47-1920w.jpg",
@@ -2691,32 +2722,54 @@
     "embeds": [],
     "sections": [
       {
-        "heading": "Bone Grafting Rebuilds Your Jaw Bone",
+        "heading": "Bone Grafting Rebuilds Your Jawbone",
         "body": [
-          "Your jaw bone plays a critical role in supporting your natural teeth by securely holding them in place. Without healthy jaw bones, natural teeth may loosen or fall out altogether, hindering dental implant success rates. When bone loss affects jaw health, ridge augmentation or bone grafting treatments such as bone grafting offer solutions.",
-          "Bone grafting procedures enable the rebuilding of bone lost due to factors like deterioration, periodontal disease, or oral trauma. By rebuilding acceptable bone volume and creating space in the jaw for dental implant support, bone grafting procedures provide the ideal preparation process. At Clearwater Dentist, bone grafting seamlessly fits into our comprehensive dental implant process.",
-          "With our comprehensive dental implant services, you can access every facet of implant care under one roof. From initial consultations to bone grafting procedures and implant placement, our team ensures an easy experience for our patients. Don't let bone loss thwart your efforts at creating a healthier and more confident smile--contact us today to discover more about our bone grafting and dental implant services!"
-        ],
-        "items": []
+          "Your jawbone supports natural teeth and provides the foundation required for successful dental implants. When bone volume is lost because of periodontal disease, extractions, trauma, or long-term denture wear, implant placement may require bone grafting first.",
+          "Bone grafting rebuilds acceptable bone volume and creates a stable site for implant support. At Clearwater Dentist, grafting is planned as part of a comprehensive implant workflow rather than as an isolated procedure.",
+          "From consultation through graft healing and implant placement, our team coordinates care in-house so you understand each phase before it begins."
+        ]
       },
       {
-        "heading": "How We Preform The Procedure",
+        "heading": "When Bone Grafting Is Recommended",
+        "items": [
+          "Insufficient bone height or width for secure implant placement",
+          "Bone loss after tooth extraction or long-term missing teeth",
+          "Periodontal disease that has reduced supporting bone",
+          "Trauma or infection that damaged jaw structure",
+          "Ridge augmentation before implant-supported dentures or full-arch treatment"
+        ]
+      },
+      {
+        "heading": "How We Perform the Procedure",
         "body": [
-          "Under bone grafting procedures, bone tissue is extracted either from your own body or a donor source and placed at the site of bone loss. Over time, the material will heal and integrate into surrounding bone tissue - increasing bone volume over time. To ensure proper healing processes take place, guided tissue regeneration (GTR) techniques may also be implemented.",
-          "GTR uses a biocompatible membrane that covers bone graft material to keep gum tissue at bay during healing and promote the formation of new bone while blocking any unwanted ingress of unwanted tissues. After several months have passed, you will have acquired enough bone volume necessary to support dental implants securely, setting the stage for successful dental implant placement.",
-          "This comprehensive approach ensures the success of bone grafting procedures while setting the groundwork for their successful implementation."
-        ],
-        "items": []
+          "Bone graft material may come from your own body or a donor source depending on the site and treatment plan. The material is placed where bone volume needs to be restored.",
+          "Over time, the graft integrates with surrounding bone. Guided tissue regeneration (GTR) may be used to protect the graft with a biocompatible membrane while new bone forms.",
+          "Healing timelines vary, but the goal is to create enough healthy bone volume to support implants predictably before restorative treatment continues."
+        ]
       },
       {
         "heading": "Full-Scope Implant Care In-House",
         "body": [
-          "If you wear dentures or anticipate needing them soon, exploring implant-supported dentures is highly recommended. At Clearwater Dentist, our dedicated team is here to assist every step of the implant and full-arch solution process, and ensure a hassle-free experience for you.",
-          "Implant-supported dentures follow similar steps as receiving individual dental implants, with our team taking great care in placing implants to anchor denture appliances in your jawbone after extraction and bone grafting (if required) have taken place. These anchoring implants serve as anchors for denture devices to rest upon.",
-          "Once implants have been secured in their positions, we utilize an implant-supported denture appliance to support them; typically between two to four implants will provide stability for your denture to snap onto. With implant-supported dentures securely in place, you can speak and eat confidently knowing your denture won't shift or come loose during regular activities such as eating or speaking.",
-          "Reach out to Clearwater Dentist now and explore how implant-supported dentures could improve your quality of life and restore both the functionality and aesthetics of your smile."
-        ],
-        "items": []
+          "Bone grafting is often combined with extractions, implant placement, or implant-supported denture planning. We map the full timeline up front so you know what to expect at each stage.",
+          "If you are exploring implant-supported dentures or full-arch solutions, grafting may be an important step toward long-term stability and confident chewing.",
+          "Our team also offers sedation options for anxious patients and clear post-operative instructions to support comfortable healing."
+        ]
+      },
+      {
+        "heading": "Frequently Asked Questions",
+        "items": [
+          "Why is bone grafting necessary for dental implants? Implants need adequate bone for stability. Grafting rebuilds volume when natural bone is insufficient.",
+          "How long does recovery take? Initial healing begins within weeks, but full bone maturation often takes several months depending on the graft site and plan.",
+          "Is bone grafting painful? The area is numbed for the procedure. Soreness afterward is usually manageable with standard post-operative care.",
+          "Are financing options available? Yes. We offer financing paths and will review phased treatment planning during your consultation.",
+          "Can bone grafting and implants happen at the same time? In some cases yes. Your provider will recommend the safest approach based on imaging and bone quality."
+        ]
+      },
+      {
+        "heading": "Plan Your Implant Foundation",
+        "body": [
+          "If you have been told you do not have enough bone for implants, schedule a consultation to review grafting options. Call (727) 285-8132 or request an appointment online to get started."
+        ]
       }
     ]
   },
@@ -3660,11 +3713,12 @@
       {
         "heading": "The Most Natural Solution To Missing Teeth",
         "body": [
-          "Dentures are not the best option for replacing missing teeth permanently. Dental implants provide a superior alternative. Dental implants not only give you a natural smile, but they also work like real teeth! You must maintain good oral hygiene, such as brushing, flossing, and maintaining the gums, just like with natural teeth. However, your implants will not cause you any discomfort or cavities!",
+          "Dentures are not the best option for replacing missing teeth permanently. Dental implants and [implant-supported dentures](/implant-supported-dentures-clearwater-fl) provide superior alternatives. Dental implants not only give you a natural smile, but they also work like real teeth! You must maintain good oral hygiene, such as brushing, flossing, and maintaining the gums, just like with natural teeth. However, your implants will not cause you any discomfort or cavities!",
           "Furthermore, dental implants provide several advantages over traditional dentures. Implants are anchored securely into the jawbone and provide stability, preventing embarrassing moments when eating or speaking. This stability allows you to chew more naturally, which will allow you to eat a variety of food without restriction.",
           "Dental implants also contribute to maintaining the jawbone's structure. The jawbone may deteriorate due to lack stimulation when teeth are missing. Implants stimulate the jawbone, preventing bone loss. It not only helps maintain facial aesthetics, but also promotes overall oral health.",
           "You can expect your implants, bridges and dentures to last the rest of their lives with proper care, regular checkups at our office, and regular maintenance. Our team will provide you with personalized care to ensure that your dental restorations are functional and long-lasting. Dental implants are not only a long-term investment, but they also provide you with comfort, confidence and a beautiful, healthy smile.",
-          "Do not hesitate to discover the benefits of dental implant restoration and improve your quality of life. Call us to schedule a consultation and begin your journey towards a healthier, happier, and more confident life."
+          "Do not hesitate to discover the benefits of dental implant restoration and improve your quality of life. Call us to schedule a consultation and begin your journey towards a healthier, happier, and more confident life.",
+          "Patients who need extractions before implants can learn more about [tooth extraction](/tooth-extraction-clearwater-fl) and how we plan the next restorative step."
         ],
         "items": [
           "Dental implants also contribute to maintaining the jawbone's structure. The jawbone may deteriorate due to lack stimulation when teeth are missing. Implants stimulate the jawbone, preventing bone loss. It not only helps maintain facial aesthetics, but also promotes overall oral health. You can expect your implants, bridges and dentures to last the rest of their lives with proper care, regular checkups at our office, and regular maintenance. Our team will provide you with personalized care to ensure that your dental restorations are functional and long-lasting. Dental implants are not only a long-term investment, but they also provide you with comfort, confidence and a beautiful, healthy smile. Do not hesitate to discover the benefits of dental implant restoration and improve your quality of life. Call us to schedule a consultation and begin your journey towards a healthier, happier, and more confident life."
@@ -3956,8 +4010,8 @@
     "route": "/emergency-dentistry-clearwater-fl",
     "slug": "emergency-dentistry-clearwater-fl",
     "type": "service",
-    "title": "Emergency Dentistry in Clearwater, FL | Clearwater Dentist",
-    "description": "We provide emergency dentistry in Clearwater, FL. Our dentist offers same-day emergency dentistry, urgent dental care, and emergency dental treatment. Call now!",
+    "title": "Emergency Dentist Clearwater, FL | Same-Day Urgent Dental Care",
+    "description": "Need an emergency dentist in Clearwater, FL? Same-day appointments for tooth pain, broken teeth, swelling, and urgent extractions. Call (727) 285-8132 for fast relief.",
     "h1": "Same-Day Emergency Dentistry Clearwater, FL",
     "heroImage": {
       "src": "/assets/images/clearwater-dentist-clearwater-fl-teeth-trauma-3-be42491e-1920w.jpg",
@@ -4025,6 +4079,26 @@
         "heading": "Expert Emergency Dentistry in Clearwater, FL",
         "body": [
           "At Clearwater Dentist, our emergency dentistry services are tailored to quickly restoring oral health. No longer should dental emergencies be endured alone--we're here to support and assist you. We recognize the discomfort associated with such emergencies; that is why we provide same-day appointments, providing timely relief from dental problems and situations that require immediate attention. Don't hesitate to reach out for immediate assistance and expert care from Clearwater Dentist today!"
+        ],
+        "items": []
+      },
+      {
+        "heading": "Common Emergency Treatments We Provide",
+        "body": [
+          "Depending on your symptoms, same-day care may include pain relief, repair of a broken tooth, treatment for infection, or planning the next restorative step with Dr. Nadia."
+        ],
+        "items": [
+          "[Tooth extraction](/tooth-extraction-clearwater-fl) for severe decay, infection, or trauma when a tooth cannot be saved",
+          "[Root canal therapy](/root-canal-clearwater-fl) when the nerve of the tooth is infected but the tooth can still be preserved",
+          "[Dental implants](/dental-implants-clearwater-fl) and [bone grafting](/bone-grafting) when a missing tooth needs long-term replacement",
+          "[Sedation dentistry](/sedation-dentistry-clearwater-fl) for anxious patients who need urgent care in a calmer setting"
+        ]
+      },
+      {
+        "heading": "When to Call Right Away",
+        "body": [
+          "Severe pain, swelling, fever, bleeding that will not stop, a knocked-out tooth, or a dental injury after an accident should be evaluated promptly. If you are unsure, call our office and we will help you decide the best next step.",
+          "For preventive follow-up after urgent care, many patients continue with [general dentistry](/general-dentistry) and [oral cancer screening](/oral-cancer-screening) as part of a complete oral health plan."
         ],
         "items": []
       }
@@ -4137,6 +4211,63 @@
     ]
   },
   {
+    "route": "/financial-policy",
+    "slug": "financial-policy",
+    "type": "policy",
+    "title": "Financial Policy | Clearwater Dentist",
+    "description": "Financial policy for Clearwater Dentist including insurance, payments, financing, membership plans, and appointment cancellation terms.",
+    "h1": "Financial Policy",
+    "sections": [
+      {
+        "heading": "Overview",
+        "body": [
+          "This Financial Policy explains how payment, insurance, and financing work at Clearwater Dentist. Our goal is to make high-quality care understandable and accessible while maintaining the one-patient-at-a-time experience our practice is known for."
+        ]
+      },
+      {
+        "heading": "Insurance",
+        "body": [
+          "We are an out-of-network provider. This allows us to maintain our focused care model without many restrictions imposed by in-network contracts.",
+          "If you have a PPO insurance plan, we will gladly submit claims to your insurance carrier on your behalf. Reimbursement is typically sent directly to you according to your plan benefits.",
+          "We do not accept HMO plans, Medicaid, or state insurance programs that require patients to see a specific contracted provider."
+        ]
+      },
+      {
+        "heading": "Payment at Time of Service",
+        "body": [
+          "Payment for treatment is generally due at the time service is provided unless other arrangements have been made in advance.",
+          "We accept major credit cards and other payment methods discussed during your visit. For larger treatment plans, we will review phased payment and financing options with you before care begins."
+        ]
+      },
+      {
+        "heading": "Financing and Membership Options",
+        "body": [
+          "We offer third-party financing options such as CareCredit, Sunbit, and Alphaeon for qualifying patients. Visit our Financing page to compare plans.",
+          "For patients without traditional PPO insurance, or those who want additional benefits, we offer in-house membership plans with tiers focused on preventive care, premium maintenance, and aesthetic services. Your provider can help you choose the plan that fits your goals during your consultation."
+        ]
+      },
+      {
+        "heading": "Treatment Estimates",
+        "body": [
+          "We provide treatment estimates whenever possible so you can make informed decisions. Final fees may vary if clinical findings change during treatment. We will communicate with you before proceeding with additional care."
+        ]
+      },
+      {
+        "heading": "Appointment Cancellation Policy",
+        "body": [
+          "Because we reserve the office for your exclusive use, we require 48 hours’ notice for cancellations or rescheduling.",
+          "Appointments canceled within the 48-hour window may be subject to a $99 fee. This policy helps us offer reserved appointment times fairly to all patients."
+        ]
+      },
+      {
+        "heading": "Questions",
+        "body": [
+          "If you have questions about insurance, financing, or payment options, contact our front desk at (727) 285-8132 or info@clearwaterdentist.com before your visit."
+        ]
+      }
+    ]
+  },
+  {
     "route": "/financing",
     "slug": "financing",
     "type": "finance",
@@ -4152,7 +4283,8 @@
         "heading": "Flexible Financing for Your Dental Care",
         "body": [
           "At Clearwater Dentist, we believe that everyone deserves a healthy and confident smile. We are committed to making high-quality dental care accessible and affordable. That's why we offer a variety of financing options to fit your budget and needs.",
-          "We have partnered with leading financing providers to offer you flexible payment plans. Explore your options below to find the perfect fit for you."
+          "We have partnered with leading financing providers to offer you flexible payment plans. Explore your options below to find the perfect fit for you.",
+          "For insurance participation, payment timing, membership plans, and our 48-hour cancellation policy, read our [Financial Policy](/financial-policy)."
         ],
         "items": []
       },
@@ -4208,7 +4340,8 @@
         "heading": "Ready to Discuss Your Options?",
         "body": [
           "We understand that navigating financing options can be confusing. Our dedicated team is here to help you understand the terms, compare your pre-qualified offers, and find the perfect payment solution for your dental needs.",
-          "Call us today at (727) 285-8132 to schedule a consultation or speak with our financial coordinator. We'll ensure you have all the information you need to move forward with confidence."
+          "Call us today at (727) 285-8132 to schedule a consultation or speak with our financial coordinator. We'll ensure you have all the information you need to move forward with confidence.",
+          "You can also review our [Financial Policy](/financial-policy) and [Privacy Policy](/privacy-policy) before your visit."
         ],
         "items": []
       }
@@ -4296,8 +4429,8 @@
     "route": "/general-dentistry",
     "slug": "general-dentistry",
     "type": "service",
-    "title": "General Dentistry in Clearwater, FL | Clearwater Dentist",
-    "description": "Get general dentistry services in Clearwater, FL, including routine exams, cleanings, fluoride treatments, and emergency dental care for your whole family. Book now!",
+    "title": "General Dentist Clearwater, FL | Exams, Cleanings & Family Care",
+    "description": "General dentistry in Clearwater, FL for families and new patients. Routine exams, cleanings, fillings, preventive care, and emergency support with a calm, patient-focused team.",
     "h1": "General Dentistry at Clearwater, FL",
     "heroImage": {
       "src": "/assets/images/clearwater-dentist-clearwater-fl-front-of-dental-office-1920w.jpg",
@@ -4830,8 +4963,8 @@
     "route": "/implant-supported-dentures-clearwater-fl",
     "slug": "implant-supported-dentures-clearwater-fl",
     "type": "service",
-    "title": "Implant Supported Denture Treatment in Clearwater, FL | Clearwater Dentist",
-    "description": "Clearwater Dentist offers implant supported dentures in Clearwater, FL to help stop slipping, improve bite strength, and reduce sore spots. Schedule a consult.",
+    "title": "Implant-Supported Dentures Clearwater, FL | Secure Full-Arch Teeth",
+    "description": "Implant-supported dentures in Clearwater, FL for patients who want stable, natural-feeling teeth. Explore full-arch and partial solutions with Dr. Nadia.",
     "h1": "Implant-Supported Dentures at Clearwater, FL",
     "heroImage": {
       "src": "/assets/images/clearwater-dentist-clearwater-fl-old-person-smiling-17cba580-1920w.jpg",
@@ -5215,8 +5348,8 @@
     "route": "/laser-dentistry",
     "slug": "laser-dentistry",
     "type": "service",
-    "title": "Laser Dentistry in Clearwater, FL | Clearwater Dentist",
-    "description": "Clearwater dentist offers laser dentistry with the Solea(R) dental laser, providing gentle, needle-free, drill-free treatments for teeth and gums with faster healing.",
+    "title": "Laser Dentistry Clearwater, FL | Solea Needle-Free Dental Laser",
+    "description": "Laser dentistry in Clearwater, FL with the Solea dental laser for gentler gum treatment, soft-tissue care, and select restorative procedures with less discomfort.",
     "h1": "Laser Dentistry at Clearwater, FL",
     "heroImage": {
       "src": "/assets/images/screenshot-2025-12-08-at-1-17-52-pm-1920w.png",
@@ -5275,7 +5408,8 @@
       {
         "heading": "A Faster, Gentler, Stress‑Free Dental Experience",
         "body": [
-          "At our boutique Clearwater dental practice, we're proud to offer Solea(R) Laser Dentistry - the most advanced, anesthesia‑free dental technology available today. If you've ever wished dental visits could feel easier, quieter, and more comfortable, Solea makes that possible. This CO₂ dental laser allows us to perform many procedures without needles, without drills, and without downtime, giving you a smoother, more relaxed experience from start to finish."
+          "At our boutique Clearwater dental practice, we're proud to offer Solea(R) Laser Dentistry - the most advanced, anesthesia‑free dental technology available today. If you've ever wished dental visits could feel easier, quieter, and more comfortable, Solea makes that possible. This CO₂ dental laser allows us to perform many procedures without needles, without drills, and without downtime, giving you a smoother, more relaxed experience from start to finish.",
+          "Many patients also ask about [Solea Sleep](/solea-sleep) for snoring and sleep-disordered breathing, while others combine laser care with [gum disease treatment](/gum-disease-treatment)."
         ],
         "items": []
       },
@@ -5283,7 +5417,8 @@
         "heading": "What Is the Solea(R) Laser?",
         "body": [
           "The Solea laser is an FDA‑approved, all‑tissue dental laser designed to treat both teeth and gums with unmatched precision. Its unique wavelength vaporizes tooth structure and soft tissue with minimal sensation, making it ideal for patients who want:",
-          "Solea is the gold standard for modern, minimally invasive dentistry - and we're one of the few practices in the Clearwater/Safety Harbor area offering it."
+          "Solea is the gold standard for modern, minimally invasive dentistry - and we're one of the few practices in the Clearwater/Safety Harbor area offering it.",
+          "Beyond routine laser dentistry, eligible patients may explore [Solea Sleep](/solea-sleep), while others pair laser care with [TMJ treatment](/tmj-treatment-clearwater-fl) or [facial esthetics](/facial-esthetics) for a more comprehensive plan."
         ],
         "items": [
           "No anesthesia or numbness",
@@ -5772,7 +5907,9 @@
           "Premium: For those who want more frequent care and advanced maintenance.",
           "Aesthetic: Designed for patients who prioritize skin rejuvenation and cosmetic enhancements.",
           "How do I sign up for an In-House Membership? Since every smile is different, we don't believe in \"one size fits all.\" We'd love to chat with you during your appointment about your specific goals. Once we understand your needs, we can help you choose the plan that maximizes your benefits and fits your budget.",
-          "Is there a cancellation policy? Because we reserve the entire office for your exclusive use, we require 48 hours' notice for any cancellations or rescheduling. This ensures we can offer that time to another patient. Appointments canceled within that 48-hour window are subject to a $99 fee."
+          "Is there a cancellation policy? Because we reserve the entire office for your exclusive use, we require 48 hours' notice for any cancellations or rescheduling. This ensures we can offer that time to another patient. Appointments canceled within that 48-hour window are subject to a $99 fee.",
+          "Where can I read your full payment and cancellation terms? See our [Financial Policy](/financial-policy) for out-of-network insurance, financing, membership plans, and appointment policies.",
+          "Questions about how we handle your information? Review our [Privacy Policy](/privacy-policy) and [Notice of Privacy Practices](/notice-of-privacy-practices)."
         ]
       },
       {
@@ -5810,11 +5947,64 @@
     ]
   },
   {
+    "route": "/notice-of-privacy-practices",
+    "slug": "notice-of-privacy-practices",
+    "type": "policy",
+    "title": "Notice of Privacy Practices | Clearwater Dentist",
+    "description": "HIPAA Notice of Privacy Practices for Clearwater Dentist. Learn how we may use and disclose your health information and your patient rights.",
+    "h1": "Notice of Privacy Practices",
+    "sections": [
+      {
+        "heading": "Our Pledge Regarding Your Health Information",
+        "body": [
+          "We understand that medical information about you and your health is personal. We are committed to protecting medical information about you.",
+          "We create a record of the care and services you receive at our office for use in your care and treatment. This notice applies to all records of your care generated by our practice."
+        ]
+      },
+      {
+        "heading": "How We May Use and Disclose Medical Information About You",
+        "items": [
+          "For Treatment: to provide, coordinate, or manage your dental care with dentists, hygienists, technicians, and other team members involved in your care",
+          "For Payment: to bill and collect payment from you, your insurance company, or a third party",
+          "For Health Care Operations: to run our office efficiently and help ensure quality care for all patients",
+          "Appointment Reminders: to contact you about upcoming visits",
+          "Treatment Alternatives: to tell you about options that may be of interest to you",
+          "Health-Related Benefits and Services: to share information about services that may benefit you",
+          "As Required By Law: when federal, state, or local law requires disclosure"
+        ]
+      },
+      {
+        "heading": "Your Rights Regarding Medical Information",
+        "items": [
+          "Right to Inspect and Copy your records",
+          "Right to Amend information you believe is incorrect or incomplete",
+          "Right to an Accounting of Disclosures in certain situations",
+          "Right to Request Restrictions on uses or disclosures for treatment, payment, or operations",
+          "Right to Request Confidential Communications at a specific phone number or address"
+        ]
+      },
+      {
+        "heading": "Complaints",
+        "body": [
+          "If you believe your privacy rights have been violated, you may file a complaint with our office or with the Secretary of the U.S. Department of Health and Human Services. You will not be penalized for filing a complaint."
+        ]
+      },
+      {
+        "heading": "Contact Information",
+        "body": [
+          "For more information about our privacy practices, or to file a complaint, contact Dr. Nadia Pokrovskaya at 1700 N McMullen Booth Rd, Ste A1, Clearwater, FL 33759.",
+          "Email: frontdesk@clearwaterdentist.com · Phone: (727) 285-8132",
+          "We are required by law to maintain the privacy of your health information and to provide you with this notice of our legal duties and privacy practices. We reserve the right to change our privacy practices and the terms of this notice when permitted by law."
+        ]
+      }
+    ]
+  },
+  {
     "route": "/oral-cancer-screening",
     "slug": "oral-cancer-screening",
     "type": "service",
-    "title": "Oral Cancer Screening in Clearwater, FL | Clearwater Dentist",
-    "description": "Our dentist provides oral cancer screening services, checks for early oral cancer signs and symptoms, and explains what to expect if oral cancer treatment is needed.",
+    "title": "Oral Cancer Screening Clearwater, FL | Early Detection Exams",
+    "description": "Oral cancer screening in Clearwater, FL with thorough oral pathology exams, soft tissue evaluation, and patient education from Dr. Nadia Pokrovskaya.",
     "h1": "Oral Cancer Screening at Clearwater, FL",
     "heroImage": {
       "src": "/assets/images/clearwater-dentist-clearwater-fl-front-of-dental-office-1920w.jpg",
@@ -5841,29 +6031,53 @@
       {
         "heading": "We Perform Thorough Oral Pathology Exams",
         "body": [
-          "At Clearwater Dentist, we take your wellbeing seriously by offering cutting-edge oral pathology and cancer screenings designed to detect diseases of the mouth, jaw, and related structures early enough for intervention and early diagnosis.",
-          "Only one-third of oral cancers are detected at an effective stage for treatment, underlining the importance of routine screenings. Furthermore, many diseases, including oral cancer, often manifest without notice or discomfort - necessitating professional evaluation as soon as symptoms emerge.",
-          "Our team at Oral Pathology Specialists in Clearwater FL excel at recognizing potential abnormalities while conducting comprehensive examinations that include x-rays of your mouth, head and neck to thoroughly assess lesions based on factors like color shape size location texture etc.",
-          "Should any troubling findings arise, our gentle dental laser will perform minimally invasive biopsies using minimally invasive techniques to screen for cancer or other diseases and make treatment decisions accordingly. Your health and safety are always of utmost concern to us and we aim to offer thorough and compassionate care designed to safeguard both oral and overall wellbeing."
-        ],
-        "items": []
-      },
-      {
-        "heading": "Oral Pathology Signs To Check",
-        "body": [],
-        "items": [
-          "Red or white patches in the mouth",
-          "Bleeding sores in the mouth",
-          "Lumps developing within the mouth",
-          "Constant sore throat or difficulty swallowing"
+          "At Clearwater Dentist, we take your wellbeing seriously by offering oral pathology and cancer screenings designed to detect diseases of the mouth, jaw, and related structures early enough for timely intervention.",
+          "Only one-third of oral cancers are detected at a stage where treatment is most effective, which is why routine screenings matter even when you feel fine. Many oral diseases develop without obvious pain at first.",
+          "Our team conducts comprehensive soft-tissue exams and reviews findings based on color, shape, size, location, and texture. When additional evaluation is needed, we discuss next steps clearly and compassionately."
         ]
       },
       {
-        "heading": "Prevention Begins At Home",
+        "heading": "What Happens During a Screening",
+        "items": [
+          "Visual exam of the lips, cheeks, tongue, floor of mouth, palate, and throat",
+          "Palpation of the jaw, neck, and lymph node areas when indicated",
+          "Review of your health history, tobacco or alcohol use, and risk factors",
+          "Discussion of any sores, patches, lumps, or changes you have noticed at home",
+          "Clear explanation of findings and recommended follow-up, including biopsy referral when appropriate"
+        ]
+      },
+      {
+        "heading": "Oral Pathology Signs To Check at Home",
+        "items": [
+          "Red or white patches in the mouth",
+          "Bleeding sores that do not heal",
+          "Lumps or thickening tissue in the mouth or neck",
+          "Persistent sore throat or difficulty swallowing",
+          "Numbness, pain, or unexplained changes in how teeth fit together"
+        ]
+      },
+      {
+        "heading": "Prevention Begins With Routine Care",
         "body": [
-          "If a biopsy taken comes back as something dangerous, we will take the necessary steps to help eliminate the concern and restore your oral health. Dr. Nadia Pokrovskaya recommends her patients start at-home oral cancer screenings to help identify potential concerns early. If you notice anything suspicious like lumps, pain, or discoloration, it should be addressed right away by scheduling an appointment with Dr. Pokrovskaya."
-        ],
-        "items": []
+          "If a biopsy or referral is needed, we help coordinate the next step and support you through the process. Dr. Nadia Pokrovskaya recommends combining professional screenings with at-home awareness.",
+          "If you notice anything suspicious such as lumps, pain, or discoloration, schedule an appointment promptly rather than waiting for your next routine visit."
+        ]
+      },
+      {
+        "heading": "Who Should Be Screened",
+        "body": [
+          "Every adult benefits from periodic oral cancer screening as part of comprehensive dental care. Screening is especially important for patients who use tobacco, drink alcohol regularly, have a history of oral lesions, or have had significant sun exposure affecting the lips.",
+          "Oral cancer screening is not only for high-risk patients. Because early disease is often painless, routine evaluation remains the safest approach."
+        ]
+      },
+      {
+        "heading": "Frequently Asked Questions",
+        "items": [
+          "Is an oral cancer screening painful? No. The exam is non-invasive and typically completed during a regular dental visit.",
+          "How often should I be screened? Many patients receive screening at least once a year during preventive visits. Your provider may recommend more frequent checks based on risk factors.",
+          "Does insurance cover oral cancer screening? Coverage varies by plan. Our team can help you understand benefits before treatment.",
+          "What if something looks abnormal? We explain findings, discuss whether monitoring or further testing is appropriate, and help you take the next step without unnecessary alarm."
+        ]
       }
     ]
   },
@@ -6226,6 +6440,115 @@
           "At Clearwater Dentist, excellence is not just a goal; it's our standard. Dr. Nadia and our team are dedicated to providing exceptional care and achieving outstanding results for every patient. We go above and beyond to ensure your comfort and satisfaction throughout your porcelain veneer journey, delivering a positive experience from start to finish. Choose Clearwater Dentist for porcelain veneers and embark on a transformative journey to a radiant, confident smile."
         ],
         "items": []
+      }
+    ]
+  },
+  {
+    "route": "/privacy-policy",
+    "slug": "privacy-policy",
+    "type": "policy",
+    "title": "Privacy Policy & Notice of Privacy Practices | Clearwater Dentist",
+    "description": "Clearwater Dentist privacy policy and HIPAA notice explaining how we protect your health information, SMS communications, and website data.",
+    "h1": "Privacy Policy and Notice of Privacy Practices",
+    "sections": [
+      {
+        "heading": "Effective Date",
+        "body": [
+          "Effective Date: April 20, 2026",
+          "THIS NOTICE DESCRIBES HOW MEDICAL INFORMATION ABOUT YOU MAY BE USED AND DISCLOSED AND HOW YOU CAN GET ACCESS TO THIS INFORMATION. PLEASE REVIEW IT CAREFULLY."
+        ]
+      },
+      {
+        "heading": "Our Commitment to Your Privacy",
+        "body": [
+          "Clearwater Dentist Inc (“we,” “our,” or “us”) is required by law to maintain the privacy and security of your Protected Health Information (PHI) and to provide you with this Notice of our legal duties and privacy practices.",
+          "We will follow the terms of this Notice currently in effect. We will notify you promptly if a breach occurs that may have compromised the privacy or security of your information."
+        ]
+      },
+      {
+        "heading": "What is Protected Health Information (PHI)?",
+        "body": [
+          "PHI includes any information about your health, treatment, or payment for healthcare services that can be linked to you, including medical and dental records, treatment plans, billing and insurance information, and contact details such as your phone number or email address.",
+          "HIPAA requires dental and medical providers to explain how this information is used and protected."
+        ]
+      },
+      {
+        "heading": "How We Use and Disclose Your Information",
+        "body": [
+          "We may use and disclose your PHI for treatment, payment, and healthcare operations, including coordinating care with specialists or labs, billing insurance, and conducting internal quality reviews that help us improve patient care."
+        ]
+      },
+      {
+        "heading": "Other Uses and Disclosures Allowed by Law",
+        "body": [
+          "We may disclose your information without your authorization when required for public health reporting, law enforcement requests, health oversight activities, abuse or neglect reporting, or compliance with legal obligations.",
+          "For uses not described in this Notice, we will obtain your written authorization, which you may revoke at any time."
+        ]
+      },
+      {
+        "heading": "Special Protections",
+        "body": [
+          "Certain records receive additional protections under federal law, including substance use disorder records, mental health information, and genetic and reproductive health information. Our policies are maintained to reflect these requirements."
+        ]
+      },
+      {
+        "heading": "Your Rights Regarding Your Health Information",
+        "items": [
+          "Access and obtain a copy of your records",
+          "Request corrections to your records",
+          "Request restrictions on how your information is used",
+          "Request confidential communications",
+          "Receive an accounting of disclosures",
+          "File a complaint without retaliation"
+        ]
+      },
+      {
+        "heading": "SMS Communications",
+        "body": [
+          "If you provide your phone number and consent, you may receive SMS messages from Clearwater Dentist Inc for appointment reminders, post-treatment follow-ups, billing notifications, and promotions or marketing offers if you opt in.",
+          "Message frequency may vary. Message and data rates may apply. Reply STOP to unsubscribe or HELP for assistance. Consent to receive SMS messages is not a condition of receiving treatment. You must be 18 years of age or older to participate. Carriers are not liable for delayed or undelivered messages."
+        ]
+      },
+      {
+        "heading": "Information We Collect on Our Website",
+        "body": [
+          "We may collect personal information (name, phone, email, address, insurance details), health information submitted through forms, and automatically collected data such as IP address, device or browser type, and website usage data."
+        ]
+      },
+      {
+        "heading": "Cookies, Tracking Technologies, and Analytics",
+        "body": [
+          "We use cookies and similar technologies to help our website function, remember preferences, measure performance, and understand how visitors use our pages. We may use analytics tools such as Google Analytics.",
+          "You can control or disable cookies through your browser settings. Disabling cookies may affect certain features. Some browsers offer a “Do Not Track” feature; our website may not respond to DNT signals at this time.",
+          "Third-party providers that support analytics or marketing are contractually required to protect your information and use it only for the services they provide."
+        ]
+      },
+      {
+        "heading": "Data Sharing",
+        "body": [
+          "No mobile information will be shared with third parties or affiliates for marketing or promotional purposes.",
+          "Information may be shared with subcontractors such as communication platforms and service providers only as necessary to operate our business.",
+          "All other use cases exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties."
+        ]
+      },
+      {
+        "heading": "Data Security",
+        "body": [
+          "We implement administrative, technical, and physical safeguards designed to protect your information in compliance with HIPAA Security Rule standards."
+        ]
+      },
+      {
+        "heading": "Changes to This Notice",
+        "body": [
+          "We reserve the right to change this Notice and make the new Notice apply to all information we maintain. Updates will be posted on our website."
+        ]
+      },
+      {
+        "heading": "Complaints and Contact Information",
+        "body": [
+          "If you believe your privacy rights have been violated, you may file a complaint with Clearwater Dentist Inc or the U.S. Department of Health and Human Services. You will not be penalized for filing a complaint.",
+          "Clearwater Dentist Inc · 1700 N McMullen Booth Rd, Ste A1, Clearwater, FL 33759 · (727) 285-8132 · info@clearwaterdentist.com · https://www.clearwaterdentist.com"
+        ]
       }
     ]
   },
@@ -6792,10 +7115,13 @@
     "route": "/solea-sleep",
     "slug": "solea-sleep",
     "type": "service",
-    "title": "Solea Sleep Snoring Treatment in Clearwater, FL | Clearwater Dentist",
-    "description": "Get sleep disorder solutions with Solea Sleep laser therapy and oral appliance treatments for snoring and mild sleep apnea to help you breathe better and rest well.",
+    "title": "Solea Sleep Clearwater, FL | Snoring & Sleep-Disordered Breathing",
+    "description": "Solea Sleep laser snoring treatment in Clearwater, FL. Non-surgical laser therapy for eligible patients with snoring or mild sleep-disordered breathing.",
     "h1": "Solea Sleep Snoring Treatment",
-    "heroImage": null,
+    "heroImage": {
+      "src": "/assets/images/clearwater-dentist-clearwater-fl-laser-dentistry-1920w.jpg",
+      "alt": "Solea laser treatment at Clearwater Dentist"
+    },
     "images": [],
     "videos": [],
     "embeds": [
@@ -6810,11 +7136,47 @@
     ],
     "sections": [
       {
-        "heading": "Overview",
+        "heading": "A Gentler Option for Snoring and Sleep-Disordered Breathing",
         "body": [
-          "Get sleep disorder solutions with Solea Sleep laser therapy and oral appliance treatments for snoring and mild sleep apnea to help you breathe better and rest well."
-        ],
-        "items": []
+          "Solea Sleep is a laser-assisted treatment designed to help eligible patients who struggle with snoring or mild sleep-disordered breathing. At Clearwater Dentist, we combine advanced laser technology with a calm, patient-focused environment so you can explore options without feeling rushed.",
+          "Many patients put off sleep-related concerns because they assume treatment means surgery, appliances, or a long recovery. Solea Sleep is different for many eligible patients: it is non-surgical, performed in-office, and designed to tighten soft tissue in the airway with minimal downtime."
+        ]
+      },
+      {
+        "heading": "How Solea Sleep Works",
+        "body": [
+          "Solea Sleep uses the Solea dental laser to gently treat soft palate tissue. The goal is to reduce the vibration and airway obstruction that contribute to snoring.",
+          "Treatment is typically quick and well tolerated. Most patients return to normal activities the same day. Your provider will review whether you are a good candidate based on your symptoms, anatomy, and overall health history."
+        ]
+      },
+      {
+        "heading": "Who May Benefit",
+        "items": [
+          "Adults who snore and want a non-surgical option to explore",
+          "Patients with mild sleep-disordered breathing who have been evaluated for suitability",
+          "Partners or family members affected by snoring at home",
+          "Patients already familiar with our Solea laser dentistry services who want a related sleep solution"
+        ]
+      },
+      {
+        "heading": "What to Expect at Your Visit",
+        "body": [
+          "Your visit begins with a conversation about your sleep history, snoring patterns, and goals. We will explain whether Solea Sleep, an oral appliance, or a referral for further sleep evaluation is the most appropriate next step.",
+          "If Solea Sleep is recommended, we will walk you through the procedure, expected sensations, and any follow-up visits before treatment begins."
+        ]
+      },
+      {
+        "heading": "Related Care at Clearwater Dentist",
+        "body": [
+          "Solea Sleep is part of our broader laser and airway-focused services. Many patients also explore laser dentistry for gum treatment and restorative care, TMJ evaluation for jaw tension, or sedation options if dental anxiety has kept them from getting care.",
+          "If snoring is part of a larger oral health concern, we will help you understand how treatment pieces fit together rather than offering a one-size-fits-all answer."
+        ]
+      },
+      {
+        "heading": "Schedule a Consultation",
+        "body": [
+          "Ready to learn whether Solea Sleep is right for you? Request an appointment online or call (727) 285-8132. Our team serves Clearwater, Safety Harbor, Dunedin, Palm Harbor, Largo, and the greater Tampa Bay area."
+        ]
       }
     ]
   },
@@ -7172,6 +7534,57 @@
         ],
         "items": [
           "Our dental team will prepare you for treatment on the day of your appointment by protecting your gums and lips before applying a professional-grade whitening gel to your teeth. This gel contains powerful whitening agents that break down stains and discoloration molecules embedded in the enamel. A special dental light activates the gel to enhance the whitening process, allowing it to penetrate deeper into the enamel for more effective results. After a specified time, the gel is removed, revealing a brighter and more radiant smile. With personalized aftercare instructions, provided by Dr. Nadia, you can enjoy long-lasting results and maintain your dazzling smile for months. Schedule your in-office teeth whitening appointment today and embark on a journey to unlock your brightest smile."
+        ]
+      }
+    ]
+  },
+  {
+    "route": "/terms-and-conditions",
+    "slug": "terms-and-conditions",
+    "type": "policy",
+    "title": "Terms & Conditions | Clearwater Dentist",
+    "description": "Terms and conditions for SMS messaging and website use at Clearwater Dentist in Clearwater, FL.",
+    "h1": "Terms and Conditions",
+    "sections": [
+      {
+        "heading": "Effective Date",
+        "body": [
+          "Effective Date: April 20, 2026"
+        ]
+      },
+      {
+        "heading": "SMS Messaging Program",
+        "body": [
+          "By providing your phone number and opting in, you agree to receive SMS text messages from Clearwater Dentist Inc related to appointment reminders, follow-up care, promotions, special offers, and general customer service communications.",
+          "Consent to receive SMS messages is not a condition of purchasing any goods or services."
+        ]
+      },
+      {
+        "heading": "Message Frequency, Rates, and Opt-Out",
+        "body": [
+          "Message frequency may vary based on your appointment activity, inquiries, and promotions. Message and data rates may apply depending on your mobile carrier and plan.",
+          "Reply STOP to cancel messaging or HELP for assistance. After opting out, you will not receive SMS messages unless you opt in again."
+        ]
+      },
+      {
+        "heading": "Customer Support",
+        "body": [
+          "For assistance, reply HELP to any message or contact us at (727) 285-8132 or info@clearwaterdentist.com.",
+          "Your information will be handled in accordance with our Privacy Policy at https://www.clearwaterdentist.com/privacy-policy."
+        ]
+      },
+      {
+        "heading": "Data Sharing, Eligibility, and Carrier Disclaimer",
+        "body": [
+          "No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. Information may be shared only with subcontractors providing support services, and only as necessary to operate our business.",
+          "You must be 18 years of age or older to use this SMS service. Carriers are not liable for delayed or undelivered messages."
+        ]
+      },
+      {
+        "heading": "Changes to Terms",
+        "body": [
+          "We reserve the right to update or modify these Terms & Conditions at any time. Updates will be posted on this page with a revised effective date.",
+          "Clearwater Dentist Inc · 1700 N McMullen Booth Rd, Ste A1, Clearwater, FL 33759 · (727) 285-8132"
         ]
       }
     ]
@@ -7949,8 +8362,8 @@
     "route": "/tmj-treatment-clearwater-fl",
     "slug": "tmj-treatment-clearwater-fl",
     "type": "service",
-    "title": "TMJ Treatment in Clearwater, FL | Clearwater Dentist",
-    "description": "Struggling with jaw pain or teeth grinding? Our TMJ specialists can help with TMJ treatment, oral appliances, and care for all TMJ symptoms. Book your consultation!",
+    "title": "TMJ Treatment Clearwater, FL | Jaw Pain & Teeth Grinding Relief",
+    "description": "TMJ treatment in Clearwater, FL for jaw pain, clicking, headaches, and teeth grinding. Custom oral appliances and a thoughtful plan from Dr. Nadia Pokrovskaya.",
     "h1": "TMJ Treatment at Clearwater, FL",
     "heroImage": {
       "src": "/assets/images/clearwater-dentist-clearwater-fl-front-of-dental-office-1920w.jpg",
@@ -8039,8 +8452,8 @@
     "route": "/tooth-extraction-clearwater-fl",
     "slug": "tooth-extraction-clearwater-fl",
     "type": "service",
-    "title": "Tooth Extraction Treatment in Clearwater, FL | Clearwater Dentist",
-    "description": "From severe decay to infection, we offer tooth extractions and wisdom teeth removal in Clearwater, FL with a gentle plan and supportive care. Schedule a visit today.",
+    "title": "Tooth Extraction Clearwater, FL | Gentle Extractions & Wisdom Teeth",
+    "description": "Tooth extraction in Clearwater, FL including wisdom teeth removal. Gentle care, sedation options, and clear guidance on healing and tooth replacement.",
     "h1": "Tooth Extraction Service at Clearwater, FL",
     "heroImage": {
       "src": "/assets/images/clearwater-dentist-clearwater-fl-dr-nadia-pokrovskaya-2-bf9c12bd-9570a1b8-1920w.jpg",
@@ -8155,8 +8568,8 @@
     "route": "/Ultra-skin-resurfacing",
     "slug": "ultra-skin-resurfacing",
     "type": "service",
-    "title": "LaseMD Ultra Laser Treatment in Clearwater, FL | Clearwater Dentist",
-    "description": "At Clearwater Dentist, we use LaseMD Ultra for non-surgical skin rejuvenation, targeting wrinkles, uneven skin tone, sun damage, and early signs of aging. Book now!",
+    "title": "LaseMD Ultra Clearwater, FL | Laser Skin Resurfacing Treatment",
+    "description": "LaseMD Ultra laser skin resurfacing in Clearwater, FL. Improve tone, texture, and clarity with advanced laser esthetic treatment at Clearwater Dentist.",
     "h1": "LaseMD Ultra Laser Treatment",
     "heroImage": {
       "src": "/assets/images/screenshot-2025-12-05-at-2-33-21-pm-1920w.png",
@@ -8547,8 +8960,8 @@
     "route": "/XERF-skin-tightening",
     "slug": "xerf-skin-tightening",
     "type": "service",
-    "title": "XERF Skin Tightening in Clearwater, FL | Clearwater Dentist",
-    "description": "Our dentist uses XERF to lift and firm your skin. This non-surgical treatment reduces wrinkles and refreshes your face. Book your appointment for XERF treatment!",
+    "title": "XERF Skin Tightening Clearwater, FL | Non-Surgical Facial Renewal",
+    "description": "XERF skin tightening in Clearwater, FL at Clearwater Dentist. Non-surgical treatment to firm skin, soften wrinkles, and refresh your appearance with little downtime. Book a consultation.",
     "h1": "XERF Skin Tightening at Clearwater Dentist",
     "heroImage": {
       "src": "/assets/images/screenshot-2025-12-05-at-12-40-33-pm-1920w.png",
