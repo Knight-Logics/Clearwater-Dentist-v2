@@ -1102,6 +1102,28 @@ body.page-home {
   background: var(--cw-logo-blue-deep);
 }
 
+.home-hero-media__poster,
+.home-hero-media__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+@media (max-width: 768px) {
+  .home-hero-media__video {
+    display: none !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .home-hero-media__poster {
+    display: none;
+  }
+}
+
 .home-hero-media::after {
   background: linear-gradient(
     90deg,

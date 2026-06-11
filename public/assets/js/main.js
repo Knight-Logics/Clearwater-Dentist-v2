@@ -67,6 +67,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
   initHomeHeroParallax();
 
+  function shouldSkipHeavyMedia() {
+    const mobile = window.matchMedia('(max-width: 768px)').matches;
+    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    const saveData = connection && connection.saveData;
+    const slowLink = connection && /(?:^|-)2g$/.test(connection.effectiveType || '');
+    return mobile || saveData || slowLink;
+  }
+
+  function ensureLazyVideoPoster(video) {
+    if (!video || video.getAttribute('poster')) return;
+    const poster = video.getAttribute('data-cw-lazy-poster');
+    if (poster) video.setAttribute('poster', poster);
+  }
+
   function ensureLazyVideoSource(video) {
     if (!video || video.dataset.cwVideoLoaded === '1') return;
     const src = video.getAttribute('data-cw-lazy-src');
@@ -83,9 +97,41 @@ document.addEventListener('DOMContentLoaded', function () {
     video.dataset.cwVideoLoaded = '0';
   }
 
+  function initLazyParallaxBackgrounds() {
+    const mobileQuery = window.matchMedia('(max-width: 768px)');
+
+    function bgUrl(el) {
+      return mobileQuery.matches ? el.getAttribute('data-bg-mobile') : el.getAttribute('data-bg-desktop');
+    }
+
+    function applyBg(el) {
+      const url = bgUrl(el);
+      if (!url) return;
+      el.style.backgroundImage = 'url("' + url.replace(/"/g, '%22') + '")';
+      el.dataset.cwBgLoaded = '1';
+    }
+
+    document.querySelectorAll('[data-cw-lazy-bg]').forEach(function (el) {
+      const section = el.closest('section');
+      if (!section || typeof IntersectionObserver === 'undefined') {
+        applyBg(el);
+        return;
+      }
+
+      const observer = new IntersectionObserver(function (entries) {
+        if (!entries.some(function (entry) { return entry.isIntersecting; })) return;
+        applyBg(el);
+        observer.disconnect();
+      }, { rootMargin: '140px' });
+      observer.observe(section);
+    });
+  }
+
+  initLazyParallaxBackgrounds();
+
   function initDeferredHeroVideo() {
     const video = document.querySelector('.home-hero-media video[data-cw-hero-video]');
-    if (!video) return;
+    if (!video || shouldSkipHeavyMedia()) return;
 
     function loadHeroVideo() {
       ensureLazyVideoSource(video);
@@ -599,8 +645,11 @@ document.addEventListener('DOMContentLoaded', function () {
         const video = slide.querySelector('video');
         if (video) {
           if (inFrame && carouselVisible && !motionQuery.matches) {
-            ensureLazyVideoSource(video);
-            video.play().catch(function () {});
+            ensureLazyVideoPoster(video);
+            if (!mq.matches) {
+              ensureLazyVideoSource(video);
+              video.play().catch(function () {});
+            }
           } else {
             video.pause();
             video.muted = true;

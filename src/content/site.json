@@ -395,7 +395,9 @@
     "heroPoster": "/assets/images/6qrr3vuprfkb7oix65k8-elmjyubzqwcgczf8kujh-2024-clearwater-dentist-intro-video-desktop-v-v2-0.webp",
     "heroVideo": "/assets/video/6qrr3vuprfkb7oix65k8-elmjyubzqwcgczf8kujh-2024-clearwater-dentist-intro-video-desktop-v-v.mp4",
     "whyBandParallax": "/assets/images/clearwater-dentist-clearwater-fl-front-staff-parallax-1280w.webp",
-    "beforeAfterParallax": "/assets/images/before-after-parallax-1280w.webp"
+    "whyBandParallaxMobile": "/assets/images/clearwater-dentist-clearwater-fl-front-staff-parallax-768w.webp",
+    "beforeAfterParallax": "/assets/images/before-after-parallax-1280w.webp",
+    "beforeAfterParallaxMobile": "/assets/images/before-after-parallax-768w.webp"
   },
   "chat": {
     "enabled": true,
