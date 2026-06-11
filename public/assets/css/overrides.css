@@ -23,6 +23,8 @@
   --teal-dark: #2f4f5c;
   --coral: #c76355;
   --gold: #c07a2e;
+  --gold-bright: #f0c070;
+  --gold-star: #9a6510;
   --cw-glass-band-bg: rgba(251, 252, 251, 0.9);
   --cw-glass-band-blur: blur(10px);
   --cw-glass-band-border-top: 1px solid rgba(213, 224, 230, 0.65);
@@ -419,22 +421,12 @@ body.page-home {
 
 .page-home .cw-why-band__doctor-copy .eyebrow {
   margin-bottom: 0.55rem;
-  color: var(--gold);
+  color: var(--gold-bright);
   text-align: left;
-  paint-order: stroke fill;
-  -webkit-text-stroke: 1.75px rgba(0, 0, 0, 0.96);
-  text-shadow:
-    0 0 2px rgba(0, 0, 0, 1),
-    0 0 6px rgba(0, 0, 0, 0.95),
-    0 2px 12px rgba(0, 0, 0, 0.9),
-    1px 2px 0 rgba(0, 0, 0, 0.94),
-    -1px -1px 0 rgba(0, 0, 0, 0.88),
-    0 0 1px rgba(255, 255, 255, 0.78),
-    0 1px 2px rgba(255, 255, 255, 0.42),
-    0 0 14px rgba(255, 255, 255, 0.2);
-  filter:
-    drop-shadow(0 0 1px rgba(255, 255, 255, 0.6))
-    drop-shadow(0 2px 8px rgba(0, 0, 0, 0.88));
+  paint-order: normal;
+  -webkit-text-stroke: 0 transparent;
+  text-shadow: none;
+  filter: none;
 }
 
 .page-home .cw-why-band__doctor-copy h3 {
@@ -504,7 +496,7 @@ body.page-home {
   width: 100%;
   max-width: min(100%, 52rem);
   margin: 0.55rem 0 0;
-  color: var(--gold);
+  color: var(--gold-bright);
   font-size: clamp(0.92rem, 0.4vw + 0.8rem, 1.12rem);
   line-height: 1.42;
   font-weight: 900;
@@ -903,7 +895,7 @@ body.page-home {
 }
 
 .cw-gallery-cta .eyebrow {
-  color: var(--gold);
+  color: var(--gold-bright);
 }
 
 .cw-gallery-cta p {
@@ -912,7 +904,7 @@ body.page-home {
 }
 
 .cw-gallery-cta p a {
-  color: var(--gold);
+  color: var(--gold-bright);
   font-weight: 700;
 }
 
@@ -2029,9 +2021,9 @@ body.page-home {
   pointer-events: none;
   background: linear-gradient(
     180deg,
-    rgba(0, 0, 0, 0.22) 0%,
-    rgba(0, 0, 0, 0.4) 55%,
-    rgba(0, 0, 0, 0.58) 100%
+    rgba(15, 63, 85, 0.16) 0%,
+    rgba(15, 63, 85, 0.58) 52%,
+    rgba(15, 63, 85, 0.92) 100%
   );
   transition: background 0.3s ease;
 }
@@ -2389,13 +2381,17 @@ body.page-home {
 .cw-video-carousel__caption {
   padding: 0.85rem 0.35rem 0;
   text-align: center;
-  opacity: 0.55;
+  opacity: 1;
   transition: opacity 0.35s ease, transform 0.35s ease;
   transform: translateY(6px);
 }
 
+.cw-video-carousel__slide:not(.is-in-frame) .cw-video-carousel__caption strong,
+.cw-video-carousel__slide:not(.is-in-frame) .cw-video-carousel__caption p {
+  color: #5a6e74;
+}
+
 .cw-video-carousel__slide.is-in-frame .cw-video-carousel__caption {
-  opacity: 1;
   transform: translateY(0);
 }
 
@@ -2501,7 +2497,8 @@ body.page-home {
 }
 
 .cw-carousel-tab.is-active .cw-carousel-tab__dot {
-  background: #c07a2e;
+  background: var(--cw-logo-navy);
+  box-shadow: inset 0 0 0 2px var(--gold-bright);
   transform: scale(1.35);
 }
 
@@ -2726,14 +2723,14 @@ body.cw-modal-open {
   justify-content: center;
   gap: 8px;
   margin-top: 2px;
-  color: #4a5c66;
+  color: #3a5258;
   font-weight: 600;
-  font-size: 0.82rem;
+  font-size: max(0.82rem, 12px);
 }
 
 .cw-google-trust .review-stars,
 .cw-google-trust .review-card-stars {
-  color: #f5a623;
+  color: var(--gold-star);
   letter-spacing: 0.12em;
 }
 
@@ -2778,7 +2775,10 @@ body.cw-modal-open {
 }
 
 .cw-google-trust .review-carousel-btn:disabled {
-  opacity: 0.36;
+  opacity: 1;
+  color: #6b8088;
+  background: #eef3f6;
+  border-color: rgba(15, 63, 85, 0.12);
   cursor: not-allowed;
 }
 
@@ -2974,7 +2974,7 @@ body.cw-modal-open {
 }
 
 .cw-google-trust .map-place-badge__stars {
-  color: #f5a623;
+  color: var(--gold-star);
   letter-spacing: 0.08em;
 }
 
@@ -3231,10 +3231,6 @@ body.cw-modal-open {
     width: min(1180px, calc(100% - 32px));
     max-width: none;
     padding: clamp(4.5rem, 12vw, 6rem) 0 clamp(2.5rem, 6vw, 3.5rem);
-  }
-
-  .home-hero-copy .eyebrow {
-    color: var(--gold);
   }
 
   .home-hero-copy .lede {
@@ -4122,9 +4118,10 @@ body.nav-open {
   }
 }
 
-/* Accessibility (Jun 2026): keep brand gold; fix only secondary UI text */
+/* Accessibility (Jun 2026): bright gold on navy, warm star glyphs on white */
 
-/* Light sections: gold label on navy chip (on-brand, passes large/bold contrast) */
+.page-home .home-hero-copy .eyebrow,
+.page-hero--gallery .page-hero-copy .eyebrow,
 .home-lead-panel .eyebrow,
 .section-head .eyebrow,
 .cw-faq-band .eyebrow,
@@ -4139,7 +4136,17 @@ body.nav-open {
   padding: 0.22em 0.8em;
   border-radius: 5px;
   background: var(--cw-logo-navy);
-  color: var(--gold);
+  color: var(--gold-bright);
+  -webkit-text-stroke: 0 transparent;
+  text-shadow: none;
+}
+
+.page-hero--gallery .page-hero-copy .eyebrow {
+  text-align: left;
+}
+
+.cta-band .eyebrow {
+  color: var(--gold-bright);
   -webkit-text-stroke: 0 transparent;
   text-shadow: none;
 }
@@ -4163,7 +4170,8 @@ body.nav-open {
 }
 
 .cw-carousel-tab.is-active .cw-carousel-tab__dot {
-  background: var(--gold);
+  background: var(--cw-logo-navy);
+  box-shadow: inset 0 0 0 2px var(--gold-bright);
 }
 
 .page-home .cw-why-band__check-copy > span {
@@ -4185,6 +4193,13 @@ body.nav-open {
 .cw-service-card__peek {
   color: #fff;
   font-size: max(0.8rem, 12px);
+  background: rgba(15, 63, 85, 0.78);
+  padding: 0.35rem 0.45rem;
+  border-radius: 6px;
+}
+
+.cw-google-trust .review-carousel-dot.active {
+  background: var(--cw-logo-navy);
 }
 
 .mini-actions a {
