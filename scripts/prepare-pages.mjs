@@ -19,16 +19,32 @@ async function copyDir(src, dest) {
   }
 }
 
+const ROOT_PATH_ATTRS = [
+  'href',
+  'src',
+  'poster',
+  'action',
+  'data-cw-lazy-src',
+  'data-cw-lazy-src-mobile',
+  'data-cw-lazy-poster',
+  'data-cw-video-src',
+  'data-bg-desktop',
+  'data-bg-mobile'
+];
+
+function prefixRootAttribute(match, attr, quote, value) {
+  if (value.startsWith(BASE_SEGMENT)) return `${attr}=${quote}/${value}${quote}`;
+  return `${attr}=${quote}${BASE_PATH}/${value}${quote}`;
+}
+
 function prefixRootPaths(text) {
   if (!BASE_PATH || BASE_PATH === '/') return text;
 
   let out = text;
+  const attrPattern = ROOT_PATH_ATTRS.join('|');
   out = out.replace(
-    /\b(href|src|poster|action)=["']\/(?!\/|https?:|#|mailto:|tel:)([^"']*)["']/gi,
-    (_match, attr, value) => {
-      if (value.startsWith(BASE_SEGMENT)) return `${attr}="/${value}"`;
-      return `${attr}="${BASE_PATH}/${value}"`;
-    }
+    new RegExp(`\\b(${attrPattern})=(["'])\\/(?!\\/|https?:|#|mailto:|tel:)([^"']*)\\2`, 'gi'),
+    prefixRootAttribute
   );
   out = out.replace(
     /\b(srcset)=["']([^"']+)["']/gi,

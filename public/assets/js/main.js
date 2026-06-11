@@ -67,9 +67,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
   initHomeHeroParallax();
 
+  function resolveSitePath(path) {
+    if (!path || /^https?:\/\//i.test(path) || path.startsWith('data:')) return path;
+    if (!path.startsWith('/')) return path;
+
+    const base = document.querySelector('base[data-github-pages-base]');
+    if (!base) return path;
+
+    const basePath = (base.getAttribute('href') || '/').replace(/\/$/, '');
+    if (!basePath || basePath === '/') return path;
+    if (path === basePath || path.startsWith(basePath + '/')) return path;
+
+    return basePath + path;
+  }
+
   function pickLazyVideoSrc(video) {
-    const mobileSrc = video.getAttribute('data-cw-lazy-src-mobile');
-    const desktopSrc = video.getAttribute('data-cw-lazy-src');
+    const mobileSrc = resolveSitePath(video.getAttribute('data-cw-lazy-src-mobile'));
+    const desktopSrc = resolveSitePath(video.getAttribute('data-cw-lazy-src'));
     if (video.hasAttribute('data-cw-hero-video') && mobileSrc && window.matchMedia('(max-width: 768px)').matches) {
       return mobileSrc;
     }
@@ -78,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function ensureLazyVideoPoster(video) {
     if (!video || video.getAttribute('poster')) return;
-    const poster = video.getAttribute('data-cw-lazy-poster');
+    const poster = resolveSitePath(video.getAttribute('data-cw-lazy-poster'));
     if (poster) video.setAttribute('poster', poster);
   }
 
@@ -102,7 +116,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const mobileQuery = window.matchMedia('(max-width: 768px)');
 
     function bgUrl(el) {
-      return mobileQuery.matches ? el.getAttribute('data-bg-mobile') : el.getAttribute('data-bg-desktop');
+      const url = mobileQuery.matches ? el.getAttribute('data-bg-mobile') : el.getAttribute('data-bg-desktop');
+      return resolveSitePath(url);
     }
 
     function applyBg(el) {
@@ -583,7 +598,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (!video || !src) return;
       lastFocus = opener || document.activeElement;
       if (titleEl) titleEl.textContent = title || '';
-      video.src = src;
+      video.src = resolveSitePath(src);
       video.muted = false;
       video.currentTime = 0;
       modal.classList.add('is-open');
