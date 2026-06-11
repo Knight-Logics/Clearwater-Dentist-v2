@@ -4,11 +4,24 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "apply:launch-seo": "node scripts/apply-launch-seo.mjs",
     "build": "node scripts/build.mjs",
+    "build:production": "node scripts/apply-launch-seo.mjs && node scripts/build.mjs",
     "serve": "node scripts/serve.mjs --port 4178",
+    "sync:google": "node scripts/google/sync-live.mjs",
+    "sync:google:reauth": "node scripts/google/sync-live.mjs --reauth-gsc",
+    "discover:gbp": "node scripts/google/discover-gbp.mjs",
+    "scrape:demo": "node scripts/scrape-demo-data.mjs",
     "verify": "node scripts/verify-static.mjs",
+    "verify:launch-seo": "node scripts/verify-launch-seo.mjs",
+    "audit:images": "node scripts/audit-images.mjs",
+    "convert:webp": "node scripts/convert-to-webp.mjs",
     "qa:screenshots": "node scripts/qa-screenshots.mjs"
   },
-  "dependencies": {},
-  "devDependencies": {}
+  "dependencies": {
+    "googleapis": "^144.0.0"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.0"
+  }
 }

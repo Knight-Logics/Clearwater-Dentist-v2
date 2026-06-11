@@ -79,6 +79,10 @@
     {
       "href": "/contact-us",
       "label": "Contact Us"
+    },
+    {
+      "href": "/llms.txt",
+      "label": "LLMs Index"
     }
   ],
   "serviceNavGroups": [
@@ -86,52 +90,118 @@
       "label": "General & Restorative",
       "href": "/general-dentistry",
       "children": [
-        { "href": "/general-dentistry", "label": "General Dentistry" },
-        { "href": "/emergency-dentistry-clearwater-fl", "label": "Emergency Dentistry" },
-        { "href": "/gum-disease-treatment", "label": "Gum Disease Treatment" },
-        { "href": "/root-canal-clearwater-fl", "label": "Root Canal" },
-        { "href": "/crowns-and-bridges", "label": "Crowns & Bridges" },
-        { "href": "/oral-cancer-screening", "label": "Oral Cancer Screening" }
+        {
+          "href": "/general-dentistry",
+          "label": "General Dentistry"
+        },
+        {
+          "href": "/emergency-dentistry-clearwater-fl",
+          "label": "Emergency Dentistry"
+        },
+        {
+          "href": "/gum-disease-treatment",
+          "label": "Gum Disease Treatment"
+        },
+        {
+          "href": "/root-canal-clearwater-fl",
+          "label": "Root Canal"
+        },
+        {
+          "href": "/crowns-and-bridges",
+          "label": "Crowns & Bridges"
+        },
+        {
+          "href": "/oral-cancer-screening",
+          "label": "Oral Cancer Screening"
+        }
       ]
     },
     {
       "label": "Implants & Surgery",
       "href": "/dental-implants-clearwater-fl",
       "children": [
-        { "href": "/dental-implants-clearwater-fl", "label": "Dental Implants" },
-        { "href": "/implant-supported-dentures-clearwater-fl", "label": "Implant-Supported Dentures" },
-        { "href": "/bone-grafting", "label": "Bone Grafting" },
-        { "href": "/tooth-extraction-clearwater-fl", "label": "Tooth Extraction" }
+        {
+          "href": "/dental-implants-clearwater-fl",
+          "label": "Dental Implants"
+        },
+        {
+          "href": "/implant-supported-dentures-clearwater-fl",
+          "label": "Implant-Supported Dentures"
+        },
+        {
+          "href": "/bone-grafting",
+          "label": "Bone Grafting"
+        },
+        {
+          "href": "/tooth-extraction-clearwater-fl",
+          "label": "Tooth Extraction"
+        }
       ]
     },
     {
       "label": "Cosmetic Dentistry",
       "href": "/cosmetic-dentistry",
       "children": [
-        { "href": "/cosmetic-dentistry", "label": "Cosmetic Dentistry" },
-        { "href": "/smile-makeover", "label": "Smile Makeover" },
-        { "href": "/porcelain-veneers-clearwater-fl", "label": "Porcelain Veneers" },
-        { "href": "/Invisalign-service-clearwater-fl", "label": "Invisalign" },
-        { "href": "/teeth-whitening-clearwater-fl", "label": "Teeth Whitening" }
+        {
+          "href": "/cosmetic-dentistry",
+          "label": "Cosmetic Dentistry"
+        },
+        {
+          "href": "/smile-makeover",
+          "label": "Smile Makeover"
+        },
+        {
+          "href": "/porcelain-veneers-clearwater-fl",
+          "label": "Porcelain Veneers"
+        },
+        {
+          "href": "/Invisalign-service-clearwater-fl",
+          "label": "Invisalign"
+        },
+        {
+          "href": "/teeth-whitening-clearwater-fl",
+          "label": "Teeth Whitening"
+        }
       ]
     },
     {
       "label": "Comfort & Advanced",
       "href": "/sedation-dentistry-clearwater-fl",
       "children": [
-        { "href": "/sedation-dentistry-clearwater-fl", "label": "Sedation Dentistry" },
-        { "href": "/laser-dentistry", "label": "Laser Dentistry" },
-        { "href": "/tmj-treatment-clearwater-fl", "label": "TMJ Treatment" },
-        { "href": "/solea-sleep", "label": "Solea Sleep" }
+        {
+          "href": "/sedation-dentistry-clearwater-fl",
+          "label": "Sedation Dentistry"
+        },
+        {
+          "href": "/laser-dentistry",
+          "label": "Laser Dentistry"
+        },
+        {
+          "href": "/tmj-treatment-clearwater-fl",
+          "label": "TMJ Treatment"
+        },
+        {
+          "href": "/solea-sleep",
+          "label": "Solea Sleep"
+        }
       ]
     },
     {
       "label": "Facial Esthetics",
       "href": "/facial-esthetics",
       "children": [
-        { "href": "/facial-esthetics", "label": "Facial Esthetics" },
-        { "href": "/XERF-skin-tightening", "label": "XERF Skin Tightening" },
-        { "href": "/Ultra-skin-resurfacing", "label": "LaseMD Ultra" }
+        {
+          "href": "/facial-esthetics",
+          "label": "Facial Esthetics"
+        },
+        {
+          "href": "/XERF-skin-tightening",
+          "label": "XERF Skin Tightening"
+        },
+        {
+          "href": "/Ultra-skin-resurfacing",
+          "label": "LaseMD Ultra"
+        }
       ]
     }
   ],
@@ -319,13 +389,13 @@
   "assets": {
     "logo": "/assets/icons/clearwater-dentist-logo-466372.svg",
     "logoWhite": "/assets/icons/clearwater-dentist-white.svg",
-    "office": "/assets/images/clearwater-dentist-clearwater-fl-front-of-dental-office-1920w.jpg",
-    "doctor": "/assets/images/clearwater-dentist-clearwater-fl-dr-nadia-pokrovskaya-2-739bdcb2-1920w.jpg",
-    "doctorCutout": "/assets/images/dr-nadia-pokrovskaya-cutout.png",
-    "heroPoster": "/assets/images/6qrr3vuprfkb7oix65k8-elmjyubzqwcgczf8kujh-2024-clearwater-dentist-intro-video-desktop-v-v2-0.jpg",
+    "office": "/assets/images/clearwater-dentist-clearwater-fl-front-of-dental-office-1920w.webp",
+    "doctor": "/assets/images/clearwater-dentist-clearwater-fl-dr-nadia-pokrovskaya-2-739bdcb2-1920w.webp",
+    "doctorCutout": "/assets/images/dr-nadia-pokrovskaya-cutout.webp",
+    "heroPoster": "/assets/images/6qrr3vuprfkb7oix65k8-elmjyubzqwcgczf8kujh-2024-clearwater-dentist-intro-video-desktop-v-v2-0.webp",
     "heroVideo": "/assets/video/6qrr3vuprfkb7oix65k8-elmjyubzqwcgczf8kujh-2024-clearwater-dentist-intro-video-desktop-v-v.mp4",
-    "whyBandParallax": "/assets/images/clearwater-dentist-clearwater-fl-front-staff-parallax.jpg",
-    "beforeAfterParallax": "/assets/images/before-after-parallax.jpg"
+    "whyBandParallax": "/assets/images/clearwater-dentist-clearwater-fl-front-staff-parallax.webp",
+    "beforeAfterParallax": "/assets/images/before-after-parallax.webp"
   },
   "chat": {
     "enabled": true,
@@ -336,5 +406,5 @@
     "placeholderNote": "Knight Logics Tidio workspace until Clearwater Dentist is ready. Replace tidioPublicKey with their key, set placeholder to false, and route notifications to productionNotificationEmail in Tidio.",
     "welcomeMessage": "Hi! How can we help you today?"
   },
-  "pageCount": 77
+  "pageCount": 82
 }
