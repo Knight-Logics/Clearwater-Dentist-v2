@@ -65,7 +65,7 @@
   max-width: 100%;
   margin: 0 0 0.7rem;
   color: var(--gold);
-  font-size: clamp(0.9rem, 0.68rem + 0.45vw, 1.32rem);
+  font-size: clamp(1rem, 0.74rem + 0.52vw, 1.48rem);
   font-weight: 900;
   line-height: 1.35;
   letter-spacing: clamp(0.06em, 0.04em + 0.12vw, 0.1em);
@@ -421,12 +421,9 @@ body.page-home {
 
 .page-home .cw-why-band__doctor-copy .eyebrow {
   margin-bottom: 0.55rem;
-  color: var(--gold-bright);
+  color: var(--gold);
   text-align: left;
-  paint-order: normal;
-  -webkit-text-stroke: 0 transparent;
-  text-shadow: none;
-  filter: none;
+  font-size: clamp(1.02rem, 0.5vw + 0.88rem, 1.34rem);
 }
 
 .page-home .cw-why-band__doctor-copy h3 {
@@ -496,8 +493,8 @@ body.page-home {
   width: 100%;
   max-width: min(100%, 52rem);
   margin: 0.55rem 0 0;
-  color: var(--gold-bright);
-  font-size: clamp(1rem, 0.45vw + 0.88rem, 1.22rem);
+  color: var(--gold);
+  font-size: clamp(1.05rem, 0.5vw + 0.92rem, 1.3rem);
   line-height: 1.42;
   font-weight: 900;
   letter-spacing: 0.03em;
@@ -518,7 +515,7 @@ body.page-home {
   max-width: min(100%, 52rem);
   margin: 0.65rem 0 0;
   color: rgba(255, 255, 255, 0.94);
-  font-size: clamp(0.88rem, 0.28vw + 0.8rem, 1rem);
+  font-size: clamp(0.96rem, 0.34vw + 0.86rem, 1.08rem);
   line-height: 1.55;
   font-weight: 500;
   -webkit-text-stroke-width: 2px;
