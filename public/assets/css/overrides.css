@@ -419,11 +419,13 @@ body.page-home {
   margin-bottom: 0;
 }
 
+.page-home .cw-why-band__doctor-copy .eyebrow,
+.page-home .cw-why-band__lede.eyebrow {
+  text-align: left;
+}
+
 .page-home .cw-why-band__doctor-copy .eyebrow {
   margin-bottom: 0.55rem;
-  color: var(--gold);
-  text-align: left;
-  font-size: clamp(1.02rem, 0.5vw + 0.88rem, 1.34rem);
 }
 
 .page-home .cw-why-band__doctor-copy h3 {
@@ -434,7 +436,7 @@ body.page-home {
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55);
 }
 
-.page-home .cw-why-band__doctor-copy p {
+.page-home .cw-why-band__doctor-copy p:not(.eyebrow) {
   margin: 0 0 0.6rem;
   color: rgba(255, 255, 255, 0.9);
   font-size: clamp(0.88rem, 0.22vw + 0.8rem, 1.02rem);
@@ -488,25 +490,12 @@ body.page-home {
   -webkit-text-stroke-width: clamp(2.5px, 0.2vw + 1.8px, 3.5px);
 }
 
-.page-home .cw-why-band__lede {
-  display: block;
-  width: 100%;
-  max-width: min(100%, 52rem);
+.page-home .cw-why-band__lede.eyebrow {
   margin: 0.55rem 0 0;
-  color: var(--gold);
-  font-size: clamp(1.05rem, 0.5vw + 0.92rem, 1.3rem);
+  max-width: min(100%, 52rem);
+  text-transform: none;
+  letter-spacing: 0.02em;
   line-height: 1.42;
-  font-weight: 900;
-  letter-spacing: 0.03em;
-  paint-order: stroke fill;
-  -webkit-text-stroke: 2.25px rgba(0, 0, 0, 0.98);
-  text-shadow:
-    0 0 2px rgba(0, 0, 0, 1),
-    0 0 6px rgba(0, 0, 0, 0.96),
-    0 2px 14px rgba(0, 0, 0, 0.92),
-    0 4px 22px rgba(0, 0, 0, 0.82),
-    2px 3px 0 rgba(0, 0, 0, 0.94),
-    -1px -1px 0 rgba(0, 0, 0, 0.9);
 }
 
 .page-home .cw-why-band__intro {
