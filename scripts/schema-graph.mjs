@@ -1,3 +1,5 @@
+import { collectPageFaqItems } from './faq-accordion.mjs';
+
 const SITE_GEO = {
   latitude: 27.9835027,
   longitude: -82.7099534
@@ -196,28 +198,8 @@ function areaServedNodes(site) {
   }));
 }
 
-function parseFaqItem(text) {
-  const clean = stripHtml(text);
-  const match = clean.match(/^(.+?\?)\s+([\s\S]+)$/);
-  if (!match) return null;
-  const question = match[1].trim();
-  const answer = match[2].trim();
-  if (question.length < 8 || answer.length < 12) return null;
-  return { question, answer };
-}
-
 function extractFaqs(page) {
-  const seen = new Set();
-  const faqs = [];
-  for (const section of page.sections || []) {
-    for (const item of section.items || []) {
-      const parsed = parseFaqItem(item);
-      if (!parsed || seen.has(parsed.question)) continue;
-      seen.add(parsed.question);
-      faqs.push(parsed);
-    }
-  }
-  return faqs;
+  return collectPageFaqItems(page);
 }
 
 function isArticleStyleService(page) {

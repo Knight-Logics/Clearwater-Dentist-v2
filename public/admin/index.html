@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Clearwater Dentist Growth Control Center</title>
+  <link rel="icon" href="/assets/images/clearwater-dentist-clearwater-fl-favicon.jpg">
+  <link rel="stylesheet" href="/assets/css/admin-dashboard.css">
+  <script src="/assets/js/admin-tab-guides.js" defer></script>
+  <script src="/assets/js/admin-referral-outreach.js" defer></script>
+  <script src="/assets/js/admin-email-agent.js" defer></script>
+  <script src="/assets/js/admin-visual-editor.js" defer></script>
+  <script src="/assets/js/admin-dashboard.js" defer></script>
+</head>
+<body class="admin-body is-locked">
+  <a class="skip-link" href="#admin-password">Skip to password field</a>
+
+  <section class="admin-login" id="admin-login" aria-labelledby="admin-login-title">
+    <form class="login-panel" id="admin-login-form" autocomplete="off">
+      <img class="login-logo" src="/assets/icons/clearwater-dentist-logo-466372.svg" alt="Clearwater Dentist" width="72" height="72">
+      <p class="eyebrow">Private team dashboard</p>
+      <h1 id="admin-login-title">Clearwater Dentist Growth Control Center</h1>
+      <p class="login-subtitle">Staff portal for clearwaterdentist.com — reports, website updates, CRM, and marketing.</p>
+      <label class="field-label" for="admin-password">Password</label>
+      <div class="password-row">
+        <input id="admin-password" name="password" type="password" required autocomplete="current-password" inputmode="text">
+        <button class="button button-primary" type="submit">Unlock</button>
+      </div>
+      <p class="login-message" id="admin-login-message" role="alert"></p>
+      <p class="guardrail-note">Demo mode only. No patient records, diagnosis details, treatment notes, payments, call recordings, or PHI are stored here.</p>
+    </form>
+  </section>
+
+  <div class="admin-app" id="admin-app" hidden aria-hidden="true">
+    <aside class="admin-sidebar" aria-label="Admin navigation">
+      <a class="admin-brand" href="/" aria-label="Open Clearwater Dentist website">
+        <img src="/assets/icons/clearwater-dentist-logo-466372.svg" alt="" width="46" height="46">
+        <span><strong>Clearwater Dentist</strong><small>clearwaterdentist.com</small></span>
+      </a>
+      <nav class="admin-nav" id="admin-nav"></nav>
+      <div class="sidebar-footer">
+        <span class="mode-pill">Planning mode</span>
+        <button class="text-button" type="button" id="logout-button">Log out</button>
+      </div>
+    </aside>
+
+    <div class="admin-workspace">
+      <header class="admin-topbar">
+        <button class="icon-button" id="nav-toggle" type="button" aria-label="Toggle admin menu" aria-expanded="false"><span></span><span></span><span></span></button>
+        <div>
+          <p class="eyebrow" id="view-kicker">Clearwater Dentist</p>
+          <h1 id="view-title">Reports</h1>
+        </div>
+        <div class="topbar-actions">
+          <a class="button button-secondary" href="https://search.google.com/search-console" target="_blank" rel="noopener noreferrer">Open GSC</a>
+          <a class="button button-secondary" href="https://business.google.com/locations" target="_blank" rel="noopener noreferrer">Open GBP</a>
+          <button class="button button-primary" type="button" id="export-button">Export</button>
+        </div>
+      </header>
+
+      <main id="admin-main" class="admin-main" tabindex="-1">
+        <div class="loading-panel">Loading dashboard...</div>
+      </main>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

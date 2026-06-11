@@ -597,7 +597,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function open(src, title, opener) {
       if (!video || !src) return;
       lastFocus = opener || document.activeElement;
-      if (titleEl) titleEl.textContent = title || '';
+      if (titleEl) titleEl.textContent = title || 'Video player';
       video.src = resolveSitePath(src);
       video.muted = false;
       video.currentTime = 0;

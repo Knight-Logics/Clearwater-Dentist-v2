@@ -3,13 +3,15 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { galleryPageSections, servicePageSections } from './clean-page-sections.mjs';
 import { generateLlmsFull, robotsTxtContent } from './llms-content.mjs';
+import { collectPageFaqItems, contentSections, faqAccordionHtml } from './faq-accordion.mjs';
+import { applyPageFaqs } from './merge-page-faqs.mjs';
 import { schemaScript } from './schema-graph.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DIST = path.join(ROOT, 'dist');
 const PUBLIC = path.join(ROOT, 'public');
 const site = JSON.parse(await fs.readFile(path.join(ROOT, 'src/content/site.json'), 'utf8'));
-const pages = JSON.parse(await fs.readFile(path.join(ROOT, 'src/content/pages.json'), 'utf8'));
+const pagesRaw = JSON.parse(await fs.readFile(path.join(ROOT, 'src/content/pages.json'), 'utf8'));
 const redirects = JSON.parse(await fs.readFile(path.join(ROOT, 'src/content/redirects.json'), 'utf8'));
 const googleReviews = JSON.parse(await fs.readFile(path.join(ROOT, 'src/content/google-reviews.json'), 'utf8'));
 const PREVIEW_NOINDEX = process.env.PREVIEW_NOINDEX === 'true';
@@ -29,7 +31,8 @@ function serviceAreaPages() {
   }));
 }
 
-const allPages = pages.concat(serviceAreaPages());
+const allPages = applyPageFaqs(pagesRaw.concat(serviceAreaPages()), site);
+const pages = pagesRaw;
 const REVIEW_AVATAR_COLORS = ['review-avatar--blue', 'review-avatar--red', 'review-avatar--green', 'review-avatar--orange', 'review-avatar--purple', 'review-avatar--teal'];
 
 const serviceImages = {
@@ -415,7 +418,17 @@ function heroPanelImages(page) {
     { src: site.assets.doctor, alt: site.doctor },
     { src: site.assets.heroPoster, alt: 'Clearwater Dentist patient visit' }
   ]);
-  return heroPanelSlots.map(([, index]) => pool[index % pool.length]);
+  const altCounts = new Map();
+  return heroPanelSlots.map(([, index]) => {
+    const image = pool[index % pool.length];
+    const alt = String(image.alt || 'Clearwater Dentist').trim();
+    const count = (altCounts.get(alt) || 0) + 1;
+    altCounts.set(alt, count);
+    if (count > 1) {
+      return { ...image, alt: alt.replace(/\.$/, '') + ' (view ' + count + ')' };
+    }
+    return image;
+  });
 }
 function heroPanels(page) {
   const images = heroPanelImages(page);
@@ -692,8 +705,15 @@ function inlineSectionHtml(section, page, ctx, isLast, sectionIndex) {
   const sid = 'section-' + sectionIndex;
   return '<section class="' + sectionClass + '"' + revealAttrs + '><h2' + cwEdit(page.route, sid + '-h2', heading || 'Section heading') + '>' + e(heading) + '</h2>' + leadMedia + bodyHtml + (section.items && section.items.length ? '<ul class="check-list">' + section.items.map(i => '<li>' + richText(i) + '</li>').join('') + '</ul>' : '') + sectionFigureHtml(section.figure) + '</section>';
 }
+function faqBandHelpers() {
+  return { e, attr, richText, cwEdit, cwRevealAttr };
+}
+function pageFaqBand(page) {
+  return faqAccordionHtml(page, collectPageFaqItems(page), faqBandHelpers());
+}
 function renderInlineSections(page) {
-  const sections = page.type === 'service' ? servicePageSections(page) : (page.sections || []);
+  const rawSections = page.type === 'service' ? servicePageSections(page) : (page.sections || []);
+  const sections = contentSections(page, rawSections);
   const images = contentImages(page);
   const ctx = {
     usedSrcs: new Set(),
@@ -775,7 +795,7 @@ function beforeAfterSection(limit) {
   return '<section class="before-after-band cw-before-after-band"><div class="cw-before-after-band__media" data-before-after-parallax data-cw-lazy-bg' + cwEdit('/', 'before-after-bg', 'Before & after background', 'background') + ' data-bg-desktop="' + attr(parallaxBg) + '" data-bg-mobile="' + attr(parallaxBgMobile) + '"></div><div class="cw-before-after-band__scrim" aria-hidden="true"></div><div class="cw-before-after-band__inner"><div class="section-head"><p class="eyebrow"' + cwEdit('/', 'before-after-eyebrow', 'Before & after eyebrow') + '>Before & After</p><h2' + cwEdit('/', 'before-after-headline', 'Before & after headline') + '>Drag to compare real smile transformations.</h2><p' + cwEdit('/', 'before-after-intro', 'Before & after intro') + '>These are real patients treated at our Clearwater office. Drag the slider on each image to compare results from implants, smile makeovers, and full-mouth restoration cases planned for natural function and appearance.</p><a href="/before-and-after">View full gallery</a></div><div class="compare-grid" data-cw-compare-grid>' + beforeAfterPairs.slice(0, limit || 3).map(compareCard).join('') + '</div></div></section>';
 }
 function homeLeadForm() {
-  return '<section id="homeLeadForm" class="home-lead-panel"><div class="home-lead-panel__enter"><div><p class="eyebrow">New Patients</p><h2>Request an appointment without leaving the page.</h2><p>Tell us how to reach you and what brought you in. Our team follows up during office hours with scheduling options, new-patient details, and answers to common first-visit questions.</p><div class="mini-actions"><a href="/contact-us">Contact page</a><a href="/financing">Financing options</a></div></div><form class="mini-form" action="/contact-us" method="get"><label>Name<input name="name" autocomplete="name" required></label><label>Phone<input name="phone" type="tel" autocomplete="tel" required></label><label>What do you need?<select name="reason"><option>New patient visit</option><option>Emergency appointment</option><option>Cosmetic consultation</option><option>Dental implants</option></select></label><button class="btn primary" type="submit">Start Request</button></form></div></section>';
+  return '<section id="homeLeadForm" class="home-lead-panel"><div class="home-lead-panel__enter"><div><p class="eyebrow">New Patients</p><h2>Request an appointment without leaving the page.</h2><p>Tell us how to reach you and what brought you in. Our team follows up during office hours with scheduling options, new-patient details, and answers to common first-visit questions.</p><div class="mini-actions"><a href="/contact-us">Contact page</a><a href="/financing">Financing options</a></div></div><form class="mini-form" action="/contact-us" method="get"><label for="home-lead-name">Name</label><input id="home-lead-name" name="name" autocomplete="name" required><label for="home-lead-phone">Phone</label><input id="home-lead-phone" name="phone" type="tel" autocomplete="tel" required><label for="home-lead-reason">What do you need?</label><select id="home-lead-reason" name="reason"><option>New patient visit</option><option>Emergency appointment</option><option>Cosmetic consultation</option><option>Dental implants</option></select><button class="btn primary" type="submit">Start Request</button></form></div></section>';
 }
 function serviceCardPeek(detail) {
   const text = String(detail || '').trim();
@@ -809,7 +829,7 @@ function carouselTabs() {
   return '<div class="cw-carousel-tabs" role="tablist" aria-label="Choose a video to watch">' + videoCarouselSlides.map((slide, idx) => '<button type="button" class="cw-carousel-tab' + (idx === 0 ? ' is-active' : '') + '" data-cw-tab="' + idx + '" role="tab" aria-selected="' + (idx === 0 ? 'true' : 'false') + '"><span class="cw-carousel-tab__dot" aria-hidden="true"></span><span class="cw-carousel-tab__label">' + e(slide.tab) + '</span></button>').join('') + '</div>';
 }
 function videoCarouselModal() {
-  return '<div class="cw-video-modal" id="cw-video-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Video player"><div class="cw-video-modal__backdrop" data-cw-modal-close></div><div class="cw-video-modal__dialog" role="document"><button type="button" class="cw-video-modal__close" data-cw-modal-close aria-label="Close video"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button><div class="cw-video-modal__frame"><video class="cw-video-modal__video" controls playsinline preload="auto"></video></div><h3 class="cw-video-modal__title"></h3></div></div>';
+  return '<div class="cw-video-modal" id="cw-video-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="cw-video-modal-title"><div class="cw-video-modal__backdrop" data-cw-modal-close></div><div class="cw-video-modal__dialog" role="document"><button type="button" class="cw-video-modal__close" data-cw-modal-close aria-label="Close video"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button><div class="cw-video-modal__frame"><video class="cw-video-modal__video" controls playsinline preload="auto"></video></div><h3 class="cw-video-modal__title" id="cw-video-modal-title">Video player</h3></div></div>';
 }
 function videoCarouselSection() {
   const slides = videoCarouselSlides.map(carouselSlide).join('');
@@ -887,7 +907,7 @@ function renderHome(page) {
     ? '<video autoplay muted loop playsinline preload="none"' + cwEdit(rk, 'hero-poster', 'Hero video poster', 'poster') + ' poster="' + attr(poster) + '" data-cw-hero-video data-cw-lazy-src="' + attr(video) + '" data-cw-lazy-src-mobile="' + attr(videoMobile) + '"></video>'
     : '<img' + cwEdit(rk, 'hero-poster-img', 'Hero image', 'img') + ' src="' + attr(poster) + '" alt="Clearwater Dentist office" width="1920" height="1080" loading="eager" decoding="async" fetchpriority="high">';
   const heroInner = '<section class="home-hero" data-home-hero-parallax><div class="home-hero-media">' + heroMedia + '</div><div class="home-hero-copy"><p class="eyebrow"' + cwEdit(rk, 'hero-eyebrow', 'Hero eyebrow') + '>Family & Cosmetic Dentistry in Clearwater, FL</p><h1 class="cw-hero-welcome cw-welcome-glimmer"' + cwEdit(rk, 'hero-h1', 'Hero headline') + '>' + e(page.h1 || 'Welcome to the Office of Dr. Nadia') + '</h1><p class="cw-hero-smile cw-smile-glimmer"' + cwEdit(rk, 'hero-subline', 'Hero subline') + '>You Deserve a Beautiful Smile</p><p class="lede"' + cwEdit(rk, 'hero-lede', 'Hero description') + '>Concierge dental care for patients who want calm visits, modern technology, and a smile they feel proud to show.</p><div class="hero-actions"><a class="btn primary"' + cwEdit(rk, 'hero-cta-book', 'Hero book button', 'button') + ' href="/contact-us">Request Appointment</a><a class="btn secondary"' + cwEdit(rk, 'hero-cta-call', 'Hero call button', 'button') + ' href="tel:' + attr(site.phoneTel) + '">Call ' + e(site.phoneDisplay) + '</a></div><div class="hero-pills"><a' + cwEdit(rk, 'hero-pill-0', 'Hero pill 1', 'button') + ' href="/emergency-dentistry-clearwater-fl">Same-day emergencies</a><a' + cwEdit(rk, 'hero-pill-1', 'Hero pill 2', 'button') + ' href="/anti-anxiety-dentist-office">Anti-anxiety care</a><a' + cwEdit(rk, 'hero-pill-2', 'Hero pill 3', 'button') + ' href="/financing">Flexible financing</a><a' + cwEdit(rk, 'hero-pill-3', 'Hero pill 4', 'button') + ' href="/before-and-after">Before & afters</a></div></div></section>';
-  return '<div class="home-hero-stage">' + heroInner + homeLeadForm() + '</div>' + servicesSection() + whySection() + googleTrustSection() + beforeAfterSection(3) + videoCarouselSection() + finalCta();
+  return '<div class="home-hero-stage">' + heroInner + homeLeadForm() + '</div>' + servicesSection() + whySection() + googleTrustSection() + beforeAfterSection(3) + videoCarouselSection() + finalCta() + pageFaqBand(page);
 }
 function pageKicker(page) {
   if (page.type === 'blogPost') return 'Dental Blog';
@@ -902,14 +922,15 @@ function blogServiceCtaBand(page) {
 }
 function renderGeneric(page) {
   const sidebar = page.type === 'policy' ? '' : relatedServices(page.route);
+  const sections = contentSections(page, page.sections || []);
   const articleBody = usesInlineMedia(page)
     ? renderInlineSections(page)
-    : (page.sections || []).map((section, index) => sectionHtml(section, page, index)).join('');
+    : sections.map((section, index) => sectionHtml(section, page, index)).join('');
   const tailMedia = usesInlineMedia(page) ? '' : mediaHtml(page);
   const tailGallery = usesInlineMedia(page) ? '' : galleryHtml((page.images || []).slice(1), 8);
   const serviceFooter = page.type === 'service' ? serviceHighlightsBand(page) + serviceCtaBand(page) : '';
   const blogFooter = page.type === 'blogPost' ? blogServiceCtaBand(page) : '';
-  return hero(page, pageKicker(page)) + '<div class="content-layout' + (page.type === 'policy' ? ' content-layout--policy' : '') + '"><article class="article-body">' + articleBody + blogFooter + policyLinksBlock(page.route) + tailMedia + tailGallery + '</article>' + sidebar + '</div>' + (page.route === '/general-dentistry' ? serviceDirectorySection() : '') + serviceFooter;
+  return hero(page, pageKicker(page)) + '<div class="content-layout' + (page.type === 'policy' ? ' content-layout--policy' : '') + '"><article class="article-body">' + articleBody + blogFooter + policyLinksBlock(page.route) + tailMedia + tailGallery + '</article>' + sidebar + '</div>' + (page.route === '/general-dentistry' ? serviceDirectorySection() : '') + serviceFooter + pageFaqBand(page);
 }
 function serviceAreaHighlights(area) {
   const links = [
@@ -927,7 +948,7 @@ function renderServiceArea(page) {
     ? '<section class="content-section"><h2>More service areas near Clearwater</h2><ul class="check-list">' + otherAreas.map(item => '<li><a href="/' + attr(item.slug) + '">Dentist in ' + e(item.label) + '</a></li>').join('') + '</ul></section>'
     : '';
   const body = '<section class="content-section"><h2>Serving ' + e(area.label) + ' from our Clearwater office</h2><p>' + e(area.intro) + '</p><p>Clearwater Dentist is located at ' + e(site.address.street) + ', ' + e(site.address.city) + ', ' + e(site.address.state) + ' ' + e(site.address.zip) + ' — a convenient drive for patients in ' + e(area.city) + ' and nearby communities.</p><p>Whether you need a routine checkup, cosmetic smile planning, dental implants, sedation-supported care, or same-day emergency treatment, Dr. Nadia Pokrovskaya and our team provide concierge-style dentistry with modern technology and a calm, patient-focused experience.</p></section>' + areaLinks;
-  return hero(page, 'Service Areas') + '<div class="content-layout"><article class="article-body">' + body + '</article>' + relatedServices('/general-dentistry') + '</div>' + serviceAreaHighlights(area) + serviceCtaBand(page);
+  return hero(page, 'Service Areas') + '<div class="content-layout"><article class="article-body">' + body + '</article>' + relatedServices('/general-dentistry') + '</div>' + serviceAreaHighlights(area) + serviceCtaBand(page) + pageFaqBand(page);
 }
 function renderBlogIndex(page) {
   const posts = allPages.filter(p => p.type === 'blogPost').map(post => '<article class="post-card"><a href="' + attr(post.route) + '">' + imageTag(post.heroImage || { src: site.assets.office, alt: post.h1 }, '', false) + '<span>Dental Blog</span><h2>' + e(post.h1) + '</h2><p>' + e(post.description || ((post.sections[0] && post.sections[0].body[0]) || 'Read more from Clearwater Dentist.')) + '</p></a></article>').join('');
@@ -935,7 +956,7 @@ function renderBlogIndex(page) {
 }
 function renderContact(page) {
   const addr = site.address || {};
-  return hero(page, 'Contact') + '<section class="contact-grid"><div class="contact-panel"><h2>Contact the office</h2><p><strong>Phone</strong><br><a href="tel:' + attr(site.phoneTel) + '">' + e(site.phoneDisplay) + '</a></p><p><strong>Email</strong><br><a href="mailto:' + attr(site.email) + '">' + e(site.email) + '</a></p><p><strong>Address</strong><br>' + e(addr.street) + '<br>' + e(addr.city) + ', ' + e(addr.state) + ' ' + e(addr.zip) + '</p><p class="fine-print">Payment and insurance questions? Read our <a href="/financial-policy">Financial Policy</a>.</p><a class="btn primary full" href="/contact-us">Request Appointment</a></div><form class="contact-form" action="#" method="post"><h2>Request an Appointment</h2><label>Name<input name="name" autocomplete="name" required></label><label>Phone<input name="phone" type="tel" autocomplete="tel" required></label><label>Email<input name="email" type="email" autocomplete="email"></label><label>How can we help?<textarea name="message" rows="5"></textarea></label><p class="fine-print">We do not accept State Insurances, HMOs, or Medicaid. Information you submit is handled according to our <a href="/privacy-policy">Privacy Policy</a> and <a href="/notice-of-privacy-practices">Notice of Privacy Practices</a>.</p><button class="btn primary" type="submit">Send Request</button></form></section>' + contactMapSection();
+  return hero(page, 'Contact') + '<section class="contact-grid"><div class="contact-panel"><h2>Contact the office</h2><p><strong>Phone</strong><br><a href="tel:' + attr(site.phoneTel) + '">' + e(site.phoneDisplay) + '</a></p><p><strong>Email</strong><br><a href="mailto:' + attr(site.email) + '">' + e(site.email) + '</a></p><p><strong>Address</strong><br>' + e(addr.street) + '<br>' + e(addr.city) + ', ' + e(addr.state) + ' ' + e(addr.zip) + '</p><p class="fine-print">Payment and insurance questions? Read our <a href="/financial-policy">Financial Policy</a>.</p><a class="btn primary full" href="/contact-us">Request Appointment</a></div><form class="contact-form" action="#" method="post"><h2>Request an Appointment</h2><label for="contact-name">Name</label><input id="contact-name" name="name" autocomplete="name" required><label for="contact-phone">Phone</label><input id="contact-phone" name="phone" type="tel" autocomplete="tel" required><label for="contact-email">Email</label><input id="contact-email" name="email" type="email" autocomplete="email"><label for="contact-message">How can we help?</label><textarea id="contact-message" name="message" rows="5"></textarea><p class="fine-print">We do not accept State Insurances, HMOs, or Medicaid. Information you submit is handled according to our <a href="/privacy-policy">Privacy Policy</a> and <a href="/notice-of-privacy-practices">Notice of Privacy Practices</a>.</p><button class="btn primary" type="submit">Send Request</button></form></section>' + contactMapSection();
 }
 function gallerySectionHtml(section, index) {
   const dir = GALLERY_REVEAL_DIRS[index % GALLERY_REVEAL_DIRS.length];

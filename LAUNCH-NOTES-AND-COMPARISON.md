@@ -50,6 +50,16 @@ Use this for client meetings, proposal follow-up, and post-cutover validation.
 | Rich Results Test (Jun 11) | https://search.google.com/test/rich-results/result?id=NhHTc9aFxE9QfgA4LqsuCA | Crawl **succeeded**. Valid: Local businesses, Organization, Review snippets. **Videos were invalid** on homepage (5 items) — fixed by using hero video only, required thumbnails, and `SCHEMA_ASSET_ORIGIN` on GitHub deploy so asset URLs resolve on preview. |
 | Schema implementation | `scripts/schema-graph.mjs` | Single `@graph` on all **82** public pages |
 
+### SERP / CTR snapshot (Jun 11, 2026)
+
+| Asset | Location |
+|-------|----------|
+| **Client brief (share with Dr. Nadia)** | `SERP-CTR-CLIENT-BRIEF.md` |
+| Raw Serper API data | `reports/serp-snapshot-2026-06-11.json` |
+| Re-run command | `npm run serp:snapshot` (requires `SERPER_API_KEY`) |
+
+Top-5 money URLs analyzed against live Google results: homepage, emergency, XERF, TMJ, toothache article. Meta descriptions trimmed Jun 11 after pixel-length review.
+
 ---
 
 ## GSC snapshot (live site, June 2026)

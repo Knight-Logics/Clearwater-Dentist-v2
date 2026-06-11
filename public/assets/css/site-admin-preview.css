@@ -1,0 +1,55 @@
+/* Active only in admin preview mode (?cwAdminPreview=1) */
+body.cw-admin-preview-mode {
+  scroll-padding-top: 0;
+}
+
+body.cw-admin-preview-mode [data-cw-edit] {
+  cursor: pointer;
+  outline: 2px dashed transparent;
+  outline-offset: 4px;
+  transition: outline-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+body.cw-admin-preview-mode [data-cw-edit]:hover {
+  outline-color: rgba(245, 197, 24, 0.95);
+  box-shadow: 0 0 0 4px rgba(245, 197, 24, 0.18);
+}
+
+body.cw-admin-preview-mode [data-cw-edit].is-selected {
+  outline: 2px solid #f5c518;
+  box-shadow: 0 0 0 6px rgba(245, 197, 24, 0.28);
+}
+
+body.cw-admin-preview-mode [data-cw-edit][contenteditable="true"] {
+  cursor: text;
+}
+
+body.cw-admin-preview-mode [data-cw-edit].is-drop-target {
+  outline-color: #2f8f8b;
+  box-shadow: 0 0 0 6px rgba(47, 143, 139, 0.22);
+}
+
+body.cw-admin-preview-mode .home-hero-media {
+  --cw-hero-poster-position: 50% 50%;
+}
+
+body.cw-admin-preview-mode .home-hero-media video {
+  object-fit: cover;
+  object-position: var(--cw-hero-poster-position, 50% 50%);
+}
+
+body.cw-admin-preview-mode a[data-cw-edit],
+body.cw-admin-preview-mode a.btn[data-cw-edit] {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+body.cw-admin-preview-mode [data-cw-edit-type="button"].is-selected {
+  outline-offset: 3px;
+}
+
+body.cw-admin-preview-mode .cw-service-card__bg,
+body.cw-admin-preview-mode .compare-before,
+body.cw-admin-preview-mode .compare-after {
+  object-fit: cover;
+}

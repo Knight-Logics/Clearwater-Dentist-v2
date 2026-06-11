@@ -16,6 +16,8 @@ desktop.ini
 *.log
 .env
 .env.*
+.env.google.local
+public/assets/data/google-live.json
 
 # Playwright / temp
 .playwright/

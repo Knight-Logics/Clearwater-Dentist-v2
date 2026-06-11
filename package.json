@@ -15,6 +15,9 @@
     "verify": "node scripts/verify-static.mjs",
     "verify:launch-seo": "node scripts/verify-launch-seo.mjs",
     "verify:schema": "node scripts/verify-schema.mjs",
+    "verify:faq-schema": "node scripts/verify-faq-schema.mjs",
+    "schema:map": "node scripts/schema-map.mjs",
+    "serp:snapshot": "node scripts/run-serp-snapshot.mjs",
     "audit:images": "node scripts/audit-images.mjs",
     "convert:webp": "node scripts/convert-to-webp.mjs",
     "qa:screenshots": "node scripts/qa-screenshots.mjs"

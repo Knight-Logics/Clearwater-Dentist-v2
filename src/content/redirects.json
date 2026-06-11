@@ -17,7 +17,7 @@
   {
     "from": "/copy-of-home",
     "to": "/",
-    "note": "Duplicate homepage from site builder"
+    "note": "GSC 404 duplicate homepage from site builder"
   },
   {
     "from": "/carecredit",
@@ -29,5 +29,80 @@
     "to": "/contact-us",
     "noindex": true,
     "note": "Legacy referral landing page"
+  },
+  {
+    "from": "/teeth-whitening",
+    "to": "/teeth-whitening-clearwater-fl",
+    "note": "Legacy short URL and AMP path target"
+  },
+  {
+    "from": "/veneers",
+    "to": "/porcelain-veneers-clearwater-fl",
+    "note": "GSC legacy short veneers URL"
+  },
+  {
+    "from": "/restorative-",
+    "to": "/restorative-dentist-clearwater",
+    "note": "GSC 404 truncated restorative URL"
+  },
+  {
+    "from": "/aesthetic",
+    "to": "/facial-esthetics",
+    "note": "GSC 404 legacy aesthetic URL"
+  },
+  {
+    "from": "/family-dentistry-clearwater-fl",
+    "to": "/general-dentistry",
+    "note": "GSC 404 legacy family dentistry URL"
+  },
+  {
+    "from": "/ampify",
+    "to": "/",
+    "note": "Duda AMP index — GSC AMP 5xx"
+  },
+  {
+    "from": "/ampify/teeth-whitening",
+    "to": "/teeth-whitening-clearwater-fl",
+    "note": "Duda AMP path with non-matching canonical slug"
+  },
+  {
+    "from": "/ampify/general-dentistry",
+    "to": "/general-dentistry",
+    "note": "GSC AMP 5xx"
+  },
+  {
+    "from": "/ampify/smile-makeover",
+    "to": "/smile-makeover",
+    "note": "GSC AMP 5xx"
+  },
+  {
+    "from": "/ampify/tmj-treatment-clearwater-fl",
+    "to": "/tmj-treatment-clearwater-fl",
+    "note": "GSC AMP 5xx"
+  },
+  {
+    "from": "/ampify/dental-therapy-dogs-clearwater-fl",
+    "to": "/dental-therapy-dogs-clearwater-fl",
+    "note": "GSC AMP 5xx"
+  },
+  {
+    "from": "/ampify/laser-dentistry",
+    "to": "/laser-dentistry",
+    "note": "GSC AMP 5xx"
+  },
+  {
+    "from": "/ampify/porcelain-veneers-clearwater-fl",
+    "to": "/porcelain-veneers-clearwater-fl",
+    "note": "GSC AMP 5xx"
+  },
+  {
+    "from": "/ampify/gum-disease-treatment",
+    "to": "/gum-disease-treatment",
+    "note": "GSC AMP 5xx"
+  },
+  {
+    "from": "/ampify/implant-supported-dentures-clearwater-fl",
+    "to": "/implant-supported-dentures-clearwater-fl",
+    "note": "GSC AMP 5xx"
   }
 ]

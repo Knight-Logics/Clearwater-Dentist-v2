@@ -1,0 +1,14 @@
+{
+  "gsc": {
+    "siteUrl": "sc-domain:clearwaterdentist.com",
+    "siteUrlFallback": "https://www.clearwaterdentist.com/",
+    "days": 90,
+    "envFile": "E:/KnightLogics-Growth-System/MainSite/.env.gsc.local",
+    "tokenFile": "E:/KnightLogics-Growth-System/MainSite/.gsc-token.json"
+  },
+  "gbp": {
+    "locationTitle": "Clearwater Dentist",
+    "accountHint": "clearwater"
+  },
+  "output": "public/assets/data/google-live.json"
+}

@@ -1,0 +1,63 @@
+{
+  "updatedAt": "2026-06-10",
+  "note": "Public-directory research near Clearwater, FL — used by admin scrape for real partner examples.",
+  "prospects": [
+    {
+      "business": "Kontour Medical Aesthetics — Clearwater",
+      "group": "Med spas",
+      "city": "Clearwater, FL",
+      "website": "https://kontourmedspa.com/",
+      "angle": "Injectables + skin treatments clientele often ask about veneers/whitening. Natural XERF cross-referral with Dr. Nadia.",
+      "nextStep": "Find office manager email on site"
+    },
+    {
+      "business": "Pure Vanity Medical Spa — Clearwater",
+      "group": "Med spas",
+      "city": "Clearwater, FL",
+      "angle": "High-volume med spa on US-19 corridor — event-season whitening and cosmetic consult demand.",
+      "nextStep": "Check Instagram for bridal/event hashtags"
+    },
+    {
+      "business": "Florida Skin Center — Clearwater",
+      "group": "Med spas",
+      "city": "Clearwater, FL",
+      "angle": "Dermatology-adjacent patients often need cosmetic dentistry for smile lines and whitening before events.",
+      "nextStep": "Research GM name on Google Business Profile"
+    },
+    {
+      "business": "Sand Key / Island Estates Realtors (Coldwell Banker)",
+      "group": "Realtors",
+      "city": "Clearwater Beach, FL",
+      "angle": "Relocation volume — new movers need trusted family dentist + emergency line in welcome packet.",
+      "nextStep": "Draft new-mover welcome PDF for Dr. Nadia approval"
+    },
+    {
+      "business": "Charles Rutenberg Realty — Clearwater",
+      "group": "Realtors",
+      "city": "Clearwater, FL",
+      "angle": "Pinellas relocations and beach properties — dentist referral card at closing gift table.",
+      "nextStep": "Identify managing broker contact"
+    },
+    {
+      "business": "Belleair Blush Bridal & Events",
+      "group": "Wedding planners",
+      "city": "Belleair, FL",
+      "angle": "Spring/summer wedding season — cosmetic dentistry + whitening before ceremonies.",
+      "nextStep": "List from Instagram #clearwaterbride"
+    },
+    {
+      "business": "BayCare Employer Health Fair — Pinellas",
+      "group": "Employers",
+      "city": "Pinellas County, FL",
+      "angle": "Employee benefits fairs — family dentistry booth with QR emergency line card.",
+      "nextStep": "Ask office if they have done health fairs before"
+    },
+    {
+      "business": "Salon Lofts — Clearwater",
+      "group": "Salons",
+      "city": "Clearwater, FL",
+      "angle": "Stylists hear smile concerns before weddings and photos — co-marketing whitening offer.",
+      "nextStep": "Visit suite directory board for suite leads"
+    }
+  ]
+}
