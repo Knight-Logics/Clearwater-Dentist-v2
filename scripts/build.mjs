@@ -233,6 +233,12 @@ function e(value) {
   return String(value || '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
 }
 function attr(value) { return e(value).replace(/`/g, '&#96;'); }
+function seoDescription(page) {
+  const raw = String(page.description || site.tagline || '').replace(/\s+/g, ' ').trim();
+  if (raw.length <= 150) return raw;
+  const clipped = raw.slice(0, 150);
+  return clipped.replace(/\s+\S*$/, '').replace(/[,.!?;:-]+$/, '').trim();
+}
 function routeKey(route) {
   return route === '/' ? 'home' : String(route || '').replace(/^\//, '').replace(/\//g, '--');
 }
@@ -343,7 +349,8 @@ function renderNav(items, currentRoute, options) {
   const opts = options || {};
   const depth = opts.depth || 0;
   return '<ul class="' + navListClass(opts) + '">' + items.map(item => {
-    const childItems = item.children && item.children.length ? item.children : [];
+    const childItems = (item.children && item.children.length ? item.children : [])
+      .filter(child => child.href !== item.href);
     const childOpts = {
       nested: true,
       depth: depth + 1,
@@ -354,7 +361,10 @@ function renderNav(items, currentRoute, options) {
       : '';
     const active = isActive(item, currentRoute) ? ' is-active' : '';
     const directoryClass = item.label === 'All Services' ? ' cw-services-nav__directory' : '';
-    return '<li class="nav-item' + (children ? ' has-children' : '') + directoryClass + active + '"><a href="' + attr(item.href) + '">' + e(item.label) + '</a>' + children + '</li>';
+    const parentLabel = childItems.length && (item.megaMenu || childItems.some(child => child.href === item.href))
+      ? '<span class="nav-parent">' + e(item.label) + '</span>'
+      : '<a href="' + attr(item.href) + '">' + e(item.label) + '</a>';
+    return '<li class="nav-item' + (children ? ' has-children' : '') + directoryClass + active + '">' + parentLabel + children + '</li>';
   }).join('') + '</ul>';
 }
 const phoneIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8c1.5 2.9 3.7 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.5.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.3 21 3 13.7 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.3 0 .7-.2 1L6.6 10.8z"/></svg>';
@@ -434,13 +444,13 @@ function heroPanels(page) {
   const images = heroPanelImages(page);
   return '<div class="page-hero-bg page-hero-bg--grid" aria-hidden="true">' + heroPanelSlots.map(([position, index]) => {
     const image = images[index];
-    return '<div class="page-hero-panel page-hero-panel--' + position + '" data-hero-panel>' + imageTag(image, '', index === 0) + '</div>';
+    return '<div class="page-hero-panel page-hero-panel--' + position + '" data-hero-panel>' + imageTag({ ...image, alt: '' }, '', index === 0) + '</div>';
   }).join('') + '</div>';
 }
 function hero(page, kicker) {
   const rk = page.route;
   const eyebrow = kicker || page.type.replace(/([A-Z])/g, ' $1');
-  return '<section class="page-hero page-hero--gallery">' + heroPanels(page) + '<div class="page-hero-overlay" aria-hidden="true"></div><div class="page-hero-inner"><div class="page-hero-copy"><p class="eyebrow"' + cwEdit(rk, 'hero-eyebrow', 'Hero eyebrow') + '>' + e(eyebrow) + '</p><h1' + cwEdit(rk, 'hero-h1', 'Page headline') + '>' + e(page.h1) + '</h1>' + (page.description ? '<p class="lede"' + cwEdit(rk, 'hero-lede', 'Hero intro') + '>' + e(page.description) + '</p>' : '') + '<div class="hero-actions"><a class="btn primary"' + cwEdit(rk, 'hero-cta-book', 'Book button', 'button') + ' href="' + APPOINTMENT_PATH + '">Request Appointment</a><a class="btn secondary"' + cwEdit(rk, 'hero-cta-call', 'Call button', 'button') + ' href="tel:' + attr(site.phoneTel) + '">Call ' + e(site.phoneDisplay) + '</a></div></div></div></section>';
+  return '<section class="page-hero page-hero--gallery">' + heroPanels(page) + '<div class="page-hero-overlay" aria-hidden="true"></div><div class="page-hero-inner"><div class="page-hero-copy"><p class="cw-kicker"' + cwEdit(rk, 'hero-eyebrow', 'Hero eyebrow') + '>' + e(eyebrow) + '</p><h1' + cwEdit(rk, 'hero-h1', 'Page headline') + '>' + e(page.h1) + '</h1>' + (page.description ? '<p class="lede"' + cwEdit(rk, 'hero-lede', 'Hero intro') + '>' + e(page.description) + '</p>' : '') + '<div class="hero-actions"><a class="btn primary"' + cwEdit(rk, 'hero-cta-book', 'Book button', 'button') + ' href="' + APPOINTMENT_PATH + '">Request Appointment</a><a class="btn secondary"' + cwEdit(rk, 'hero-cta-call', 'Call button', 'button') + ' href="tel:' + attr(site.phoneTel) + '">Call ' + e(site.phoneDisplay) + '</a></div></div></div></section>';
 }
 const THERAPY_DOG_NAMES = ['Barbie', 'Baby', 'Chucha', 'Pusha'];
 const MAP_EMBED_ROUTES = new Set(['/', '/contact-us']);
@@ -962,12 +972,16 @@ function gallerySectionHtml(section, index) {
   const dir = GALLERY_REVEAL_DIRS[index % GALLERY_REVEAL_DIRS.length];
   return '<section class="content-section cw-gallery-section cw-reveal"' + cwRevealAttr(dir, index * 90) + '><h2>' + e(section.heading) + '</h2>' + (section.body || []).map(p => '<p>' + richText(p) + '</p>').join('') + (section.items && section.items.length ? '<ul class="check-list">' + section.items.map(i => '<li>' + richText(i) + '</li>').join('') + '</ul>' : '') + sectionFigureHtml(section.figure) + '</section>';
 }
+function galleryHighlightCard(item, index) {
+  const label = item.title || item.label || 'Dental care';
+  return '<article class="cw-gallery-highlight cw-reveal"' + cwRevealAttr(GALLERY_REVEAL_DIRS[index % GALLERY_REVEAL_DIRS.length], index * 100) + '>' + imageTag({ src: item.image, alt: '' }, 'cw-gallery-highlight__img', false) + '<div class="cw-gallery-highlight__copy"><span class="cw-gallery-highlight__title">' + e(label) + '</span><p>' + e(item.desc) + '</p><a class="cw-gallery-highlight__link" href="' + attr(item.href) + '">Learn more about ' + e(label) + '</a></div></article>';
+}
 function galleryHighlightsBand() {
-  const cards = galleryTreatmentHighlights.map((item, index) => '<a class="cw-gallery-highlight cw-reveal" href="' + attr(item.href) + '"' + cwRevealAttr(GALLERY_REVEAL_DIRS[index % GALLERY_REVEAL_DIRS.length], index * 100) + '>' + imageTag({ src: item.image, alt: item.title + ' at Clearwater Dentist' }, 'cw-gallery-highlight__img', false) + '<span class="cw-gallery-highlight__copy"><strong>' + e(item.title) + '</strong><p>' + e(item.desc) + '</p><span class="cw-gallery-highlight__link">Learn more</span></span></a>').join('');
-  return '<section class="cw-gallery-discover" aria-label="Treatments featured in our before and after gallery"><div class="cw-gallery-discover__inner"><div class="section-head cw-reveal"' + cwRevealAttr('bottom', 0) + '><p class="eyebrow">Smile Transformations</p><h2>Explore the treatments behind these results.</h2><p>Every before and after photo reflects a personalized plan at our Clearwater, FL dental office. Browse the services most often associated with these transformations, then request a consultation to discuss your goals with Dr. Nadia.</p></div><div class="cw-gallery-highlight-grid">' + cards + '</div></div></section>';
+  const cards = galleryTreatmentHighlights.map(galleryHighlightCard).join('');
+  return '<section class="cw-gallery-discover" aria-label="Treatments featured in our before and after gallery"><div class="cw-gallery-discover__inner"><div class="section-head cw-reveal"' + cwRevealAttr('bottom', 0) + '><p class="cw-kicker">Smile Transformations</p><h2>Explore the treatments behind these results.</h2><p>Every before and after photo reflects a personalized plan at our Clearwater, FL dental office. Browse the services most often associated with these transformations, then request a consultation to discuss your goals with Dr. Nadia.</p></div><div class="cw-gallery-highlight-grid">' + cards + '</div></div></section>';
 }
 function galleryCtaBand() {
-  return '<section class="cw-gallery-cta cw-reveal"' + cwRevealAttr('bottom', 120) + '><div class="cw-gallery-cta__inner"><p class="eyebrow">Clearwater Dentist</p><h2>Ready to start your smile transformation?</h2><p>Schedule a consultation at our Clearwater office to review your options for dental implants, cosmetic dentistry, restorative care, and flexible financing.</p><div class="hero-actions"><a class="btn primary" href="' + APPOINTMENT_PATH + '">Request Appointment</a><a class="btn secondary" href="tel:' + attr(site.phoneTel) + '">Call ' + e(site.phoneDisplay) + '</a></div></div></section>';
+  return '<section class="cw-gallery-cta cw-reveal"' + cwRevealAttr('bottom', 120) + '><div class="cw-gallery-cta__inner"><p class="cw-kicker">Clearwater Dentist</p><h2>Ready to start your smile transformation?</h2><p>Schedule a consultation at our Clearwater office to review your options for dental implants, cosmetic dentistry, restorative care, and flexible financing.</p><div class="hero-actions"><a class="btn primary" href="' + APPOINTMENT_PATH + '">Request Appointment</a><a class="btn secondary" href="tel:' + attr(site.phoneTel) + '">Call ' + e(site.phoneDisplay) + '</a></div></div></section>';
 }
 function servicePageTitle(page) {
   return String(page.h1 || page.title || 'Dental Care').replace(/^[\u{1F300}-\u{1FAFF}\u2600-\u27BF]+\s*/u, '').trim();
@@ -1005,13 +1019,13 @@ function serviceHighlightsBand(page) {
   const group = serviceNavGroupFor(page.route);
   const eyebrow = group ? group.label : 'Related Services';
   const title = servicePageTitle(page);
-  const cards = items.map((item, index) => '<a class="cw-gallery-highlight cw-reveal" href="' + attr(item.href) + '"' + cwRevealAttr(GALLERY_REVEAL_DIRS[index % GALLERY_REVEAL_DIRS.length], index * 100) + '>' + imageTag({ src: item.image, alt: item.title + ' at Clearwater Dentist' }, 'cw-gallery-highlight__img', false) + '<span class="cw-gallery-highlight__copy"><strong>' + e(item.title) + '</strong><p>' + e(item.desc) + '</p><span class="cw-gallery-highlight__link">Learn more</span></span></a>').join('');
-  return '<section class="cw-gallery-discover" aria-label="Related dental services"><div class="cw-gallery-discover__inner"><div class="section-head cw-reveal"' + cwRevealAttr('bottom', 0) + '><p class="eyebrow">' + e(eyebrow) + '</p><h2>Explore related care at Clearwater Dentist.</h2><p>' + richText('Patients often combine treatments related to ' + title + ' with other services in our Clearwater, FL office. Browse related care below, or see the [full service directory](/general-dentistry#service-directory) for every option we offer.') + '</p></div><div class="cw-gallery-highlight-grid">' + cards + '</div></div></section>';
+  const cards = items.map(galleryHighlightCard).join('');
+  return '<section class="cw-gallery-discover" aria-label="Related dental services"><div class="cw-gallery-discover__inner"><div class="section-head cw-reveal"' + cwRevealAttr('bottom', 0) + '><p class="cw-kicker">' + e(eyebrow) + '</p><h2>Explore related care at Clearwater Dentist.</h2><p>' + richText('Patients often combine treatments related to ' + title + ' with other services in our Clearwater, FL office. Browse related care below, or see the [full service directory](/general-dentistry#service-directory) for every option we offer.') + '</p></div><div class="cw-gallery-highlight-grid">' + cards + '</div></div></section>';
 }
 function serviceCtaBand(page) {
   const title = servicePageTitle(page);
   const rk = page.route;
-  return '<section class="cw-gallery-cta cw-reveal"' + cwRevealAttr('bottom', 120) + '><div class="cw-gallery-cta__inner"><p class="eyebrow"' + cwEdit(rk, 'service-cta-eyebrow', 'Service CTA eyebrow') + '>Clearwater Dentist</p><h2' + cwEdit(rk, 'service-cta-headline', 'Service CTA headline') + '>Ready to learn more about ' + e(title) + '?</h2><p' + cwEdit(rk, 'service-cta-intro', 'Service CTA intro') + '>' + richText('Request a consultation at our Clearwater office. Dr. Nadia and our team will review your goals, explain your options, and discuss [financing](/financing) when helpful.') + '</p><div class="hero-actions"><a class="btn primary"' + cwEdit(rk, 'service-cta-book', 'Service CTA book button', 'button') + ' href="' + APPOINTMENT_PATH + '">Request Appointment</a><a class="btn secondary"' + cwEdit(rk, 'service-cta-call', 'Service CTA call button', 'button') + ' href="tel:' + attr(site.phoneTel) + '">Call ' + e(site.phoneDisplay) + '</a></div></div></section>';
+  return '<section class="cw-gallery-cta cw-reveal"' + cwRevealAttr('bottom', 120) + '><div class="cw-gallery-cta__inner"><p class="cw-kicker"' + cwEdit(rk, 'service-cta-eyebrow', 'Service CTA eyebrow') + '>Clearwater Dentist</p><h2' + cwEdit(rk, 'service-cta-headline', 'Service CTA headline') + '>Ready to learn more about ' + e(title) + '?</h2><p' + cwEdit(rk, 'service-cta-intro', 'Service CTA intro') + '>' + richText('Request a consultation at our Clearwater office. Dr. Nadia and our team will review your goals, explain your options, and discuss [financing](/financing) when helpful.') + '</p><div class="hero-actions"><a class="btn primary"' + cwEdit(rk, 'service-cta-book', 'Service CTA book button', 'button') + ' href="' + APPOINTMENT_PATH + '">Request Appointment</a><a class="btn secondary"' + cwEdit(rk, 'service-cta-call', 'Service CTA call button', 'button') + ' href="tel:' + attr(site.phoneTel) + '">Call ' + e(site.phoneDisplay) + '</a></div></div></section>';
 }
 function renderGallery(page) {
   const sections = galleryPageSections(page);
@@ -1052,7 +1066,7 @@ function layout(page, main, options) {
   const headPreload = page.type === 'home' && site.assets?.heroPoster
     ? '<link rel="preload" as="image" href="' + attr(site.assets.heroPoster) + '" fetchpriority="high">'
     : '';
-  return '<!doctype html><html lang="en"><head><meta charset="utf-8"><script>document.documentElement.classList.add(\'js\');</script><meta name="viewport" content="width=device-width, initial-scale=1">' + robotsMeta(noindex) + headPreload + '<title>' + e(page.title) + '</title><meta name="description" content="' + attr(page.description || site.tagline) + '"><link rel="canonical" href="' + attr(canonical) + '"><link rel="stylesheet" href="/assets/css/styles.css"><link rel="stylesheet" href="/assets/css/overrides.css">' + previewAssets + '<script src="/assets/js/main.js" defer></script>' + schema(page) + '</head><body class="page-' + attr(page.type) + '" ' + chatBodyAttrs() + '><a class="skip-link" href="#main">Skip to content</a>' + header(page) + '<main id="main">' + main + '</main>' + footer() + chatScriptTag() + '</body></html>';
+  return '<!doctype html><html lang="en"><head><meta charset="utf-8"><script>document.documentElement.classList.add(\'js\');</script><meta name="viewport" content="width=device-width, initial-scale=1">' + robotsMeta(noindex) + headPreload + '<title>' + e(page.title) + '</title><meta name="description" content="' + attr(seoDescription(page)) + '"><link rel="canonical" href="' + attr(canonical) + '"><link rel="stylesheet" href="/assets/css/styles.css"><link rel="stylesheet" href="/assets/css/overrides.css">' + previewAssets + '<script src="/assets/js/main.js" defer></script>' + schema(page) + '</head><body class="page-' + attr(page.type) + '" ' + chatBodyAttrs() + '><a class="skip-link" href="#main">Skip to content</a>' + header(page) + '<main id="main">' + main + '</main>' + footer() + chatScriptTag() + '</body></html>';
 }
 function htaccessRules() {
   const lines = [
