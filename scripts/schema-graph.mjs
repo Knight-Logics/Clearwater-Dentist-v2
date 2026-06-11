@@ -3,18 +3,121 @@ const SITE_GEO = {
   longitude: -82.7099534
 };
 
-const FAQ_PRIORITY_ROUTES = new Set([
-  '/new-patient-faqs',
-  '/sedation-dentistry-clearwater-fl',
-  '/anti-anxiety-dentist-office',
-  '/emergency-dentistry-clearwater-fl',
-  '/dental-implants-clearwater-fl',
-  '/financing',
-  '/laser-dentistry',
-  '/gum-disease-treatment',
-  '/cosmetic-dentistry',
-  '/Invisalign-service-clearwater-fl'
-]);
+const DENTIST_KNOWS_ABOUT = [
+  'Cosmetic dentistry',
+  'Dental implants',
+  'Sedation dentistry',
+  'Emergency dentistry',
+  'XERF skin tightening',
+  'Anxiety-friendly dental care'
+];
+
+const VIDEO_SCHEMA_META = {
+  '6qrr3vuprfkb7oix65k8-elmjyubzqwcgczf8kujh-2024-clearwater-dentist-intro-video-desktop-v-v-optimized': {
+    id: 'video-welcome-intro',
+    name: 'Meet Dr. Nadia Pokrovskaya at Clearwater Dentist',
+    description: 'Dr. Nadia introduces Clearwater Dentist and explains the practice\'s comfort-focused approach to family, cosmetic, and emergency dentistry.',
+    uploadDate: '2024-06-15T09:00:00-04:00',
+    duration: 'PT1M45S',
+    poster: '/assets/images/6qrr3vuprfkb7oix65k8-elmjyubzqwcgczf8kujh-2024-clearwater-dentist-intro-video-desktop-v-v2-0.webp'
+  },
+  '6qrr3vuprfkb7oix65k8-elmjyubzqwcgczf8kujh-2024-clearwater-dentist-intro-video-mobile': {
+    id: 'video-welcome-intro-mobile',
+    name: 'Meet Dr. Nadia Pokrovskaya at Clearwater Dentist',
+    description: 'Dr. Nadia introduces Clearwater Dentist and explains the practice\'s comfort-focused approach to family, cosmetic, and emergency dentistry.',
+    uploadDate: '2024-06-15T09:00:00-04:00',
+    duration: 'PT1M45S',
+    poster: '/assets/images/6qrr3vuprfkb7oix65k8-elmjyubzqwcgczf8kujh-2024-clearwater-dentist-intro-video-desktop-v-v2-0.webp'
+  },
+  'wzdvza5yrog6hu70zyqp-office-v': {
+    id: 'video-office-tour',
+    name: 'Office tour at Clearwater Dentist',
+    description: 'Take a look inside the Clearwater Dentist office and the calm, patient-focused environment Dr. Nadia and her team created.',
+    uploadDate: '2024-03-01T10:00:00-05:00',
+    duration: 'PT2M30S',
+    poster: '/assets/images/clearwater-dentist-clearwater-fl-front-of-dental-office-1920w.webp'
+  },
+  'clearwater-dentist-featured-video-therapy-dog': {
+    id: 'video-therapy-dog',
+    name: 'Dental therapy dogs at Clearwater Dentist',
+    description: 'Learn how therapy dogs help anxious patients feel calmer during dental visits at Clearwater Dentist in Clearwater, FL.',
+    uploadDate: '2024-04-01T10:00:00-04:00',
+    duration: 'PT1M20S',
+    poster: '/assets/images/485a7112-1920w.webp'
+  },
+  'e3msq9urtahssy3tq3kg-dr-nadia-interview-2024-edited-v': {
+    id: 'video-dr-nadia-intro',
+    name: 'Meet Dr. Nadia Pokrovskaya at Clearwater Dentist',
+    description: 'Dr. Nadia Pokrovskaya discusses her background, philosophy of care, and what patients can expect at Clearwater Dentist.',
+    uploadDate: '2024-05-01T10:00:00-04:00',
+    duration: 'PT3M00S',
+    poster: '/assets/images/clearwater-dentist-clearwater-fl-dr-nadia-pokrovskaya-2-739bdcb2-1920w.webp'
+  },
+  'urpldxkqiwfqgznlujv4-clearwater-dentistry-dr-nadia-2024-testimony-video-edited-2-v': {
+    id: 'video-patient-testimony',
+    name: 'Patient testimonial at Clearwater Dentist',
+    description: 'A Clearwater Dentist patient shares their experience with the team and results of treatment.',
+    uploadDate: '2024-05-15T10:00:00-04:00',
+    duration: 'PT2M00S',
+    poster: '/assets/images/clearwater-dentist-clearwater-fl-front-staff-parallax-1280w.webp'
+  },
+  'ywmr4zpsfw700hobq1fq-julia-patient-testimonial-v': {
+    id: 'video-julia-testimonial',
+    name: 'Julia patient testimonial at Clearwater Dentist',
+    description: 'Patient Julia shares her experience at Clearwater Dentist.',
+    uploadDate: '2024-05-15T10:00:00-04:00',
+    duration: 'PT1M30S',
+    poster: '/assets/images/clearwater-dentist-clearwater-fl-smile-lady-2880w.webp'
+  },
+  'do-you-need-a-dental-crown-v': {
+    id: 'video-dental-crown',
+    name: 'Do you need a dental crown?',
+    description: 'Educational video from Clearwater Dentist about when a dental crown may be recommended.',
+    uploadDate: '2024-02-01T10:00:00-05:00',
+    duration: 'PT2M15S',
+    poster: '/assets/images/clearwater-dentist-clearwater-fl-crowns-and-bridges-1920w.webp'
+  },
+  'scared-of-the-dentist-v': {
+    id: 'video-scared-of-dentist',
+    name: 'Scared of the dentist?',
+    description: 'How Clearwater Dentist helps anxious patients feel more comfortable during dental care.',
+    uploadDate: '2024-02-01T10:00:00-05:00',
+    duration: 'PT2M00S',
+    poster: '/assets/images/sedation-dentist-v2-0000000-1920w.webp'
+  },
+  'sedation-dentist-v': {
+    id: 'video-sedation-dentist',
+    name: 'Sedation dentistry at Clearwater Dentist',
+    description: 'Overview of sedation options for patients with dental anxiety at Clearwater Dentist.',
+    uploadDate: '2024-02-01T10:00:00-05:00',
+    duration: 'PT2M30S',
+    poster: '/assets/images/sedation-dentist-v2-0000000-1920w.webp'
+  },
+  'veneers-dentist-v': {
+    id: 'video-veneers',
+    name: 'Porcelain veneers at Clearwater Dentist',
+    description: 'Learn about porcelain veneer treatment options at Clearwater Dentist.',
+    uploadDate: '2024-02-01T10:00:00-05:00',
+    duration: 'PT2M00S',
+    poster: '/assets/images/clearwater-dentist-clearwater-fl-veneer-1920w.webp'
+  },
+  'gum-disease-v': {
+    id: 'video-gum-disease',
+    name: 'Gum disease treatment at Clearwater Dentist',
+    description: 'Educational overview of gum disease treatment at Clearwater Dentist.',
+    uploadDate: '2024-02-01T10:00:00-05:00',
+    duration: 'PT2M00S',
+    poster: '/assets/images/clearwater-dentist-clearwater-fl-gingivectomy-be1e5855-1920w.webp'
+  },
+  'gru61qftnm5yovvxsqhn-smile-makeover-v': {
+    id: 'video-smile-makeover',
+    name: 'Smile makeover at Clearwater Dentist',
+    description: 'Overview of smile makeover planning and cosmetic dentistry at Clearwater Dentist.',
+    uploadDate: '2024-02-01T10:00:00-05:00',
+    duration: 'PT2M30S',
+    poster: '/assets/images/clearwater-dentist-clearwater-fl-smile-makeover-ab960fc4-256c5e17-1920w.webp'
+  }
+};
 
 let assetOriginOverride = null;
 
@@ -23,55 +126,6 @@ function absUrl(site, path) {
   if (/^https?:\/\//i.test(path)) return path;
   const origin = (assetOriginOverride || site.domain).replace(/\/$/, '');
   return origin + (path.startsWith('/') ? path : '/' + path);
-}
-
-const VIDEO_TITLE_OVERRIDES = {
-  '6qrr3vuprfkb7oix65k8-elmjyubzqwcgczf8kujh-2024-clearwater-dentist-intro-video-desktop-v-v-optimized': 'Welcome to Clearwater Dentist',
-  '6qrr3vuprfkb7oix65k8-elmjyubzqwcgczf8kujh-2024-clearwater-dentist-intro-video-desktop-v-v': 'Welcome to Clearwater Dentist',
-  '6qrr3vuprfkb7oix65k8-elmjyubzqwcgczf8kujh-2024-clearwater-dentist-intro-video-mobile': 'Welcome to Clearwater Dentist',
-  'wzdvza5yrog6hu70zyqp-office-v': 'Office tour at Clearwater Dentist',
-  'clearwater-dentist-featured-video-therapy-dog': 'Dental therapy dogs at Clearwater Dentist',
-  'e3msq9urtahssy3tq3kg-dr-nadia-interview-2024-edited-v': 'Meet Dr. Nadia Pokrovskaya',
-  'urpldxkqiwfqgznlujv4-clearwater-dentistry-dr-nadia-2024-testimony-video-edited-2-v': 'Patient testimonial at Clearwater Dentist',
-  'ywmr4zpsfw700hobq1fq-julia-patient-testimonial-v': 'Patient testimonial at Clearwater Dentist'
-};
-
-function videoSlug(src) {
-  return String(src || '').split('/').pop()?.replace(/\.mp4$/i, '') || '';
-}
-
-function videoTitle(video, page) {
-  const slug = videoSlug(video.src);
-  if (VIDEO_TITLE_OVERRIDES[slug]) return VIDEO_TITLE_OVERRIDES[slug];
-  const label = String(video.label || '').trim();
-  if (label && !/^clearwater dentist video$/i.test(label)) return label;
-  if (slug) {
-    return slug
-      .replace(/[-_]+/g, ' ')
-      .replace(/\b\w/g, (char) => char.toUpperCase());
-  }
-  return page.h1 || page.title || 'Clearwater Dentist video';
-}
-
-function videoPoster(site, page, video) {
-  return video.poster
-    || site.assets?.heroPoster
-    || page.heroImage?.src
-    || page.images?.[0]?.src
-    || site.assets?.office
-    || site.assets?.doctor;
-}
-
-function videosForSchema(site, page) {
-  if (page.type === 'home') {
-    if (!site.assets?.heroVideo) return [];
-    return [{
-      src: site.assets.heroVideo,
-      poster: site.assets.heroPoster,
-      label: 'Welcome to Clearwater Dentist'
-    }];
-  }
-  return (page.videos || []).slice(0, 2);
 }
 
 function siteRoot(site) {
@@ -127,6 +181,21 @@ function openingHoursSpecs(hours) {
   return specs;
 }
 
+function areaServedNodes(site) {
+  const areas = site.serviceAreas || [];
+  const cities = areas.length
+    ? areas.map((area) => area.city || area.label?.replace(/,.*$/, '').trim())
+    : [site.address?.city || 'Clearwater'];
+  return [...new Set(cities.filter(Boolean))].map((city) => ({
+    '@type': 'City',
+    name: city,
+    containedInPlace: {
+      '@type': 'State',
+      name: site.address?.state || 'Florida'
+    }
+  }));
+}
+
 function parseFaqItem(text) {
   const clean = stripHtml(text);
   const match = clean.match(/^(.+?\?)\s+([\s\S]+)$/);
@@ -155,6 +224,10 @@ function isArticleStyleService(page) {
   return page.type === 'service' && /\/(how-|what-|why-|the-|taming-|needle-|dental-anxiety|havent-|questions-)/i.test(page.route);
 }
 
+function isMoneyServicePage(page) {
+  return page.type === 'service' && !isArticleStyleService(page) && page.route !== '/new-patient-faqs';
+}
+
 function webpageType(page) {
   if (page.type === 'home') return 'WebPage';
   if (page.type === 'contact') return 'ContactPage';
@@ -162,7 +235,6 @@ function webpageType(page) {
   if (page.type === 'team') return 'AboutPage';
   if (page.type === 'gallery') return 'CollectionPage';
   if (page.type === 'blogIndex') return 'CollectionPage';
-  if (page.type === 'policy') return 'WebPage';
   return 'WebPage';
 }
 
@@ -170,23 +242,40 @@ function breadcrumbItems(site, page) {
   const root = siteRoot(site);
   const url = pageUrl(site, page);
   const items = [{ name: 'Home', item: root }];
+
+  if (page.route === '/') return items;
+
   if (page.type === 'blogPost') {
     items.push({ name: 'Blog', item: root + 'blog' });
     items.push({ name: page.h1, item: url });
     return items;
   }
+
   if (page.type === 'blogIndex') {
     items.push({ name: 'Blog', item: url });
     return items;
   }
-  if (page.type === 'serviceArea' && page.area) {
-    items.push({ name: 'Service Areas', item: root + 'dentist-clearwater-fl' });
-    items.push({ name: 'Dentist in ' + page.area.label, item: url });
+
+  if (page.type === 'service' || page.type === 'serviceArea') {
+    items.push({ name: 'Services', item: root + 'general-dentistry' });
+    items.push({ name: page.h1 || page.title, item: url });
     return items;
   }
-  if (page.route !== '/') {
-    items.push({ name: page.h1 || page.title, item: url });
+
+  if (page.type === 'finance') {
+    items.push({ name: 'Financing', item: root + 'financing' });
+    if (page.route !== '/financing') {
+      items.push({ name: page.h1 || page.title, item: url });
+    }
+    return items;
   }
+
+  if (page.type === 'policy') {
+    items.push({ name: page.h1 || page.title, item: url });
+    return items;
+  }
+
+  items.push({ name: page.h1 || page.title, item: url });
   return items;
 }
 
@@ -195,7 +284,7 @@ function dentistNode(site, googleReviews) {
   const root = siteRoot(site);
   const sameAs = [site.googleReviewUrl, ...(site.social || []).map((s) => s.href)].filter(Boolean);
   const node = {
-    '@type': ['Dentist', 'LocalBusiness'],
+    '@type': 'Dentist',
     '@id': root + '#dentist',
     name: site.name,
     url: root,
@@ -205,6 +294,7 @@ function dentistNode(site, googleReviews) {
     logo: absUrl(site, site.assets?.logo),
     description: site.tagline,
     priceRange: '$$',
+    medicalSpecialty: ['Dentistry', 'Cosmetic dentistry', 'Emergency dentistry'],
     address: {
       '@type': 'PostalAddress',
       streetAddress: addr.street,
@@ -220,16 +310,10 @@ function dentistNode(site, googleReviews) {
     },
     hasMap: site.googleReviewUrl,
     openingHoursSpecification: openingHoursSpecs(site.hours),
+    areaServed: areaServedNodes(site),
     sameAs,
-    contactPoint: {
-      '@type': 'ContactPoint',
-      telephone: site.phoneTel || site.phoneDisplay,
-      contactType: 'customer service',
-      areaServed: 'US-FL',
-      availableLanguage: ['English']
-    },
-    employee: { '@id': root + '#physician' },
-    parentOrganization: { '@id': root + '#organization' }
+    founder: { '@id': root + '#dr-nadia' },
+    employee: { '@id': root + '#dr-nadia' }
   };
 
   if (googleReviews?.rating && googleReviews?.reviewCount) {
@@ -253,27 +337,29 @@ function organizationNode(site) {
     name: site.name,
     url: root,
     logo: absUrl(site, site.assets?.logo),
-    email: site.email,
-    telephone: site.phoneTel || site.phoneDisplay,
-    sameAs: [site.googleReviewUrl, ...(site.social || []).map((s) => s.href)].filter(Boolean),
-    founder: { '@id': root + '#physician' }
+    founder: { '@id': root + '#dr-nadia' }
   };
 }
 
-function physicianNode(site) {
+function personNode(site, page) {
   const root = siteRoot(site);
-  return {
-    '@type': 'Physician',
-    '@id': root + '#physician',
-    name: 'Dr. Nadia Pokrovskaya',
-    honorificSuffix: 'D.M.D.',
-    jobTitle: 'Owner & Dentist',
-    medicalSpecialty: 'Dentistry',
+  const node = {
+    '@type': 'Person',
+    '@id': root + '#dr-nadia',
+    name: 'Dr. Nadia Pokrovskaya, D.M.D.',
+    jobTitle: 'Dentist',
     url: root + 'meet-the-doctor',
     image: absUrl(site, site.assets?.doctor),
     worksFor: { '@id': root + '#dentist' },
-    memberOf: { '@id': root + '#organization' }
+    knowsAbout: DENTIST_KNOWS_ABOUT
   };
+
+  if (page?.type === 'doctor') {
+    node.description = page.description || site.tagline;
+    node.mainEntityOfPage = { '@id': pageUrl(site, page) + '#webpage' };
+  }
+
+  return node;
 }
 
 function websiteNode(site) {
@@ -293,7 +379,7 @@ function webpageNode(site, page) {
   const url = pageUrl(site, page);
   const root = siteRoot(site);
   const image = page.heroImage?.src || page.images?.[0]?.src || site.assets?.office;
-  return {
+  const node = {
     '@type': webpageType(page),
     '@id': url + '#webpage',
     url,
@@ -304,12 +390,17 @@ function webpageNode(site, page) {
     primaryImageOfPage: image ? { '@type': 'ImageObject', url: absUrl(site, image) } : undefined,
     inLanguage: 'en-US'
   };
+
+  if (page.type === 'doctor') {
+    node.mainEntity = { '@id': root + '#dr-nadia' };
+  }
+
+  return node;
 }
 
 function breadcrumbNode(site, page) {
   const url = pageUrl(site, page);
   const items = breadcrumbItems(site, page);
-  if (items.length < 2) return null;
   return {
     '@type': 'BreadcrumbList',
     '@id': url + '#breadcrumb',
@@ -340,8 +431,26 @@ function faqNode(site, page, faqs) {
 }
 
 function serviceNode(site, page) {
-  if (page.type !== 'service' && page.type !== 'serviceArea') return null;
+  if (!isMoneyServicePage(page) && page.type !== 'serviceArea' && page.route !== '/new-patient-faqs') {
+    if (page.type === 'finance') {
+      const url = pageUrl(site, page);
+      const root = siteRoot(site);
+      return {
+        '@type': 'Service',
+        '@id': url + '#service',
+        name: page.h1 || page.title,
+        description: page.description,
+        serviceType: 'Dental financing',
+        url,
+        provider: { '@id': root + '#dentist' },
+        areaServed: areaServedNodes(site)
+      };
+    }
+    return null;
+  }
+
   if (isArticleStyleService(page)) return null;
+
   const url = pageUrl(site, page);
   const root = siteRoot(site);
   const node = {
@@ -349,21 +458,48 @@ function serviceNode(site, page) {
     '@id': url + '#service',
     name: page.h1 || page.title,
     description: page.description,
+    serviceType: page.h1 || page.title,
     url,
     provider: { '@id': root + '#dentist' },
-    areaServed: {
-      '@type': 'City',
-      name: page.area?.city || site.address?.city || 'Clearwater',
-      containedInPlace: {
-        '@type': 'State',
-        name: page.area?.state || site.address?.state || 'Florida'
-      }
-    }
+    areaServed: page.area
+      ? [{
+          '@type': 'City',
+          name: page.area.city || page.area.label,
+          containedInPlace: { '@type': 'State', name: page.area.state || 'Florida' }
+        }]
+      : areaServedNodes(site)
   };
+
   if (page.heroImage?.src) {
     node.image = absUrl(site, page.heroImage.src);
   }
+
   return node;
+}
+
+function placeNode(site, page) {
+  if (page.type !== 'serviceArea' || !page.area) return null;
+  const url = pageUrl(site, page);
+  const addr = site.address || {};
+  return {
+    '@type': 'Place',
+    '@id': url + '#place',
+    name: 'Clearwater Dentist — ' + page.area.label,
+    description: page.description,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: addr.street,
+      addressLocality: addr.city,
+      addressRegion: addr.state,
+      postalCode: addr.zip,
+      addressCountry: addr.country || 'US'
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: site.geo?.latitude ?? SITE_GEO.latitude,
+      longitude: site.geo?.longitude ?? SITE_GEO.longitude
+    }
+  };
 }
 
 function articleNode(site, page) {
@@ -378,7 +514,7 @@ function articleNode(site, page) {
       description: page.description,
       url,
       image: image ? absUrl(site, image) : undefined,
-      author: { '@id': root + '#physician' },
+      author: { '@id': root + '#dr-nadia' },
       publisher: { '@id': root + '#organization' },
       mainEntityOfPage: { '@id': url + '#webpage' },
       inLanguage: 'en-US',
@@ -395,7 +531,7 @@ function articleNode(site, page) {
       description: page.description,
       url,
       image: image ? absUrl(site, image) : undefined,
-      author: { '@id': root + '#physician' },
+      author: { '@id': root + '#dr-nadia' },
       publisher: { '@id': root + '#organization' },
       mainEntityOfPage: { '@id': url + '#webpage' },
       inLanguage: 'en-US'
@@ -404,51 +540,66 @@ function articleNode(site, page) {
   return null;
 }
 
+function videoSlug(src) {
+  return String(src || '').split('/').pop()?.replace(/\.mp4$/i, '') || '';
+}
+
+function videoPoster(site, page, video, meta) {
+  return video.poster || meta?.poster || site.assets?.heroPoster || page.heroImage?.src || page.images?.[0]?.src || site.assets?.office;
+}
+
+function videosForSchema(site, page) {
+  if (page.type === 'home') {
+    if (!site.assets?.heroVideo) return [];
+    return [{
+      src: site.assets.heroVideo,
+      poster: site.assets.heroPoster,
+      label: 'Welcome to Clearwater Dentist'
+    }];
+  }
+
+  return (page.videos || []).slice(0, 2);
+}
+
 function videoNodes(site, page) {
-  const url = pageUrl(site, page);
+  const pageBase = pageUrl(site, page);
   const root = siteRoot(site);
-  return videosForSchema(site, page).map((video, index) => {
-    const poster = videoPoster(site, page, video);
+
+  return videosForSchema(site, page).map((video) => {
+    const slug = videoSlug(video.src);
+    const meta = VIDEO_SCHEMA_META[slug] || {};
+    const poster = videoPoster(site, page, video, meta);
     const contentUrl = absUrl(site, video.src);
     const thumbnailUrl = poster ? absUrl(site, poster) : undefined;
     if (!contentUrl || !thumbnailUrl) return null;
 
-    return {
+    const videoId = meta.id || ('video-' + slug.slice(0, 24));
+    const node = {
       '@type': 'VideoObject',
-      '@id': url + '#video-' + (index + 1),
-      name: videoTitle(video, page),
-      description: page.description || site.tagline,
+      '@id': pageBase + '#' + videoId,
+      name: meta.name || video.label || page.h1 || page.title,
+      description: meta.description || page.description || site.tagline,
       contentUrl,
       thumbnailUrl,
-      uploadDate: '2024-06-15T09:00:00-04:00',
+      uploadDate: meta.uploadDate || '2024-06-15T09:00:00-04:00',
       inLanguage: 'en-US',
       publisher: { '@id': root + '#organization' }
     };
+
+    if (meta.duration) node.duration = meta.duration;
+    if (video.embedUrl) node.embedUrl = video.embedUrl;
+
+    return node;
   }).filter(Boolean);
 }
 
-function reviewNodes(site, googleReviews) {
-  const root = siteRoot(site);
-  return (googleReviews?.reviews || []).slice(0, 5).map((review, index) => ({
-    '@type': 'Review',
-    '@id': root + '#review-' + (index + 1),
-    author: {
-      '@type': 'Person',
-      name: review.name || 'Google reviewer'
-    },
-    reviewBody: review.quote,
-    reviewRating: {
-      '@type': 'Rating',
-      ratingValue: '5',
-      bestRating: '5',
-      worstRating: '1'
-    },
-    itemReviewed: { '@id': root + '#dentist' }
-  }));
+function compactNode(node) {
+  return JSON.parse(JSON.stringify(node));
 }
 
-function compactNode(node) {
-  return JSON.parse(JSON.stringify(node, (_key, value) => (value === undefined ? undefined : value)));
+function setWebpageMainEntity(graph, page, site, id) {
+  const webpage = graph.find((node) => node['@id'] === pageUrl(site, page) + '#webpage');
+  if (webpage) webpage.mainEntity = { '@id': id };
 }
 
 export function buildSchemaGraph(page, site, googleReviews, options = {}) {
@@ -458,22 +609,17 @@ export function buildSchemaGraph(page, site, googleReviews, options = {}) {
   const graph = [
     dentistNode(site, googleReviews),
     organizationNode(site),
-    physicianNode(site),
+    personNode(site, page),
     websiteNode(site),
-    webpageNode(site, page)
+    webpageNode(site, page),
+    breadcrumbNode(site, page)
   ];
 
-  const breadcrumb = breadcrumbNode(site, page);
-  if (breadcrumb) graph.push(breadcrumb);
-
   const faqs = extractFaqs(page);
-  if (faqs.length || FAQ_PRIORITY_ROUTES.has(page.route)) {
-    const faq = faqNode(site, page, faqs);
-    if (faq) {
-      graph.push(faq);
-      const webpage = graph.find((node) => node['@id'] === pageUrl(site, page) + '#webpage');
-      if (webpage) webpage.mainEntity = { '@id': faq['@id'] };
-    }
+  const faq = faqNode(site, page, faqs);
+  if (faq) {
+    graph.push(faq);
+    setWebpageMainEntity(graph, page, site, faq['@id']);
   }
 
   const service = serviceNode(site, page);
@@ -483,20 +629,13 @@ export function buildSchemaGraph(page, site, googleReviews, options = {}) {
     if (webpage && !webpage.mainEntity) webpage.mainEntity = { '@id': service['@id'] };
   }
 
+  const place = placeNode(site, page);
+  if (place) graph.push(place);
+
   const article = articleNode(site, page);
   if (article) {
     graph.push(article);
-    const webpage = graph.find((node) => node['@id'] === pageUrl(site, page) + '#webpage');
-    if (webpage) webpage.mainEntity = { '@id': article['@id'] };
-  }
-
-  if (page.type === 'doctor') {
-    const webpage = graph.find((node) => node['@id'] === pageUrl(site, page) + '#webpage');
-    if (webpage) webpage.mainEntity = { '@id': siteRoot(site) + '#physician' };
-  }
-
-  if (page.type === 'home') {
-    graph.push(...reviewNodes(site, googleReviews));
+    setWebpageMainEntity(graph, page, site, article['@id']);
   }
 
   const videos = videoNodes(site, page);
@@ -504,9 +643,7 @@ export function buildSchemaGraph(page, site, googleReviews, options = {}) {
 
   if (videos.length) {
     const webpage = graph.find((node) => node['@id'] === pageUrl(site, page) + '#webpage');
-    if (webpage && !webpage.mainEntity) {
-      webpage.mainEntity = { '@id': videos[0]['@id'] };
-    }
+    if (webpage && !webpage.mainEntity) webpage.mainEntity = { '@id': videos[0]['@id'] };
   }
 
   const payload = {

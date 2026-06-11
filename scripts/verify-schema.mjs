@@ -14,7 +14,6 @@ async function walk(dir, files = []) {
   return files;
 }
 
-const requiredGlobal = ['Dentist', 'LocalBusiness', 'Organization', 'Physician', 'WebSite'];
 const files = (await walk(DIST)).filter((file) => !file.includes(`${path.sep}admin${path.sep}`));
 let failures = 0;
 
@@ -26,18 +25,56 @@ for (const file of files) {
     failures++;
     continue;
   }
+
   const data = JSON.parse(match[1]);
   if (!data['@graph']) {
     console.error('Missing @graph:', path.relative(DIST, file));
     failures++;
     continue;
   }
+
   const types = new Set(data['@graph'].flatMap((node) => Array.isArray(node['@type']) ? node['@type'] : [node['@type']]));
-  for (const type of requiredGlobal) {
-    if (!types.has(type)) {
-      console.error('Missing ' + type + ':', path.relative(DIST, file));
+  const ids = data['@graph'].map((node) => node['@id']).filter(Boolean);
+
+  for (const required of ['Dentist', 'Organization', 'Person', 'WebSite', 'BreadcrumbList']) {
+    if (!types.has(required)) {
+      console.error('Missing ' + required + ':', path.relative(DIST, file));
       failures++;
     }
+  }
+
+  const dentistCount = data['@graph'].filter((node) => node['@type'] === 'Dentist' || (Array.isArray(node['@type']) && node['@type'].includes('Dentist'))).length;
+  const orgCount = data['@graph'].filter((node) => node['@type'] === 'Organization').length;
+  const localBusinessCount = data['@graph'].filter((node) => node['@type'] === 'LocalBusiness' || (Array.isArray(node['@type']) && node['@type'].includes('LocalBusiness'))).length;
+  const reviewCount = data['@graph'].filter((node) => node['@type'] === 'Review').length;
+
+  if (dentistCount !== 1) {
+    console.error('Expected 1 Dentist node, found ' + dentistCount + ':', path.relative(DIST, file));
+    failures++;
+  }
+  if (orgCount !== 1) {
+    console.error('Expected 1 Organization node, found ' + orgCount + ':', path.relative(DIST, file));
+    failures++;
+  }
+  if (localBusinessCount > 0) {
+    console.error('Unexpected LocalBusiness node on:', path.relative(DIST, file));
+    failures++;
+  }
+  if (reviewCount > 0) {
+    console.error('Review nodes should not be stuffed on:', path.relative(DIST, file));
+    failures++;
+  }
+
+  for (const video of data['@graph'].filter((node) => node['@type'] === 'VideoObject')) {
+    if (!video.name || !video.thumbnailUrl || !video.uploadDate || !(video.contentUrl || video.embedUrl)) {
+      console.error('Invalid VideoObject on:', path.relative(DIST, file), video['@id']);
+      failures++;
+    }
+  }
+
+  if (new Set(ids).size !== ids.length) {
+    console.error('Duplicate @id values on:', path.relative(DIST, file));
+    failures++;
   }
 }
 

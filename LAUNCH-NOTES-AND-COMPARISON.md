@@ -288,20 +288,20 @@ Implemented in `scripts/schema-graph.mjs` — injected on **all 82 public pages*
 
 ### Global `@graph` nodes (every page)
 
-| Type | Purpose |
-|------|---------|
-| `Dentist` + `LocalBusiness` | Canonical practice entity (`#dentist`) — NAP, `geo`, hours, `priceRange`, `sameAs`, `AggregateRating` |
-| `Organization` | Brand entity with logo + social profiles |
-| `Physician` | Dr. Nadia Pokrovskaya, D.M.D. — E-E-A-T |
-| `WebSite` | Site-level publisher node |
-| `WebPage` / `ContactPage` / `ProfilePage` / `CollectionPage` | Page-type-specific shell |
-| `BreadcrumbList` | All pages except homepage |
+| Type | `@id` | Purpose |
+|------|-------|---------|
+| `Dentist` | `#dentist` | Canonical practice — NAP, `geo`, hours, `areaServed`, `sameAs`, `aggregateRating` only (no review stuffing) |
+| `Organization` | `#organization` | Minimal brand node — logo + founder reference only |
+| `Person` | `#dr-nadia` | Dr. Nadia Pokrovskaya, D.M.D. — E-E-A-T |
+| `WebSite` | `#website` | Site publisher |
+| `WebPage` / `ContactPage` / `ProfilePage` / `CollectionPage` | `#webpage` | Page shell |
+| `BreadcrumbList` | `#breadcrumb` | **Every page**, including homepage |
 
 ### Page-type enhancements
 
 | Page type | Additional schema |
 |-----------|-------------------|
-| `home` | `Review` samples + hero `VideoObject` |
+| `home` | Hero `VideoObject` only (visible autoplay video) |
 | `service` | `Service` + `FAQPage` when Q&A items detected |
 | `serviceArea` | `Service` with `areaServed` city |
 | `blogPost` | `BlogPosting` + author → Physician |
@@ -411,6 +411,7 @@ node scripts/build.mjs
 | 2026-06-11 | PageSpeed Insights v2 link added; full JSON-LD `@graph` schema on all 82 pages |
 | 2026-06-11 | GitHub Pages mobile hero video 404 fixed (`prepare-pages.mjs` + `resolveSitePath`) |
 | 2026-06-11 | Rich Results video schema fix — 1 hero `VideoObject`, poster fallbacks, preview asset origin in CI |
+| 2026-06-11 | Schema refactor — canonical `Dentist`/`Person` graph, no duplicate LocalBusiness/Review nodes, `Service`+`FAQPage`+`VideoObject` metadata registry |
 
 ---
 
