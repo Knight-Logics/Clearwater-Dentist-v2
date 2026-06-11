@@ -4122,102 +4122,85 @@ body.nav-open {
   }
 }
 
-/* Accessibility: WAVE / WCAG AA contrast pass (Jun 2026) */
-:root {
-  --muted: #3d5257;
-}
+/* Accessibility (Jun 2026): keep brand gold; fix only secondary UI text */
 
-.eyebrow {
-  color: #8f5a1c;
-}
-
-.page-home .home-hero-copy .eyebrow,
-.page-home .cw-why-band__panel .eyebrow,
-.cw-before-after-band__inner .eyebrow,
-.cta-band .eyebrow,
-.page-gallery .cw-before-after-band__inner .eyebrow {
-  color: #e8b56a;
-}
-
-.page-home .cw-why-band__lede {
-  color: #e8b56a;
-}
-
-.brand small {
-  color: #3d5257;
-}
-
-.page-home .cw-trust-intro,
-.cw-faq-band__intro,
-.section-head p:not(.eyebrow),
-.cw-video-carousel__intro p:not(.eyebrow),
-.fine-print {
-  color: #3d5257;
+/* Light sections: gold label on navy chip (on-brand, passes large/bold contrast) */
+.home-lead-panel .eyebrow,
+.section-head .eyebrow,
+.cw-faq-band .eyebrow,
+.cw-video-carousel__intro .eyebrow,
+.cw-before-after-band__inner .section-head .eyebrow,
+.cw-gallery-discover .section-head .eyebrow {
+  display: inline-block;
+  width: auto;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.22em 0.8em;
+  border-radius: 5px;
+  background: var(--cw-logo-navy);
+  color: var(--gold);
+  -webkit-text-stroke: 0 transparent;
+  text-shadow: none;
 }
 
 .cw-google-trust .review-card-meta,
 .cw-google-trust .review-card-date {
-  color: #354a50;
-  font-size: clamp(0.76rem, 0.2vw + 0.7rem, 0.8rem);
+  color: #3a5258;
+  font-size: max(0.8rem, 12px);
 }
 
 .cw-google-trust .map-place-badge__score {
-  color: #354a50;
+  color: #3a5258;
 }
 
 .cw-carousel-tab {
-  color: #2a454c;
+  color: var(--cw-logo-navy);
 }
 
 .cw-carousel-tab__dot {
-  background: #8fa3a9;
+  background: #9eb0b6;
 }
 
 .cw-carousel-tab.is-active .cw-carousel-tab__dot {
-  background: #8f5a1c;
-}
-
-.cw-video-carousel__caption p {
-  color: #3d5257;
+  background: var(--gold);
 }
 
 .page-home .cw-why-band__check-copy > span {
-  color: rgba(255, 255, 255, 0.92);
+  color: #fff;
 }
 
 .page-home .cw-before-after-band__inner .section-head a,
 .page-gallery .cw-before-after-band__inner .section-head a {
-  color: #0a3345;
+  color: var(--cw-logo-navy);
   text-decoration: underline;
   font-weight: 800;
 }
 
 .compare-label {
-  background: rgba(10, 34, 40, 0.82);
-  font-size: 0.82rem;
+  background: rgba(10, 34, 40, 0.85);
+  font-size: max(0.82rem, 12px);
+}
+
+.cw-service-card__peek {
+  color: #fff;
+  font-size: max(0.8rem, 12px);
 }
 
 .mini-actions a {
-  color: #0a3345;
-}
-
-.page-home .hero-pills a {
-  border-color: rgba(255, 255, 255, 0.45);
-}
-
-.cw-faq-item summary::after {
-  background: #0a3345;
+  color: var(--cw-logo-navy);
+  font-weight: 800;
 }
 
 .site-footer .copyright {
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.92);
 }
 
 .mini-form label,
 .contact-form label {
   display: block;
   margin: 0;
-  color: #172323;
+  color: var(--ink);
   font-weight: 800;
 }
 
