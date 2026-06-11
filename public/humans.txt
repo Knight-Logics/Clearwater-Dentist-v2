@@ -1,0 +1,20 @@
+/* TEAM */
+Developer: Knight Logics
+Site: https://knightlogics.com
+Contact: nknight@knightgroup.com
+
+/* SITE */
+Business: Clearwater Dentist
+Doctor: Dr. Nadia Pokrovskaya, D.M.D.
+Location: Clearwater, FL 33759
+Phone: (727) 285-8132
+Email: info@clearwaterdentist.com
+
+/* THANKS */
+Client: Clearwater Dentist
+Platform: Static rebuild (DentistClearwater v2)
+
+/* STANDARDS */
+HTML5, CSS3, semantic markup, accessible navigation
+LLM index: /llms.txt
+Full LLM index: /llms-full.txt
