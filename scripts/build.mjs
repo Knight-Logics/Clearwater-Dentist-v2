@@ -344,6 +344,33 @@ function navTree() {
     { label: 'Blog', href: '/blog' }
   ];
 }
+function navOverviewLabel(item, options) {
+  if (item.overviewLabel) return item.overviewLabel;
+  const depth = options.depth || 0;
+  const megaMenu = options.megaMenu;
+  if (megaMenu && depth === 0) return 'All Services';
+  if (megaMenu && depth === 1) return item.label;
+  if (item.label === 'About') return 'Meet Dr. Nadia';
+  if (item.label === 'Financing') return 'Financing Options';
+  return item.label;
+}
+function navSubmenuItems(item, options) {
+  const depth = options.depth || 0;
+  const megaMenu = options.megaMenu;
+  const childItems = (item.children && item.children.length ? item.children : [])
+    .filter(child => child.href !== item.href);
+  if (!childItems.length) return [];
+  if (!item.href || childItems.some(child => child.href === item.href)) return childItems;
+  const overviewItem = {
+    label: navOverviewLabel(item, { depth, megaMenu: megaMenu || item.megaMenu }),
+    href: item.href,
+    isOverview: true
+  };
+  const extraChildren = (item.megaMenu && depth === 0)
+    ? childItems.filter(child => child.label !== 'All Services')
+    : childItems;
+  return [overviewItem].concat(extraChildren);
+}
 function renderNav(items, currentRoute, options) {
   const opts = options || {};
   const depth = opts.depth || 0;
@@ -366,6 +393,47 @@ function renderNav(items, currentRoute, options) {
     return '<li class="nav-item' + (children ? ' has-children' : '') + directoryClass + active + '">' + parentLabel + children + '</li>';
   }).join('') + '</ul>';
 }
+function mobileNavSlug(label, depth, index) {
+  const slug = String(label || 'item').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'item';
+  return 'cw-mm-' + depth + '-' + index + '-' + slug;
+}
+function renderMobileNavItems(items, currentRoute, options) {
+  const opts = options || {};
+  const depth = opts.depth || 0;
+  const megaMenu = !!(opts.megaMenu);
+  return items.map(function (item, index) {
+    const submenuItems = navSubmenuItems(item, { depth, megaMenu: megaMenu || item.megaMenu });
+    const childOpts = {
+      depth: depth + 1,
+      megaMenu: !!(opts.megaMenu || item.megaMenu)
+    };
+    const active = isActive(item, currentRoute) ? ' is-active' : '';
+    const overviewClass = item.isOverview ? ' cw-mm-item--overview' : '';
+    const directoryClass = item.label === 'All Services' ? ' cw-mm-item--directory' : '';
+
+    if (!submenuItems.length) {
+      return '<li class="cw-mm-item' + overviewClass + directoryClass + active + '"><a class="cw-mm-link" href="' + attr(item.href) + '">' + e(item.label) + '</a></li>';
+    }
+
+    const submenuId = mobileNavSlug(item.label, depth, index);
+    return '<li class="cw-mm-item cw-mm-item--branch' + active + '"><button class="cw-mm-trigger" type="button" aria-expanded="false" aria-controls="' + attr(submenuId) + '"><span class="cw-mm-label">' + e(item.label) + '</span><span class="cw-mm-chevron" aria-hidden="true"></span></button><ul class="cw-mm-submenu" id="' + attr(submenuId) + '" hidden>' + renderMobileNavItems(submenuItems, currentRoute, childOpts) + '</ul></li>';
+  }).join('');
+}
+function renderMobileNav(items, currentRoute) {
+  return renderMobileNavItems(items, currentRoute, { depth: 0 });
+}
+function mobileDrawerSocial() {
+  return (site.social || []).map(s => '<a class="cw-mobile-drawer__social-link" href="' + attr(s.href) + '" target="_blank" rel="noopener noreferrer" aria-label="' + attr(s.label) + '"><span class="social-glyph cw-mobile-drawer__social-icon" aria-hidden="true">' + socialIcon(s.label) + '</span></a>').join('');
+}
+function mobileMenuFooter() {
+  return '<div class="cw-mobile-drawer__foot"><div class="cw-mobile-drawer__cta"><a class="cw-mobile-drawer__cta-book" href="' + APPOINTMENT_PATH + '">Request Visit</a><a class="cw-mobile-drawer__cta-call" href="tel:' + attr(site.phoneTel) + '">' + e(site.phoneDisplay) + '</a></div><div class="cw-mobile-drawer__social" aria-label="Social media">' + mobileDrawerSocial() + '</div><p class="cw-mobile-drawer__copyright">&copy; 2026 ' + e(site.name) + '. All Rights Reserved.</p></div>';
+}
+function mobileMenuShell(navListHtml, logo) {
+  const logoHtml = logo
+    ? '<a class="cw-mobile-drawer__logo" href="/" aria-label="Clearwater Dentist home"><img src="' + attr(logo) + '" alt="" width="36" height="36" decoding="async"></a>'
+    : '';
+  return '<nav id="cwMobileMenu" class="cw-mobile-menu" aria-label="Mobile navigation" aria-hidden="true" hidden><div class="cw-mobile-drawer__head"><div class="cw-mobile-drawer__brand">' + logoHtml + '<p class="cw-mobile-drawer__title">Menu</p></div><button class="cw-mobile-drawer__close" type="button" data-menu-close aria-label="Close menu"><span aria-hidden="true">&times;</span></button></div><div class="cw-mobile-drawer__body"><ul class="cw-mm-nav">' + navListHtml + '</ul></div>' + mobileMenuFooter() + '</nav>';
+}
 const phoneIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8c1.5 2.9 3.7 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.5.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.3 21 3 13.7 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.3 0 .7-.2 1L6.6 10.8z"/></svg>';
 function headerSocial() {
   return (site.social || []).map(s => '<a class="cw-site-header__social-link" href="' + attr(s.href) + '" target="_blank" rel="noopener noreferrer" aria-label="' + attr(s.label) + '"><span class="social-glyph cw-header-social-icon" aria-hidden="true">' + socialIcon(s.label) + '</span></a>').join('');
@@ -375,7 +443,10 @@ function headerCtaStack() {
 }
 function header(page) {
   const logo = site.assets.logo || site.assets.logoWhite || '';
-  return '<header class="site-header" data-site-header><div class="header-inner"><div class="brand-wrap"><a class="brand" href="/" aria-label="Clearwater Dentist home">' + (logo ? '<img src="' + attr(logo) + '" alt="Clearwater Dentist logo" width="58" height="58">' : '') + '<span class="brand-text"><strong>' + e(site.name) + '</strong><small>' + e(site.doctor) + '</small></span></a><div class="cw-site-header__social cw-brand-social" aria-label="Social media">' + headerSocial() + '</div></div><nav id="primary-menu" class="primary-menu" aria-label="Primary navigation">' + renderNav(navTree(), page.route, { depth: 0 }) + '</nav><div class="header-mobile-end">' + headerCtaStack() + '<button class="menu-button" type="button" data-menu-toggle aria-controls="primary-menu" aria-expanded="false"><span></span><span></span><span></span><b>Menu</b></button></div></div></header>';
+  const drawerLogo = site.assets.logoWhite || site.assets.logo || '';
+  const navHtml = renderNav(navTree(), page.route, { depth: 0 });
+  const mobileNavHtml = renderMobileNav(navTree(), page.route);
+  return '<header class="site-header" data-site-header><div class="header-inner"><div class="brand-wrap"><a class="brand" href="/" aria-label="Clearwater Dentist home">' + (logo ? '<img src="' + attr(logo) + '" alt="Clearwater Dentist logo" width="58" height="58">' : '') + '<span class="brand-text"><strong>' + e(site.name) + '</strong><small>' + e(site.doctor) + '</small></span></a><button class="menu-button" type="button" data-menu-toggle aria-controls="cwMobileMenu" aria-expanded="false"><span></span><span></span><span></span><b>Menu</b></button><div class="cw-site-header__social cw-brand-social" aria-label="Social media">' + headerSocial() + '</div></div><nav id="primary-menu" class="primary-menu" aria-label="Primary navigation">' + navHtml + '</nav><div class="header-mobile-end">' + headerCtaStack() + '</div></div><div class="cw-nav-backdrop" id="cwNavBackdrop" aria-hidden="true" hidden></div>' + mobileMenuShell(mobileNavHtml, drawerLogo) + '</header>';
 }
 function socialIcon(label) {
   const codes = { Facebook: '&#xea90;', Instagram: '&#xea92;', YouTube: '&#xea9d;', Pinterest: '&#xf0d2;', TikTok: '&#xe813;' };
