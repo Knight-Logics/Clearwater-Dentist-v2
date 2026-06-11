@@ -108,7 +108,7 @@ export function faqAccordionHtml(page, items, helpers) {
   return '<section class="cw-faq-band cw-reveal" id="faqs" aria-labelledby="' + attr(headingId) + '"' + cwRevealAttr('bottom', 100) + '>'
     + '<div class="cw-faq-band__inner">'
     + '<div class="cw-faq-band__head section-head">'
-    + '<p class="cw-kicker"' + cwEdit(page.route, 'faq-eyebrow', 'FAQ eyebrow') + '>' + e(copy.eyebrow) + '</p>'
+    + '<p class="eyebrow"' + cwEdit(page.route, 'faq-eyebrow', 'FAQ eyebrow') + '>' + e(copy.eyebrow) + '</p>'
     + '<h2 id="' + attr(headingId) + '"' + cwEdit(page.route, 'faq-title', 'FAQ title') + '>' + e(copy.title) + '</h2>'
     + '<p class="cw-faq-band__intro"' + cwEdit(page.route, 'faq-intro', 'FAQ intro') + '>' + e(copy.intro) + '</p>'
     + '</div>'
