@@ -67,12 +67,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
   initHomeHeroParallax();
 
-  function shouldSkipHeavyMedia() {
-    const mobile = window.matchMedia('(max-width: 768px)').matches;
-    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-    const saveData = connection && connection.saveData;
-    const slowLink = connection && /(?:^|-)2g$/.test(connection.effectiveType || '');
-    return mobile || saveData || slowLink;
+  function pickLazyVideoSrc(video) {
+    const mobileSrc = video.getAttribute('data-cw-lazy-src-mobile');
+    const desktopSrc = video.getAttribute('data-cw-lazy-src');
+    if (video.hasAttribute('data-cw-hero-video') && mobileSrc && window.matchMedia('(max-width: 768px)').matches) {
+      return mobileSrc;
+    }
+    return desktopSrc;
   }
 
   function ensureLazyVideoPoster(video) {
@@ -83,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function ensureLazyVideoSource(video) {
     if (!video || video.dataset.cwVideoLoaded === '1') return;
-    const src = video.getAttribute('data-cw-lazy-src');
+    const src = pickLazyVideoSrc(video);
     if (!src) return;
     video.src = src;
     video.dataset.cwVideoLoaded = '1';
@@ -131,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function initDeferredHeroVideo() {
     const video = document.querySelector('.home-hero-media video[data-cw-hero-video]');
-    if (!video || shouldSkipHeavyMedia()) return;
+    if (!video) return;
 
     function loadHeroVideo() {
       ensureLazyVideoSource(video);
@@ -646,10 +647,8 @@ document.addEventListener('DOMContentLoaded', function () {
         if (video) {
           if (inFrame && carouselVisible && !motionQuery.matches) {
             ensureLazyVideoPoster(video);
-            if (!mq.matches) {
-              ensureLazyVideoSource(video);
-              video.play().catch(function () {});
-            }
+            ensureLazyVideoSource(video);
+            video.play().catch(function () {});
           } else {
             video.pause();
             video.muted = true;
