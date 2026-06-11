@@ -263,6 +263,35 @@ async function copyDir(src, dest) {
 function linkList(items) {
   return (items || []).map(item => '<li><a href="' + attr(item.href) + '">' + e(item.label) + '</a></li>').join('');
 }
+function footerServiceLinkColumns(links) {
+  const implantHref = '/implant-supported-dentures-clearwater-fl';
+  const gumHref = '/gum-disease-treatment';
+  const implant = links.find(item => item.href === implantHref);
+  const gum = links.find(item => item.href === gumHref);
+  const rest = links.filter(item => item.href !== implantHref && item.href !== gumHref);
+  return [
+    rest.slice(0, 7).concat(implant ? [implant] : []),
+    rest.slice(7, 13).concat(gum ? [gum] : []),
+    rest.slice(13)
+  ];
+}
+function footerServiceColumnItems(items, colEndHref) {
+  return items.map(item => {
+    const endClass = colEndHref && item.href === colEndHref ? ' footer-services__item--col-end' : '';
+    return '<li class="footer-services__item' + endClass + '"><a href="' + attr(item.href) + '">' + e(item.label) + '</a></li>';
+  }).join('');
+}
+function footerServiceLinksHtml() {
+  const columns = footerServiceLinkColumns(site.serviceLinks || []);
+  return '<div class="footer-services__columns">' + columns.map((items, index) => {
+    const colEndHref = index === 0
+      ? '/implant-supported-dentures-clearwater-fl'
+      : index === 1
+        ? '/gum-disease-treatment'
+        : '';
+    return '<ul class="footer-services__col">' + footerServiceColumnItems(items, colEndHref) + '</ul>';
+  }).join('') + '</div>';
+}
 const internalLinkRoutes = new Set([
   ...allPages.map(page => page.route),
   ...(site.serviceAreas || []).map(area => `/${area.slug}`),
@@ -460,7 +489,7 @@ function footerOfficeCompact() {
 function footer() {
   const logo = site.assets.logoWhite || site.assets.logo || '';
   const social = (site.social || []).map(s => '<a class="social-link" href="' + attr(s.href) + '" target="_blank" rel="noopener" aria-label="' + attr(s.label) + '"><span class="social-glyph" aria-hidden="true">' + socialIcon(s.label) + '</span></a>').join('');
-  return '<footer class="site-footer"><div class="footer-grid"><section class="footer-brand">' + (logo ? '<img src="' + attr(logo) + '" alt="Clearwater Dentist logo" width="108" height="108" decoding="async">' : '') + '<h2>' + e(site.name) + '</h2><p>' + e(site.tagline) + '</p><div class="social-row">' + social + '</div></section><section class="footer-services"><h2>Services</h2><ul class="footer-services__list">' + linkList(site.serviceLinks || []) + '</ul></section><section class="footer-quick-links"><h2>Quick Links</h2><ul class="footer-quick-links__list">' + linkList(site.quickLinks || []) + '</ul></section>' + footerOfficeCompact() + '</div><div class="footer-bottom"><ul class="footer-policies">' + linkList(site.policyLinks || []) + '</ul><p class="copyright">&copy; 2026 Clearwater Dentist. All Rights Reserved.</p></div></footer>';
+  return '<footer class="site-footer"><div class="footer-grid"><section class="footer-brand">' + (logo ? '<img src="' + attr(logo) + '" alt="Clearwater Dentist logo" width="108" height="108" decoding="async">' : '') + '<h2>' + e(site.name) + '</h2><p>' + e(site.tagline) + '</p><div class="social-row">' + social + '</div></section><section class="footer-services"><h2>Services</h2>' + footerServiceLinksHtml() + '</section><section class="footer-quick-links"><h2>Quick Links</h2><ul class="footer-quick-links__list">' + linkList(site.quickLinks || []) + '</ul></section>' + footerOfficeCompact() + '</div><div class="footer-bottom"><ul class="footer-policies">' + linkList(site.policyLinks || []) + '</ul><p class="copyright">&copy; 2026 Clearwater Dentist. All Rights Reserved.</p></div></footer>';
 }
 function imageAlt(image) {
   if (!image || !Object.prototype.hasOwnProperty.call(image, 'alt')) {
@@ -951,8 +980,7 @@ function whySection() {
 function reviewInitials(name) {
   const parts = String(name || '').replace(/"/g, '').trim().split(/\s+/).filter(Boolean);
   if (!parts.length) return '?';
-  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
-  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+  return parts[0][0].toUpperCase();
 }
 function googleReviewCard(review, index) {
   const color = REVIEW_AVATAR_COLORS[index % REVIEW_AVATAR_COLORS.length];
