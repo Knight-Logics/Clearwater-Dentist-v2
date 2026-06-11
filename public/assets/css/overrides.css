@@ -29,6 +29,24 @@
   --cw-glass-band-border-bottom: 1px solid rgba(213, 224, 230, 0.45);
   --cw-glass-band-shadow: 0 10px 28px rgba(15, 63, 85, 0.06);
   --cw-glass-band-solid: #fbfcfb;
+  --cw-btn-primary: var(--cw-logo-navy);
+  --cw-btn-primary-hover: var(--cw-logo-blue-deep);
+}
+
+.header-cta,
+.btn.primary {
+  background: var(--cw-btn-primary);
+  border-color: var(--cw-btn-primary);
+  color: #fff;
+}
+
+.header-cta:hover,
+.header-cta:focus-visible,
+.btn.primary:hover,
+.btn.primary:focus-visible {
+  background: var(--cw-btn-primary-hover);
+  border-color: var(--cw-btn-primary-hover);
+  color: #fff;
 }
 
 .eyebrow {
@@ -949,20 +967,44 @@ body.page-home {
 
 .site-footer .footer-grid {
   grid-template-columns: minmax(220px, 1.05fr) minmax(340px, 2.15fr) minmax(180px, 0.85fr);
-  gap: 2rem 2.5rem;
+  grid-template-areas:
+    "brand services quick"
+    "office office office";
+  gap: 1.35rem 2.5rem;
   align-items: start;
 }
 
+.site-footer .footer-brand {
+  grid-area: brand;
+}
+
+.site-footer .footer-services {
+  grid-area: services;
+}
+
+.site-footer .footer-quick-links {
+  grid-area: quick;
+}
+
 .site-footer .footer-office {
-  margin-top: 1.15rem;
-  padding-top: 0.95rem;
+  grid-area: office;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  width: 100%;
+  margin-top: 0.15rem;
+  padding-top: 1rem;
   border-top: 1px solid rgba(255, 255, 255, 0.14);
   font-size: 0.88rem;
   line-height: 1.45;
+  text-align: center;
 }
 
 .site-footer .footer-office__label {
-  margin: 0 0 0.4rem;
+  flex: 0 0 auto;
+  margin: 0;
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -970,14 +1012,24 @@ body.page-home {
   color: var(--gold);
 }
 
-.site-footer .footer-office__address {
-  margin: 0 0 0.45rem;
+.site-footer .footer-office__details {
+  display: flex;
+  flex: 0 1 auto;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.35rem 1.5rem;
+  width: 100%;
+  min-width: 0;
+}
+
+.site-footer .footer-office__address,
+.site-footer .footer-office__hours,
+.site-footer .footer-office__contact {
+  margin: 0;
 }
 
 .site-footer .footer-office__hours {
-  display: grid;
-  gap: 0.15rem;
-  margin-bottom: 0.5rem;
   color: rgba(255, 255, 255, 0.78);
   font-size: 0.84rem;
 }
@@ -988,7 +1040,6 @@ body.page-home {
 }
 
 .site-footer .footer-office__contact {
-  margin: 0;
   font-size: 0.9rem;
 }
 
@@ -1195,7 +1246,7 @@ body.page-home {
   height: 42px;
   padding: 0 1.15rem;
   border-radius: 999px;
-  background: linear-gradient(135deg, #c07a2e 0%, #a86824 100%);
+  background: var(--cw-btn-primary);
   color: #fff !important;
   font-size: clamp(0.62rem, 0.25vw + 0.55rem, 0.74rem);
   font-weight: 800;
@@ -1203,15 +1254,15 @@ body.page-home {
   text-transform: uppercase;
   text-decoration: none;
   white-space: nowrap;
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15), 0 8px 22px rgba(192, 122, 46, 0.35);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15), 0 8px 22px rgba(15, 63, 85, 0.35);
   transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.18s ease;
 }
 
 .cw-site-header__btn--book:hover,
 .cw-site-header__btn--book:focus-visible {
-  background: linear-gradient(135deg, #ff9a3c 0%, #f07a18 100%);
+  background: var(--cw-btn-primary-hover);
   color: #fff !important;
-  box-shadow: 0 0 18px rgba(255, 140, 50, 0.55), 0 8px 24px rgba(255, 120, 30, 0.4);
+  box-shadow: 0 0 18px rgba(15, 63, 85, 0.45), 0 8px 24px rgba(15, 63, 85, 0.35);
   transform: translateY(-1px);
   outline: none;
 }
@@ -2071,13 +2122,13 @@ body.page-home {
   width: 100%;
   min-height: 36px;
   padding: 0.45rem 0.75rem;
-  border: 2px solid #ff9a3c;
-  background: rgba(0, 0, 0, 0.55);
+  border: 2px solid var(--cw-btn-primary);
+  background: var(--cw-btn-primary);
   font-size: 0.68rem;
   font-weight: 900;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #ff9a3c;
+  color: #fff;
   text-decoration: none;
   box-sizing: border-box;
   flex: 0 0 auto;
@@ -3019,6 +3070,11 @@ body.cw-modal-open {
 
   .site-footer .footer-grid {
     grid-template-columns: 1fr;
+    grid-template-areas:
+      "brand"
+      "services"
+      "quick"
+      "office";
     justify-items: center;
     text-align: center;
   }
@@ -3045,7 +3101,16 @@ body.cw-modal-open {
 
   .site-footer .footer-office {
     width: 100%;
+    max-width: 28rem;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
+  }
+
+  .site-footer .footer-office__details {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
   }
 
   .site-footer .footer-grid ul {
@@ -3157,30 +3222,30 @@ body.cw-modal-open {
   }
 
   .hero-pills a {
-    color: #172323;
-    background: rgba(255, 154, 60, 0.88);
-    border-color: rgba(255, 180, 100, 0.95);
+    color: #fff;
+    background: var(--cw-btn-primary);
+    border-color: rgba(255, 255, 255, 0.28);
   }
 
   .hero-pills a:hover,
   .hero-pills a:focus-visible {
-    background: #ff9a3c;
+    background: var(--cw-btn-primary-hover);
     color: #fff;
-    border-color: rgba(255, 255, 255, 0.9);
+    border-color: rgba(255, 255, 255, 0.42);
   }
 }
 
 .page-home .hero-pills a {
-  color: #172323;
-  background: rgba(255, 154, 60, 0.88);
-  border-color: rgba(255, 180, 100, 0.95);
+  color: #fff;
+  background: var(--cw-btn-primary);
+  border-color: rgba(255, 255, 255, 0.28);
 }
 
 .page-home .hero-pills a:hover,
 .page-home .hero-pills a:focus-visible {
-  background: #ff9a3c;
+  background: var(--cw-btn-primary-hover);
   color: #fff;
-  border-color: rgba(255, 255, 255, 0.9);
+  border-color: rgba(255, 255, 255, 0.42);
 }
 
 .page-home .home-hero-copy .hero-actions .btn.primary,
@@ -3209,15 +3274,15 @@ body.cw-modal-open {
 }
 
 .cta-band .btn.primary {
-  background: #ff9a3c;
-  border-color: #ff9a3c;
-  color: #172323;
+  background: var(--cw-btn-primary);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #fff;
 }
 
 .cta-band .btn.primary:hover,
 .cta-band .btn.primary:focus-visible {
-  background: #f07a18;
-  border-color: #f07a18;
+  background: var(--cw-btn-primary-hover);
+  border-color: rgba(255, 255, 255, 0.42);
   color: #fff;
 }
 
