@@ -100,7 +100,7 @@ export function faqAccordionHtml(page, items, helpers) {
   }).join('');
 
   const moreLink = page.route === '/'
-    ? '<p class="cw-faq-band__more"><a href="/new-patient-faqs">See all new patient FAQs</a></p>'
+    ? ''
     : page.route !== '/new-patient-faqs'
       ? '<p class="cw-faq-band__more"><a href="/new-patient-faqs">More new patient FAQs</a></p>'
       : '';
