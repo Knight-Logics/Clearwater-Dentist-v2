@@ -3,6 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { galleryPageSections, servicePageSections } from './clean-page-sections.mjs';
 import { generateLlmsFull, robotsTxtContent } from './llms-content.mjs';
+import { schemaScript } from './schema-graph.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DIST = path.join(ROOT, 'dist');
@@ -995,8 +996,7 @@ function renderGallery(page) {
   return hero(page, 'Before & After') + beforeAfterSection(5) + '<div class="content-layout cw-gallery-content"><article class="article-body">' + sections.map(gallerySectionHtml).join('') + '</article>' + relatedServices(page.route) + '</div>' + galleryHighlightsBand() + galleryCtaBand();
 }
 function schema(page) {
-  const addr = site.address || {};
-  return '<script type="application/ld+json">' + JSON.stringify({ '@context': 'https://schema.org', '@type': 'Dentist', name: site.name, url: site.domain + page.route, telephone: site.phoneDisplay, address: { '@type': 'PostalAddress', streetAddress: addr.street, addressLocality: addr.city, addressRegion: addr.state, postalCode: addr.zip, addressCountry: 'US' } }) + '</script>';
+  return schemaScript(page, site, googleReviews);
 }
 function chatBodyAttrs() {
   const chat = site.chat || {};

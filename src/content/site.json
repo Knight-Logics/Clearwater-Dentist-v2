@@ -15,6 +15,10 @@
     "zip": "33759",
     "country": "US"
   },
+  "geo": {
+    "latitude": 27.9835027,
+    "longitude": -82.7099534
+  },
   "hours": [
     {
       "days": "Monday - Friday",

@@ -14,6 +14,7 @@
     "scrape:demo": "node scripts/scrape-demo-data.mjs",
     "verify": "node scripts/verify-static.mjs",
     "verify:launch-seo": "node scripts/verify-launch-seo.mjs",
+    "verify:schema": "node scripts/verify-schema.mjs",
     "audit:images": "node scripts/audit-images.mjs",
     "convert:webp": "node scripts/convert-to-webp.mjs",
     "qa:screenshots": "node scripts/qa-screenshots.mjs"
