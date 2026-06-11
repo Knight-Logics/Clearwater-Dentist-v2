@@ -13,6 +13,7 @@ const pages = JSON.parse(await fs.readFile(path.join(ROOT, 'src/content/pages.js
 const redirects = JSON.parse(await fs.readFile(path.join(ROOT, 'src/content/redirects.json'), 'utf8'));
 const googleReviews = JSON.parse(await fs.readFile(path.join(ROOT, 'src/content/google-reviews.json'), 'utf8'));
 const PREVIEW_NOINDEX = process.env.PREVIEW_NOINDEX === 'true';
+const SCHEMA_ASSET_ORIGIN = process.env.SCHEMA_ASSET_ORIGIN || '';
 const INCLUDE_ADMIN_PREVIEW = PREVIEW_NOINDEX;
 const APPOINTMENT_PATH = '/contact-us';
 
@@ -996,7 +997,8 @@ function renderGallery(page) {
   return hero(page, 'Before & After') + beforeAfterSection(5) + '<div class="content-layout cw-gallery-content"><article class="article-body">' + sections.map(gallerySectionHtml).join('') + '</article>' + relatedServices(page.route) + '</div>' + galleryHighlightsBand() + galleryCtaBand();
 }
 function schema(page) {
-  return schemaScript(page, site, googleReviews);
+  const options = SCHEMA_ASSET_ORIGIN ? { assetOrigin: SCHEMA_ASSET_ORIGIN } : {};
+  return schemaScript(page, site, googleReviews, options);
 }
 function chatBodyAttrs() {
   const chat = site.chat || {};

@@ -47,7 +47,7 @@ Use this for client meetings, proposal follow-up, and post-cutover validation.
 
 | Tool | URL | Notes |
 |------|-----|-------|
-| Rich Results Test | https://search.google.com/test/rich-results?url=https%3A%2F%2Fknight-logics.github.io%2FClearwater-Dentist-v2%2F | GitHub Pages preview may show **“URL is not available to Google”** — crawler access limitation on `github.io`, not missing markup. Validate JSON-LD in page source or re-test after domain cutover. |
+| Rich Results Test (Jun 11) | https://search.google.com/test/rich-results/result?id=NhHTc9aFxE9QfgA4LqsuCA | Crawl **succeeded**. Valid: Local businesses, Organization, Review snippets. **Videos were invalid** on homepage (5 items) — fixed by using hero video only, required thumbnails, and `SCHEMA_ASSET_ORIGIN` on GitHub deploy so asset URLs resolve on preview. |
 | Schema implementation | `scripts/schema-graph.mjs` | Single `@graph` on all **82** public pages |
 
 ---
@@ -410,6 +410,7 @@ node scripts/build.mjs
 | 2026-06-10 | This document created — live vs v2 comparison + launch notes |
 | 2026-06-11 | PageSpeed Insights v2 link added; full JSON-LD `@graph` schema on all 82 pages |
 | 2026-06-11 | GitHub Pages mobile hero video 404 fixed (`prepare-pages.mjs` + `resolveSitePath`) |
+| 2026-06-11 | Rich Results video schema fix — 1 hero `VideoObject`, poster fallbacks, preview asset origin in CI |
 
 ---
 

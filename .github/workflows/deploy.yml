@@ -27,6 +27,7 @@ jobs:
         run: node scripts/build.mjs
         env:
           PREVIEW_NOINDEX: "false"
+          SCHEMA_ASSET_ORIGIN: https://knight-logics.github.io/Clearwater-Dentist-v2
 
       - name: Prepare site for GitHub Pages
         run: node scripts/prepare-pages.mjs

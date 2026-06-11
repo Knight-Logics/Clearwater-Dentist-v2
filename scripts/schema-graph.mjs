@@ -16,10 +16,62 @@ const FAQ_PRIORITY_ROUTES = new Set([
   '/Invisalign-service-clearwater-fl'
 ]);
 
+let assetOriginOverride = null;
+
 function absUrl(site, path) {
   if (!path) return undefined;
   if (/^https?:\/\//i.test(path)) return path;
-  return site.domain.replace(/\/$/, '') + (path.startsWith('/') ? path : '/' + path);
+  const origin = (assetOriginOverride || site.domain).replace(/\/$/, '');
+  return origin + (path.startsWith('/') ? path : '/' + path);
+}
+
+const VIDEO_TITLE_OVERRIDES = {
+  '6qrr3vuprfkb7oix65k8-elmjyubzqwcgczf8kujh-2024-clearwater-dentist-intro-video-desktop-v-v-optimized': 'Welcome to Clearwater Dentist',
+  '6qrr3vuprfkb7oix65k8-elmjyubzqwcgczf8kujh-2024-clearwater-dentist-intro-video-desktop-v-v': 'Welcome to Clearwater Dentist',
+  '6qrr3vuprfkb7oix65k8-elmjyubzqwcgczf8kujh-2024-clearwater-dentist-intro-video-mobile': 'Welcome to Clearwater Dentist',
+  'wzdvza5yrog6hu70zyqp-office-v': 'Office tour at Clearwater Dentist',
+  'clearwater-dentist-featured-video-therapy-dog': 'Dental therapy dogs at Clearwater Dentist',
+  'e3msq9urtahssy3tq3kg-dr-nadia-interview-2024-edited-v': 'Meet Dr. Nadia Pokrovskaya',
+  'urpldxkqiwfqgznlujv4-clearwater-dentistry-dr-nadia-2024-testimony-video-edited-2-v': 'Patient testimonial at Clearwater Dentist',
+  'ywmr4zpsfw700hobq1fq-julia-patient-testimonial-v': 'Patient testimonial at Clearwater Dentist'
+};
+
+function videoSlug(src) {
+  return String(src || '').split('/').pop()?.replace(/\.mp4$/i, '') || '';
+}
+
+function videoTitle(video, page) {
+  const slug = videoSlug(video.src);
+  if (VIDEO_TITLE_OVERRIDES[slug]) return VIDEO_TITLE_OVERRIDES[slug];
+  const label = String(video.label || '').trim();
+  if (label && !/^clearwater dentist video$/i.test(label)) return label;
+  if (slug) {
+    return slug
+      .replace(/[-_]+/g, ' ')
+      .replace(/\b\w/g, (char) => char.toUpperCase());
+  }
+  return page.h1 || page.title || 'Clearwater Dentist video';
+}
+
+function videoPoster(site, page, video) {
+  return video.poster
+    || site.assets?.heroPoster
+    || page.heroImage?.src
+    || page.images?.[0]?.src
+    || site.assets?.office
+    || site.assets?.doctor;
+}
+
+function videosForSchema(site, page) {
+  if (page.type === 'home') {
+    if (!site.assets?.heroVideo) return [];
+    return [{
+      src: site.assets.heroVideo,
+      poster: site.assets.heroPoster,
+      label: 'Welcome to Clearwater Dentist'
+    }];
+  }
+  return (page.videos || []).slice(0, 2);
 }
 
 function siteRoot(site) {
@@ -176,7 +228,8 @@ function dentistNode(site, googleReviews) {
       areaServed: 'US-FL',
       availableLanguage: ['English']
     },
-    employee: { '@id': root + '#physician' }
+    employee: { '@id': root + '#physician' },
+    parentOrganization: { '@id': root + '#organization' }
   };
 
   if (googleReviews?.rating && googleReviews?.reviewCount) {
@@ -330,7 +383,7 @@ function articleNode(site, page) {
       mainEntityOfPage: { '@id': url + '#webpage' },
       inLanguage: 'en-US',
       about: page.canonicalService?.href
-        ? { '@type': 'Service', url: absUrl(site, page.canonicalService.href), name: page.canonicalService.label }
+        ? { '@type': 'Service', url: pageUrl(site, { route: page.canonicalService.href }), name: page.canonicalService.label }
         : { '@id': root + '#dentist' }
     };
   }
@@ -353,24 +406,25 @@ function articleNode(site, page) {
 
 function videoNodes(site, page) {
   const url = pageUrl(site, page);
-  const videos = [...(page.videos || [])];
-  if (page.type === 'home' && site.assets?.heroVideo) {
-    videos.push({
-      src: site.assets.heroVideo,
-      poster: site.assets.heroPoster,
-      label: 'Welcome to Clearwater Dentist'
-    });
-  }
-  return videos.map((video, index) => ({
-    '@type': 'VideoObject',
-    '@id': url + '#video-' + (index + 1),
-    name: video.label || page.h1 || page.title,
-    description: page.description || site.tagline,
-    contentUrl: absUrl(site, video.src),
-    thumbnailUrl: video.poster ? absUrl(site, video.poster) : undefined,
-    uploadDate: '2024-01-01',
-    publisher: { '@id': siteRoot(site) + '#organization' }
-  }));
+  const root = siteRoot(site);
+  return videosForSchema(site, page).map((video, index) => {
+    const poster = videoPoster(site, page, video);
+    const contentUrl = absUrl(site, video.src);
+    const thumbnailUrl = poster ? absUrl(site, poster) : undefined;
+    if (!contentUrl || !thumbnailUrl) return null;
+
+    return {
+      '@type': 'VideoObject',
+      '@id': url + '#video-' + (index + 1),
+      name: videoTitle(video, page),
+      description: page.description || site.tagline,
+      contentUrl,
+      thumbnailUrl,
+      uploadDate: '2024-06-15T09:00:00-04:00',
+      inLanguage: 'en-US',
+      publisher: { '@id': root + '#organization' }
+    };
+  }).filter(Boolean);
 }
 
 function reviewNodes(site, googleReviews) {
@@ -397,7 +451,10 @@ function compactNode(node) {
   return JSON.parse(JSON.stringify(node, (_key, value) => (value === undefined ? undefined : value)));
 }
 
-export function buildSchemaGraph(page, site, googleReviews) {
+export function buildSchemaGraph(page, site, googleReviews, options = {}) {
+  const previousAssetOrigin = assetOriginOverride;
+  assetOriginOverride = options.assetOrigin || null;
+
   const graph = [
     dentistNode(site, googleReviews),
     organizationNode(site),
@@ -442,15 +499,26 @@ export function buildSchemaGraph(page, site, googleReviews) {
     graph.push(...reviewNodes(site, googleReviews));
   }
 
-  graph.push(...videoNodes(site, page));
+  const videos = videoNodes(site, page);
+  graph.push(...videos);
 
-  return {
+  if (videos.length) {
+    const webpage = graph.find((node) => node['@id'] === pageUrl(site, page) + '#webpage');
+    if (webpage && !webpage.mainEntity) {
+      webpage.mainEntity = { '@id': videos[0]['@id'] };
+    }
+  }
+
+  const payload = {
     '@context': 'https://schema.org',
     '@graph': graph.map(compactNode)
   };
+
+  assetOriginOverride = previousAssetOrigin;
+  return payload;
 }
 
-export function schemaScript(page, site, googleReviews) {
-  const graph = buildSchemaGraph(page, site, googleReviews);
+export function schemaScript(page, site, googleReviews, options = {}) {
+  const graph = buildSchemaGraph(page, site, googleReviews, options);
   return '<script type="application/ld+json">' + JSON.stringify(graph) + '</script>';
 }
