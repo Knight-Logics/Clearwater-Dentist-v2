@@ -391,11 +391,11 @@
     "logoWhite": "/assets/icons/clearwater-dentist-white.svg",
     "office": "/assets/images/clearwater-dentist-clearwater-fl-front-of-dental-office-1920w.webp",
     "doctor": "/assets/images/clearwater-dentist-clearwater-fl-dr-nadia-pokrovskaya-2-739bdcb2-1920w.webp",
-    "doctorCutout": "/assets/images/dr-nadia-pokrovskaya-cutout.webp",
+    "doctorCutout": "/assets/images/dr-nadia-pokrovskaya-cutout-640w.webp",
     "heroPoster": "/assets/images/6qrr3vuprfkb7oix65k8-elmjyubzqwcgczf8kujh-2024-clearwater-dentist-intro-video-desktop-v-v2-0.webp",
     "heroVideo": "/assets/video/6qrr3vuprfkb7oix65k8-elmjyubzqwcgczf8kujh-2024-clearwater-dentist-intro-video-desktop-v-v.mp4",
-    "whyBandParallax": "/assets/images/clearwater-dentist-clearwater-fl-front-staff-parallax.webp",
-    "beforeAfterParallax": "/assets/images/before-after-parallax.webp"
+    "whyBandParallax": "/assets/images/clearwater-dentist-clearwater-fl-front-staff-parallax-1280w.webp",
+    "beforeAfterParallax": "/assets/images/before-after-parallax-1280w.webp"
   },
   "chat": {
     "enabled": true,

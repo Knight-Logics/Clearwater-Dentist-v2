@@ -49,6 +49,14 @@
   color: #fff;
 }
 
+@font-face {
+  font-family: dm-social-icons;
+  src: url("/assets/fonts/dm-social-icons.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 .eyebrow {
   display: block;
   width: 100%;

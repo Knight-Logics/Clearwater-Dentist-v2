@@ -67,6 +67,52 @@ document.addEventListener('DOMContentLoaded', function () {
 
   initHomeHeroParallax();
 
+  function ensureLazyVideoSource(video) {
+    if (!video || video.dataset.cwVideoLoaded === '1') return;
+    const src = video.getAttribute('data-cw-lazy-src');
+    if (!src) return;
+    video.src = src;
+    video.dataset.cwVideoLoaded = '1';
+  }
+
+  function releaseLazyVideoSource(video) {
+    if (!video || video.dataset.cwVideoLoaded !== '1') return;
+    video.pause();
+    video.removeAttribute('src');
+    video.load();
+    video.dataset.cwVideoLoaded = '0';
+  }
+
+  function initDeferredHeroVideo() {
+    const video = document.querySelector('.home-hero-media video[data-cw-hero-video]');
+    if (!video) return;
+
+    function loadHeroVideo() {
+      ensureLazyVideoSource(video);
+      video.play().catch(function () {});
+    }
+
+    if (typeof IntersectionObserver !== 'undefined') {
+      const observer = new IntersectionObserver(function (entries) {
+        if (!entries.some(function (entry) { return entry.isIntersecting; })) return;
+        observer.disconnect();
+        if ('requestIdleCallback' in window) {
+          window.requestIdleCallback(loadHeroVideo, { timeout: 1800 });
+        } else {
+          window.setTimeout(loadHeroVideo, 400);
+        }
+      }, { threshold: 0.12 });
+      observer.observe(video);
+      return;
+    }
+
+    window.addEventListener('load', function () {
+      window.setTimeout(loadHeroVideo, 500);
+    }, { once: true });
+  }
+
+  initDeferredHeroVideo();
+
   function initEyebrowReveal() {
     const revealSelector = '.eyebrow, .cw-slide-reveal';
     const revealTargets = document.querySelectorAll(revealSelector);
@@ -553,10 +599,12 @@ document.addEventListener('DOMContentLoaded', function () {
         const video = slide.querySelector('video');
         if (video) {
           if (inFrame && carouselVisible && !motionQuery.matches) {
+            ensureLazyVideoSource(video);
             video.play().catch(function () {});
           } else {
             video.pause();
             video.muted = true;
+            releaseLazyVideoSource(video);
             const card = slide.querySelector('.cw-slide-mute');
             if (card) {
               card.setAttribute('aria-pressed', 'true');
@@ -637,6 +685,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const willUnmute = video.muted;
         muteAll();
         if (willUnmute) {
+          ensureLazyVideoSource(video);
           video.muted = false;
           audioLocked = true;
           btn.setAttribute('aria-pressed', 'false');
@@ -679,7 +728,10 @@ document.addEventListener('DOMContentLoaded', function () {
         timer = null;
         slides.forEach(function (slide) {
           const video = slide.querySelector('video');
-          if (video) video.pause();
+          if (video) {
+            video.pause();
+            releaseLazyVideoSource(video);
+          }
         });
         return;
       }

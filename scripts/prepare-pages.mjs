@@ -53,7 +53,7 @@ async function injectBase(file) {
       ? html.replace('<head>', `<head>\n  ${tag}`)
       : tag + html;
   }
-  if (!html.includes('name="robots"')) {
+  if (process.env.PAGES_NOINDEX === 'true' && !html.includes('name="robots"')) {
     html = html.includes('<head>')
       ? html.replace('<head>', '<head>\n  <meta name="robots" content="noindex,nofollow" data-github-pages-preview>')
       : '<meta name="robots" content="noindex,nofollow" data-github-pages-preview>' + html;
