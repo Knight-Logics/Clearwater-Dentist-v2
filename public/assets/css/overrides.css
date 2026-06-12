@@ -3453,7 +3453,8 @@ a.map-place-badge:hover {
     margin-right: 0;
   }
 
-  .home-hero-copy .lede {
+  .page-home .home-hero-copy .lede {
+    font-size: calc(1.05rem + 2px);
     color: rgba(255, 255, 255, 0.92);
   }
 
@@ -4619,6 +4620,7 @@ body.nav-open #tidio-chat iframe {
 
 .page-home .home-hero-copy .lede {
   color: #fff;
+  font-size: calc(1.25rem + 2px);
   max-width: 38rem;
   line-height: 1.55;
   text-shadow: 0 2px 18px rgba(0, 0, 0, 0.55);
